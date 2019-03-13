@@ -1,0 +1,7 @@
+.orange-gradient-background {
+    background: linear-gradient(to left, #ff4e50, #ffb618) !important;
+}
+
+.peach-gradient-background {
+    background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
+}
