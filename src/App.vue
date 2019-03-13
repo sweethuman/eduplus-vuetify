@@ -28,6 +28,21 @@
     <v-content>
       <router-view />
     </v-content>
+    <v-footer dark height="auto" absolute app>
+      <v-card
+        class="flex"
+        style="background: linear-gradient(to left, #ffd86f, #fc6262)"
+        flat
+        tile
+      >
+        <v-card-actions class="justify-center">
+          <span class="subheading">
+            &copy;2019 — <strong>EDU+</strong> by Avram Gheorghe and Vlad
+            Schiller
+          </span>
+        </v-card-actions>
+      </v-card>
+    </v-footer>
   </v-app>
 </template>
 
