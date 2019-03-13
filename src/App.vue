@@ -11,8 +11,10 @@
       </v-toolbar-side-icon>
       <v-toolbar-items>
         <v-btn to="/" flat> <v-icon left>mdi-home-outline</v-icon>Home </v-btn>
-        <v-btn flat> <v-icon left>mdi-book-outline</v-icon>Lessons </v-btn>
-        <v-btn flat>
+        <v-btn flat @click="snackbar = true">
+          <v-icon left>mdi-book-outline</v-icon>Lessons
+        </v-btn>
+        <v-btn flat @click="snackbar = true">
           <v-icon left>mdi-trophy-variant-outline</v-icon>Badges
         </v-btn>
         <v-btn to="/about" flat>
@@ -20,7 +22,12 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-btn class="orange-gradient-background" flat large>
+      <v-btn
+        class="orange-gradient-background"
+        flat
+        large
+        @click="snackbar = true"
+      >
         <v-icon left>mdi-account-outline</v-icon>Account
       </v-btn>
     </v-toolbar>
@@ -43,6 +50,10 @@
         </v-card-actions>
       </v-card>
     </v-footer>
+    <v-snackbar v-model="snackbar" color="error" timeout="5000">
+      <span class="font-weight-bold"> PAGE NOT AVAILABLE!</span>
+      <v-btn dark flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -52,7 +63,7 @@ export default {
   components: {},
   data() {
     return {
-      //
+      snackbar: false
     };
   }
 };

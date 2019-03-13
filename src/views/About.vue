@@ -69,6 +69,7 @@
                             color="orange"
                             class="peach-gradient-background"
                             large
+                            @click="snackbar = true"
                           >
                             <v-icon left>mdi-book-open-page-variant</v-icon
                             >Learn
@@ -84,6 +85,10 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <v-snackbar v-model="snackbar" color="error" timeout="6000">
+      Sorry. Lesson isn't active yet.
+      <v-btn dark flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -143,7 +148,8 @@ export default {
               "What if we learned how the inside works? Let's delve deep into the human consciousness and analyze why people do what they do.."
           }
         ]
-      ]
+      ],
+      snackbar: false
     };
   }
 };
