@@ -5,7 +5,10 @@
         <img src="./assets/home-small.png" alt="logo" style="height:26px" />
       </v-toolbar-side-icon>
       <v-toolbar-items>
-        <v-btn to="/" flat> <v-icon left>mdi-home-outline</v-icon>Home </v-btn>
+        <v-btn to="/" flat>
+          <v-icon left>{{ iconPath("/", "mdi-home") }}</v-icon
+          >Home
+        </v-btn>
         <v-btn flat @click="snackbar = true">
           <v-icon left>mdi-book-outline</v-icon>Lessons
         </v-btn>
@@ -13,7 +16,8 @@
           <v-icon left>mdi-trophy-variant-outline</v-icon>Badges
         </v-btn>
         <v-btn to="/about" flat>
-          <v-icon left>mdi-information-outline</v-icon>About
+          <v-icon left>{{ iconPath("/about", "mdi-information") }}</v-icon
+          >About
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
@@ -90,6 +94,13 @@ export default {
       snackbar: false,
       dialog: false
     };
+  },
+  methods: {
+    iconPath: function(path, baseIconName) {
+      return path === this.$route.path
+        ? baseIconName
+        : baseIconName + "-outline";
+    }
   }
 };
 </script>
