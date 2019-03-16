@@ -7,13 +7,13 @@
       </v-btn>
     </template>
     <v-tabs
-      class="wiretap-gradient"
       v-model="activeTab"
       color="#F27121"
       dark
       slider-color="#E94057"
       grow
       icons-and-text
+      style="background: white;"
     >
       <v-tab ripple class="wiretap-gradient-reversed">
         Login
@@ -24,7 +24,7 @@
         <v-icon>{{ tabIcon(1, "mdi-account-plus") }}</v-icon>
       </v-tab>
       <v-tab-item>
-        <v-card class="elevation-20" flat>
+        <v-card flat>
           <v-card-text>
             <v-form v-model="validLogin">
               <v-text-field
@@ -62,7 +62,7 @@
         </v-card>
       </v-tab-item>
       <v-tab-item>
-        <v-card class="elevation-20" flat>
+        <v-card flat>
           <v-card-text>
             <v-form ref="form">
               <v-text-field
