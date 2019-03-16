@@ -53,7 +53,7 @@
             <v-spacer></v-spacer>
             <v-btn
               color="primary"
-              class="peach-gradient"
+              class="wiretap-gradient-angled"
               @click="dialog = false"
               large
               >Login
@@ -99,7 +99,7 @@
             <v-spacer></v-spacer>
             <v-btn
               color="primary"
-              class="peach-gradient"
+              class="wiretap-gradient-angled"
               @click="dialog = false"
               large
               >Create Account
