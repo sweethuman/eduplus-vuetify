@@ -85,7 +85,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <v-snackbar v-model="snackbar" color="error" timeout="6000">
+    <v-snackbar v-model="snackbar" color="error" :timeout="5000">
       Sorry. Lesson isn't active yet.
       <v-btn dark flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
