@@ -2,6 +2,14 @@
     background: linear-gradient(to left, #ff4e50, #ffb618) !important;
 }
 
+.orange-gradient-background-reversed {
+    background: linear-gradient(to right, #ff4e50, #ffb618) !important;
+}
+
 .peach-gradient-background {
     background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
+}
+
+.peach-gradient-background-reversed {
+    background: linear-gradient(335deg, #ffd86f, #fc6262) !important;
 }
