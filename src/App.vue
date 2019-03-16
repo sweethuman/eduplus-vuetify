@@ -21,48 +21,7 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500">
-        <template #activator="{ on }">
-          <v-btn class="orange-gradient-background" flat large v-on="on">
-            <v-icon left>mdi-login-variant</v-icon>Login
-          </v-btn>
-        </template>
-        <v-card class="elevation-20">
-          <v-toolbar
-            dark
-            color="primary"
-            class="peach-gradient-background-reversed"
-          >
-            <v-toolbar-title>Login</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                prepend-icon="mdi-account"
-                name="username"
-                label="Login"
-                type="text"
-              ></v-text-field>
-              <v-text-field
-                prepend-icon="mdi-lock"
-                name="password"
-                label="Login"
-                type="password"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              class="peach-gradient-background"
-              @click="dialog = false"
-              large
-              >Login
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <AccountDialog />
     </v-toolbar>
 
     <v-content>
@@ -86,9 +45,11 @@
 </template>
 
 <script>
+import AccountDialog from "./components/AccountDialog";
+
 export default {
   name: "App",
-  components: {},
+  components: { AccountDialog },
   data() {
     return {
       snackbar: false,
@@ -104,5 +65,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
