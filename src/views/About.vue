@@ -67,7 +67,7 @@
                         <v-card-actions>
                           <v-btn
                             color="orange"
-                            class="peach-gradient-background"
+                            class="peach-gradient"
                             large
                             @click="snackbar = true"
                           >

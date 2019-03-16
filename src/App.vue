@@ -1,11 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar
-      app
-      scroll-off-screen
-      class="orange-gradient-background elevation-12"
-      dark
-    >
+    <v-toolbar app scroll-off-screen class="orange-gradient elevation-12" dark>
       <v-toolbar-side-icon href="/" fab>
         <img src="./assets/home-small.png" alt="logo" style="height:26px" />
       </v-toolbar-side-icon>
@@ -70,7 +65,7 @@
       <router-view />
     </v-content>
     <v-footer dark height="auto" absolute app>
-      <v-card class="flex peach-gradient-background-reversed" flat tile>
+      <v-card class="flex peach-gradient-reversed" flat tile>
         <v-card-actions class="justify-center">
           <span class="subheading">
             &copy;2019 — <strong>EDU+</strong> by Avram Gheorghe and Vlad

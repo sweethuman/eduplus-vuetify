@@ -1,15 +1,41 @@
-.orange-gradient-background {
+.orange-gradient {
     background: linear-gradient(to left, #ff4e50, #ffb618) !important;
 }
 
-.orange-gradient-background-reversed {
+.orange-gradient-reversed {
     background: linear-gradient(to right, #ff4e50, #ffb618) !important;
 }
 
-.peach-gradient-background {
+.peach-gradient {
     background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
 }
 
-.peach-gradient-background-reversed {
+.peach-gradient-reversed {
     background: linear-gradient(335deg, #ffd86f, #fc6262) !important;
+}
+
+.wiretap-gradient{
+    background: #8A2387;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.wiretap-gradient-reversed{
+    background: #F27121;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.kingyna-gradient{
+    background: #1a2a6c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.kingyna-gradient-reversed{
+    background: #1a2a6c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
