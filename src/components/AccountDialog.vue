@@ -1,5 +1,11 @@
 <template>
-  <v-dialog v-model="dialog" max-width="500">
+  <v-dialog
+    v-model="dialog"
+    max-width="500"
+    :fullscreen="!this.$vuetify.breakpoint.mdAndUp"
+    :transition="this.$vuetify.breakpoint.mdAndUp ? 'dialog-transition' : 'dialog-bottom-transition'"
+    content-class="white"
+  >
     <template #activator="{ on }">
       <v-btn class="orange-gradient" flat large v-on="on">
         <v-icon left>mdi-login-variant</v-icon>
@@ -19,6 +25,15 @@
         Login
         <v-icon>{{ tabIcon(0, "mdi-account") }}</v-icon>
       </v-tab>
+      <v-btn
+        @click="dialog = false"
+        style="margin: auto"
+        v-if="!this.$vuetify.breakpoint.mdAndUp"
+        class="wiretap-gradient-halved"
+        round
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
       <v-tab ripple class="wiretap-gradient">
         Register
         <v-icon>{{ tabIcon(1, "mdi-account-plus") }}</v-icon>
@@ -51,13 +66,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              class="wiretap-gradient-angled"
-              @click="dialog = false"
-              large
-              >Login
-            </v-btn>
+            <v-btn color="primary" class="wiretap-gradient-angled" @click="dialog = false" large>Login </v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -72,13 +81,7 @@
                 type="text"
                 color="orange"
               ></v-text-field>
-              <v-text-field
-                prepend-icon="mdi-at"
-                name="email"
-                label="Email"
-                type="text"
-                color="#FF8C00"
-              ></v-text-field>
+              <v-text-field prepend-icon="mdi-at" name="email" label="Email" type="text" color="#FF8C00"></v-text-field>
               <v-text-field
                 prepend-icon="mdi-lock"
                 name="password"
@@ -97,13 +100,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              class="wiretap-gradient-angled"
-              @click="dialog = false"
-              large
-              >Create Account
-            </v-btn>
+            <v-btn color="primary" class="wiretap-gradient-angled" @click="dialog = false" large>Create Account </v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -126,9 +123,7 @@ export default {
   },
   methods: {
     tabIcon: function(tabNumber, baseIconName) {
-      return tabNumber === this.activeTab
-        ? baseIconName
-        : baseIconName + "-outline";
+      return tabNumber === this.activeTab ? baseIconName : baseIconName + "-outline";
     }
   }
 };
