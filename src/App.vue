@@ -1,12 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      fixed
-      v-model="drawer"
-      app
-      temporary
-      v-if="this.$vuetify.breakpoint.smAndDown"
-    >
+    <v-navigation-drawer fixed v-model="drawer" app temporary v-if="this.$vuetify.breakpoint.smAndDown">
       <v-list>
         <v-list-tile to="/" ripple>
           <v-list-tile-action>
@@ -48,19 +42,15 @@
         v-if="this.$vuetify.breakpoint.smAndDown"
       ></v-toolbar-side-icon>
       <v-toolbar-side-icon href="/" fab>
-        <img src="./assets/home-small.png" alt="logo" style="height:26px" />
+        <img src="./assets/home-small.png" alt="logo" style="height:44px" />
       </v-toolbar-side-icon>
       <v-toolbar-items v-if="this.$vuetify.breakpoint.mdAndUp">
         <v-btn to="/" flat>
           <v-icon left>{{ iconPath("/", "mdi-home") }}</v-icon
           >Home
         </v-btn>
-        <v-btn flat @click="snackbar = true">
-          <v-icon left>mdi-book-outline</v-icon>Lessons
-        </v-btn>
-        <v-btn flat @click="snackbar = true">
-          <v-icon left>mdi-trophy-variant-outline</v-icon>Badges
-        </v-btn>
+        <v-btn flat @click="snackbar = true"> <v-icon left>mdi-book-outline</v-icon>Lessons </v-btn>
+        <v-btn flat @click="snackbar = true"> <v-icon left>mdi-trophy-variant-outline</v-icon>Badges </v-btn>
         <v-btn to="/about" flat>
           <v-icon left>{{ iconPath("/about", "mdi-information") }}</v-icon
           >About
@@ -76,10 +66,7 @@
     <v-footer dark height="auto" absolute app>
       <v-card class="flex peach-gradient-reversed" flat tile>
         <v-card-actions class="justify-center">
-          <span class="subheading">
-            &copy;2019 — <strong>EDU+</strong> by Avram Gheorghe and Vlad
-            Schiller
-          </span>
+          <span class="subheading"> &copy;2019 — <strong>EDU+</strong> by Avram Gheorghe and Vlad Schiller </span>
         </v-card-actions>
       </v-card>
     </v-footer>
@@ -104,9 +91,7 @@ export default {
   },
   methods: {
     iconPath: function(path, baseIconName) {
-      return path === this.$route.path
-        ? baseIconName
-        : baseIconName + "-outline";
+      return path === this.$route.path ? baseIconName : baseIconName + "-outline";
     }
   }
 };
