@@ -1,10 +1,56 @@
 <template>
   <v-app>
+    <v-navigation-drawer
+      fixed
+      v-model="drawer"
+      app
+      temporary
+      v-if="this.$vuetify.breakpoint.smAndDown"
+    >
+      <v-list>
+        <v-list-tile to="/" ripple>
+          <v-list-tile-action>
+            <v-icon>{{ iconPath("/", "mdi-home") }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="snackbar = true" ripple>
+          <v-list-tile-action>
+            <v-icon>mdi-book-outline</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Lessons</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="snackbar = true" ripple>
+          <v-list-tile-action>
+            <v-icon>mdi-trophy-variant-outline</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Badges</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile to="/about" ripple>
+          <v-list-tile-action>
+            <v-icon>{{ iconPath("/about", "mdi-information") }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>About</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     <v-toolbar app scroll-off-screen class="orange-gradient elevation-12" dark>
+      <v-toolbar-side-icon
+        @click.stop="drawer = !drawer"
+        v-if="this.$vuetify.breakpoint.smAndDown"
+      ></v-toolbar-side-icon>
       <v-toolbar-side-icon href="/" fab>
         <img src="./assets/home-small.png" alt="logo" style="height:26px" />
       </v-toolbar-side-icon>
-      <v-toolbar-items>
+      <v-toolbar-items v-if="this.$vuetify.breakpoint.mdAndUp">
         <v-btn to="/" flat>
           <v-icon left>{{ iconPath("/", "mdi-home") }}</v-icon
           >Home
@@ -53,7 +99,7 @@ export default {
   data() {
     return {
       snackbar: false,
-      dialog: false
+      drawer: null
     };
   },
   methods: {
