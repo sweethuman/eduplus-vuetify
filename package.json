@@ -17,15 +17,17 @@
     "vuetify": "^1.5.6"
   },
   "devDependencies": {
+    "@babel/parser": "^7.3.4",
     "@vue/cli-plugin-babel": "^3.5.1",
     "@vue/cli-plugin-eslint": "^3.5.1",
     "@vue/cli-plugin-pwa": "^3.5.1",
     "@vue/cli-service": "^3.5.1",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.1",
-    "@babel/parser": "^7.3.4",
-    "eslint": "^5.15.1",
+    "eslint": "5.15.3",
     "eslint-plugin-vue": "^5.2.2",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.95.1",
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-template-compiler": "^2.6.8"
   },
