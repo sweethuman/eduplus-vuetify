@@ -275,7 +275,12 @@ export default {
       return "";
     },
     checkAnswer() {
-      if (this.radioSelection == null) return;
+      if (this.radioSelection == null) {
+        this.snackbarData.color = "warning";
+        this.snackbarData.text = "Selecteaza un raspuns!";
+        this.showSnackbar = true;
+        return;
+      }
       this.chosenAnswer = this.radioSelection;
       if (this.chosenAnswer === this.questions[this.questionPosition].correctAnswer) {
         this.points++;
