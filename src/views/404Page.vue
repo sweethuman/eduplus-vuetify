@@ -2,19 +2,8 @@
   <v-container class="backing" fill-height fluid>
     <v-layout row align-center justify-center
       ><v-flex d-flex md3 offset-md3 v-if="this.$vuetify.breakpoint.mdAndUp"
-        ><svg
-          height="500px"
-          viewBox="0 0 837 1045"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g
-            id="Page-1"
-            stroke="none"
-            stroke-width="1"
-            fill="none"
-            fill-rule="evenodd"
-          >
+        ><svg height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <path
               d="M353,9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z"
               id="Polygon-1"
@@ -54,10 +43,7 @@
             <h2 class="display-2 white--text">Page not found</h2>
           </v-flex>
           <v-flex xs12>
-            <v-btn
-              onclick="history.back()"
-              class="primary kingyna-gradient elevation-15"
-            >
+            <v-btn onclick="history.back()" class="primary kingyna-gradient elevation-15">
               <v-icon left>mdi-arrow-left</v-icon>
               Go Back
             </v-btn>
