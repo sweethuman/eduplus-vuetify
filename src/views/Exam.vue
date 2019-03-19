@@ -81,13 +81,7 @@
                     large
                     round
                     :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
-                    @click="
-                      $set(chipStore, questions[questionPosition].correctAnswer, {
-                        result: true,
-                        value: resultOptions.intermidiate
-                      });
-                      answered = true;
-                    "
+                    @click="skipQuestion()"
                   >
                     Sari Peste<v-icon right>mdi-skip-next</v-icon>
                   </v-btn>
@@ -234,7 +228,6 @@ export default {
         }
       ],
       radioSelection: null,
-      chosenAnswer: null,
       chipStore: [],
       resultOptions: Object.freeze({ correct: 0, wrong: 1, intermidiate: 2 }),
       questionPosition: 0,
@@ -250,14 +243,14 @@ export default {
   },
   methods: {
     showChip(chipId) {
-      if (chipId === this.chosenAnswer) {
+      if (chipId === this.radioSelection) {
         if (chipId === this.questions[this.questionPosition].correctAnswer) {
           return { result: true, value: this.resultOptions.correct };
         } else {
           return { result: true, value: this.resultOptions.wrong };
         }
       }
-      if (chipId === this.questions[this.questionPosition].correctAnswer && this.chosenAnswer != null) {
+      if (chipId === this.questions[this.questionPosition].correctAnswer && this.radioSelection != null) {
         return { result: true, value: this.resultOptions.intermidiate };
       }
       return { result: false };
@@ -285,8 +278,7 @@ export default {
         this.showSnackbar = true;
         return;
       }
-      this.chosenAnswer = this.radioSelection;
-      if (this.chosenAnswer === this.questions[this.questionPosition].correctAnswer) {
+      if (this.radioSelection === this.questions[this.questionPosition].correctAnswer) {
         this.points++;
         this.snackbarData.color = "success";
         this.snackbarData.text = "Ai raspuns corect!";
@@ -298,13 +290,19 @@ export default {
       this.calculateChips();
       this.answered = true;
     },
+    skipQuestion() {
+      this.$set(this.chipStore, this.questions[this.questionPosition].correctAnswer, {
+        result: true,
+        value: this.resultOptions.intermidiate
+      });
+      this.answered = true;
+    },
     resetAndLoadPosition(position) {
       if (position === this.questions.length) {
         this.finished = true;
         return;
       }
       this.radioSelection = null;
-      this.chosenAnswer = null;
       this.answered = false;
       this.calculateChips();
     }
