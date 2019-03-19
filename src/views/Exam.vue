@@ -14,6 +14,10 @@
               {{ questions[questionPosition].question }}
             </h3>
           </v-card-title>
+          <v-progress-linear
+            :value="(100 / questions.length) * questionPosition"
+            color="wiretap-gradient"
+          ></v-progress-linear>
         </v-card>
       </v-flex>
     </v-layout>
