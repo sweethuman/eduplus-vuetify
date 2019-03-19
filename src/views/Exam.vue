@@ -99,7 +99,7 @@
                     large
                     round
                     :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
-                    @click="resetAndLoadNext()"
+                    @click="resetAndLoadPosition(++questionPosition)"
                   >
                     Urmatoarea Intrebare<v-icon right>mdi-arrow-right</v-icon>
                   </v-btn>
@@ -294,8 +294,8 @@ export default {
       this.calculateChips();
       this.answered = true;
     },
-    resetAndLoadNext() {
-      if (this.questionPosition === this.questions.length - 1) {
+    resetAndLoadPosition(position) {
+      if (position === this.questions.length) {
         this.finished = true;
         return;
       }
@@ -303,7 +303,6 @@ export default {
       this.chosenAnswer = null;
       this.answered = false;
       this.calculateChips();
-      this.questionPosition++;
     }
   },
   beforeMount() {
