@@ -57,7 +57,7 @@
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
-      <AccountDialog />
+      <account-dialog />
     </v-toolbar>
 
     <v-content>
