@@ -36,7 +36,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app scroll-off-screen class="orange-gradient elevation-12" dark>
+    <v-toolbar app scroll-off-screen :scroll-threshold="200" class="orange-gradient elevation-12" dark>
       <v-toolbar-side-icon
         @click.stop="drawer = !drawer"
         v-if="this.$vuetify.breakpoint.smAndDown"
@@ -86,13 +86,13 @@ export default {
   data() {
     return {
       snackbar: false,
-      drawer: null
+      drawer: null,
     };
   },
   methods: {
     iconPath: function(path, baseIconName) {
       return path === this.$route.path ? baseIconName : baseIconName + "-outline";
-    }
-  }
+    },
+  },
 };
 </script>

@@ -118,13 +118,13 @@ export default {
       loginId: "",
       loginPassword: "",
       loginIdRules: [v => !!v || "Username/Email is required"],
-      passwordRules: [v => !!v || "Password is required"]
+      passwordRules: [v => !!v || "Password is required"],
     };
   },
   methods: {
     tabIcon: function(tabNumber, baseIconName) {
       return tabNumber === this.activeTab ? baseIconName : baseIconName + "-outline";
-    }
-  }
+    },
+  },
 };
 </script>
