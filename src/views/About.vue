@@ -58,7 +58,7 @@
                         </v-card-title>
                       </v-flex>
 
-                      <v-flex shrink style="margin-left: 10px; margin-bottom: 10px">
+                      <v-flex shrink class="ml-2 mb-2">
                         <v-card-actions>
                           <v-btn color="orange" class="peach-gradient" large @click="snackbar = true">
                             <v-icon left>mdi-book-open-page-variant</v-icon>Learn
@@ -91,28 +91,28 @@ export default {
           image:
             "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
           title: "Coding Lessons",
-          description: "Step by step guide with problems based on the latest Bacalaureat Exam."
+          description: "Step by step guide with problems based on the latest Bacalaureat Exam.",
         },
         {
           id: 2,
           image:
             "https://images.unsplash.com/photo-1457904375453-3e1fc2fc76f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
           title: "Math Lessons",
-          description: "From the basics to the advanced. Complete lessons on everything you need to know about maths."
+          description: "From the basics to the advanced. Complete lessons on everything you need to know about maths.",
         },
         {
           id: 3,
           image:
             "https://images.unsplash.com/photo-1542412138098-8f997794d3d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
           title: "Study Romanian",
-          description: "Take this class and improve all your knowledge about Bacovia, Eminescu and may others."
+          description: "Take this class and improve all your knowledge about Bacovia, Eminescu and may others.",
         },
         {
           id: 4,
           image:
             "https://images.unsplash.com/photo-1470172201050-cecdf8133607?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
           title: "Physics",
-          description: "Discover the inner-workings of The Universe!"
+          description: "Discover the inner-workings of The Universe!",
         },
         {
           id: 5,
@@ -120,7 +120,7 @@ export default {
             "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
           title: "Chemistry",
           description:
-            "Atoms are special. So are the relationships between them. Now let's see how combining them can create the most amazing things!"
+            "Atoms are special. So are the relationships between them. Now let's see how combining them can create the most amazing things!",
         },
         {
           id: 6,
@@ -128,10 +128,10 @@ export default {
             "https://images.unsplash.com/photo-1549925245-8a7a48495212?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
           title: "Psychology",
           description:
-            "What if we learned how the inside works? Let's delve deep into the human consciousness and analyze why people do what they do.."
-        }
+            "What if we learned how the inside works? Let's delve deep into the human consciousness and analyze why people do what they do..",
+        },
       ],
-      snackbar: false
+      snackbar: false,
     };
   },
   computed: {
@@ -148,7 +148,7 @@ export default {
         i += itemPerRow;
       }
       return arrayOfSlides;
-    }
-  }
+    },
+  },
 };
 </script>
