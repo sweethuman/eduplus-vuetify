@@ -2,16 +2,16 @@
   <v-container>
     <v-layout fill-height align-center justify-center>
       <v-flex shrink class="mr-1" v-if="$vuetify.breakpoint.mdAndUp">
-        <v-btn fab @click="prev()" class="peach-gradient-reversed" dark>
+        <v-btn fab @click="prev()" class="peach-gradient-reversed" dark large>
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
       </v-flex>
-      <v-flex xs12 sm8>
-        <v-window class="elevation-0 my-5" v-model="slide" :touch="{ left: next, right: prev }" dark>
+      <v-flex xs12 md12 lg8 xlg8>
+        <v-window class="elevation-0 my-5" v-model="slide" dark>
           <v-window-item v-for="i in 5" :key="i">
             <v-layout align-center justify-space-between fill-height>
-              <v-flex xs12 sm4 v-for="j in $vuetify.breakpoint.mdAndUp ? 3 : 1" :key="'' + i + j">
-                <v-card height="200" class="mx-1">
+              <v-flex xs12 md4 v-for="j in $vuetify.breakpoint.mdAndUp ? 3 : 1" :key="'' + i + j">
+                <v-card class="mx-1" min-height="200px" hover>
                   <v-layout fill-height column>
                     <v-flex grow>
                       <v-card-title primary-title>
@@ -19,6 +19,9 @@
                           <span class="font-weight-bold">{{ "" + i + j }}:</span> Is Seaweed good Seaweed?
                         </h3>
                       </v-card-title>
+                    </v-flex>
+
+                    <v-flex shrink>
                       <v-card-text>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.
@@ -32,11 +35,59 @@
         </v-window>
       </v-flex>
       <v-flex shrink class="ml-1" v-if="$vuetify.breakpoint.mdAndUp">
-        <v-btn fab @click="next" class="peach-gradient" dark>
+        <v-btn fab @click="next" class="peach-gradient" dark large>
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-flex>
     </v-layout>
+    <v-expansion-panel
+      v-model="expansionPanel"
+      class="elevation-12 mb-4"
+      style="position: -webkit-sticky; position: sticky; top: 0; z-index: 1"
+      v-if="!$vuetify.breakpoint.mdAndUp"
+    >
+      <v-expansion-panel-content ripple>
+        <template #header>
+          <div class="py-1">Cuprins</div>
+        </template>
+        <v-list style="padding: 0; overflow: hidden">
+          <template v-for="(item, i) in items">
+            <v-list-tile
+              :key="item.title"
+              @click.stop.prevent="
+                $vuetify.goTo(`#${item.title.toLowerCase().replace(/\s/g, '')}`, {
+                  duration: 1000,
+                  easing: 'easeInOutQuad',
+                  offset: 6,
+                })
+              "
+              v-model="item.active"
+              ripple
+              class="active-border-default"
+              active-class="primary--text active-border"
+              v-scroll="onScroll"
+            >
+              <v-list-tile-action>
+                <v-icon>mdi-{{ item.icon }}</v-icon>
+              </v-list-tile-action>
+
+              <v-list-tile-content>
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-divider :key="i" v-if="i !== items.length"></v-divider>
+          </template>
+          <v-list-tile @click="expansionPanel = null" ripple>
+            <v-list-tile-action>
+              <v-icon color="red">mdi-close-circle</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Inchide Cuprinsul</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
     <v-layout justify-space-between>
       <v-flex shrink class="mr-4" v-if="$vuetify.breakpoint.mdAndUp">
         <v-card class="d-inline-block elevation-12" style="position: -webkit-sticky; position: sticky; top: 70px;">
@@ -46,7 +97,6 @@
                 <v-list-tile
                   :key="item.title"
                   @click.stop.prevent="
-                    //activeElement = i;
                     $vuetify.goTo(`#${item.title.toLowerCase().replace(/\s/g, '')}`, {
                       duration: 1000,
                       easing: 'easeInOutQuad',
@@ -174,6 +224,7 @@ export default {
       currentOffset: 0,
       timeout: null,
       slide: 0,
+      expansionPanel: null,
     };
   },
   //TODO can just use old value
@@ -187,13 +238,14 @@ export default {
       this.currentOffset = window.pageYOffset || document.documentElement.offsetTop;
       clearTimeout(this.timeout);
       //TODO make this smaller if you want updates live instead of when scrolling stopped
-      this.timeout = setTimeout(this.findIndex, 50);
+      this.timeout = setTimeout(this.findIndex, 40);
     },
     findIndex() {
       let element = this.$refs.cards.findIndex(card => {
-        return card.$el.offsetTop - 30 > this.currentOffset;
+        return card.$el.offsetTop - 75 >= this.currentOffset;
       });
       this.activeElement = element === 0 ? 0 : element - 1;
+      this.activeElement = element === -1 ? this.$refs.cards.length - 1 : this.activeElement;
     },
     prev() {
       this.slide = this.slide - 1 < 0 ? 4 : this.slide - 1;
