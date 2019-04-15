@@ -61,7 +61,7 @@
                   offset: 6,
                 })
               "
-              v-model="item.active"
+              :value="activeElement === i"
               ripple
               class="active-border-default"
               active-class="primary--text active-border"
@@ -103,7 +103,7 @@
                       offset: 6,
                     })
                   "
-                  v-model="item.active"
+                  :value="activeElement === i"
                   ripple
                   class="active-border-default"
                   active-class="primary--text active-border"
@@ -192,46 +192,35 @@ export default {
           title: "Welcome Message",
           icon: "human-handsup",
           content: null,
-          active: null,
         },
         {
           title: "Quick Guide",
           icon: "owl",
           content: null,
-          active: null,
         },
         {
           title: "Overview",
           icon: "compass",
           content: null,
-          active: null,
         },
         {
           title: "Aditional Content",
           icon: "book-multiple-plus",
           content: null,
-          active: null,
         },
         {
           title: "Support",
           icon: "help",
           content: null,
-          active: null,
         },
       ],
       right: null,
-      activeElement: null,
+      activeElement: 0,
       currentOffset: 0,
       timeout: null,
       slide: 0,
       expansionPanel: null,
     };
-  },
-  //TODO can just use old value
-  watch: {
-    activeElement: function() {
-      for (let item in this.items) this.items[item].active = this.activeElement == item;
-    },
   },
   methods: {
     onScroll() {
