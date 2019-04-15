@@ -242,7 +242,7 @@ export default {
     },
     findIndex() {
       let element = this.$refs.cards.findIndex(card => {
-        return card.$el.offsetTop - 75 >= this.currentOffset;
+        return card.$el.offsetTop - this.$vuetify.clientHeight / 4 >= this.currentOffset;
       });
       this.activeElement = element === 0 ? 0 : element - 1;
       this.activeElement = element === -1 ? this.$refs.cards.length - 1 : this.activeElement;
