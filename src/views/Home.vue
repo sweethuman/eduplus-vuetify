@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-layout fill-height align-center justify-center>
       <v-flex shrink class="mr-1" v-if="$vuetify.breakpoint.mdAndUp">
         <v-btn fab @click="prev()" class="peach-gradient-reversed" dark large>

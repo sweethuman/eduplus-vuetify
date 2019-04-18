@@ -63,8 +63,8 @@
     <v-content>
       <router-view />
     </v-content>
-    <v-footer dark height="auto" absolute app>
-      <v-card class="flex peach-gradient-reversed" flat tile>
+    <v-footer dark absolute app>
+      <v-card class="flex peach-gradient-reversed" flat>
         <v-card-actions class="justify-center">
           <span class="subheading"> &copy;2019 — <strong>EDU+</strong> by Avram Gheorghe and Vlad Schiller </span>
         </v-card-actions>

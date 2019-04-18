@@ -36,7 +36,7 @@
             ></path>
           </g></svg
       ></v-flex>
-      <v-flex md6>
+      <v-flex xs12 md6>
         <v-layout column :align-center="!this.$vuetify.breakpoint.mdAndUp">
           <v-flex xs12 py-5>
             <h1 class="display-4 white--text">404</h1>
@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  name: "NotFoundPage"
+  name: "NotFoundPage",
 };
 </script>
 
