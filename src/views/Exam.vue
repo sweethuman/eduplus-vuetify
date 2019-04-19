@@ -5,8 +5,8 @@
         <h2 class="display-3 my-5">Test Memorie</h2>
       </v-flex>
     </v-layout>
-    <card-slide-exam :questions="questions" v-if="$route.query.display === 'slide'" />
-    <card-list-exam :questions="questions" v-if="$route.query.display === 'list' || !$route.query.display" />
+    <card-slide-exam v-if="$route.query.display === 'slide'" :questions="questions" />
+    <card-list-exam v-if="$route.query.display === 'list' || !$route.query.display" :questions="questions" />
   </v-container>
 </template>
 

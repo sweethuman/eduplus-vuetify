@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer fixed v-model="drawer" app temporary v-if="this.$vuetify.breakpoint.smAndDown">
+    <v-navigation-drawer v-if="this.$vuetify.breakpoint.smAndDown" v-model="drawer" fixed app temporary>
       <v-list>
         <v-list-tile to="/" ripple>
           <v-list-tile-action>
@@ -10,7 +10,7 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="snackbar = true" ripple>
+        <v-list-tile ripple @click="snackbar = true">
           <v-list-tile-action>
             <v-icon>mdi-book-outline</v-icon>
           </v-list-tile-action>
@@ -18,7 +18,7 @@
             <v-list-tile-title>Lessons</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="snackbar = true" ripple>
+        <v-list-tile ripple @click="snackbar = true">
           <v-list-tile-action>
             <v-icon>mdi-trophy-variant-outline</v-icon>
           </v-list-tile-action>
@@ -38,8 +38,8 @@
     </v-navigation-drawer>
     <v-toolbar app scroll-off-screen :scroll-threshold="200" class="orange-gradient elevation-12" dark>
       <v-toolbar-side-icon
-        @click.stop="drawer = !drawer"
         v-if="this.$vuetify.breakpoint.smAndDown"
+        @click.stop="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-toolbar-side-icon href="/" fab>
         <img src="./assets/home-small.png" alt="logo" style="height:44px" />

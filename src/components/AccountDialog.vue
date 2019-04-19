@@ -26,11 +26,11 @@
         <v-icon>{{ tabIcon(0, "mdi-account") }}</v-icon>
       </v-tab>
       <v-btn
-        @click="dialog = false"
-        style="margin: auto"
         v-if="!this.$vuetify.breakpoint.mdAndUp"
+        style="margin: auto"
         class="wiretap-gradient-halved"
         round
+        @click="dialog = false"
       >
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -43,22 +43,22 @@
           <v-card-text>
             <v-form v-model="validLogin">
               <v-text-field
+                v-model="loginId"
                 prepend-icon="mdi-account"
                 name="loginId"
                 label="Username/Email"
                 type="text"
                 color="orange"
-                v-model="loginId"
                 :rules="loginIdRules"
                 required
               ></v-text-field>
               <v-text-field
+                v-model="loginPassword"
                 prepend-icon="mdi-lock"
                 name="password"
                 label="Password"
                 type="password"
                 color="red"
-                v-model="loginPassword"
                 :rules="passwordRules"
                 required
               ></v-text-field>
@@ -66,7 +66,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" class="wiretap-gradient-angled" @click="dialog = false" large>Login </v-btn>
+            <v-btn color="primary" class="wiretap-gradient-angled" large @click="dialog = false">Login </v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -100,7 +100,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" class="wiretap-gradient-angled" @click="dialog = false" large>Create Account </v-btn>
+            <v-btn color="primary" class="wiretap-gradient-angled" large @click="dialog = false">Create Account </v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>

@@ -1,16 +1,16 @@
 <template>
   <v-container fluid>
     <v-layout fill-height align-center justify-center>
-      <v-flex shrink class="mr-1" v-if="$vuetify.breakpoint.mdAndUp">
-        <v-btn fab @click="prev()" class="peach-gradient-reversed" dark large>
+      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="mr-1">
+        <v-btn fab class="peach-gradient-reversed" dark large @click="prev()">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
       </v-flex>
       <v-flex xs12 md12 lg8 xlg8>
-        <v-window class="elevation-0 my-5" v-model="slide" dark>
+        <v-window v-model="slide" class="elevation-0 my-5" dark>
           <v-window-item v-for="i in 5" :key="i">
             <v-layout align-center justify-space-between fill-height>
-              <v-flex xs12 md4 v-for="j in $vuetify.breakpoint.mdAndUp ? 3 : 1" :key="'' + i + j">
+              <v-flex v-for="j in $vuetify.breakpoint.mdAndUp ? 3 : 1" :key="'' + i + j" xs12 md4>
                 <v-card class="mx-1" min-height="200px" hover>
                   <v-layout fill-height column>
                     <v-flex grow>
@@ -34,17 +34,17 @@
           </v-window-item>
         </v-window>
       </v-flex>
-      <v-flex shrink class="ml-1" v-if="$vuetify.breakpoint.mdAndUp">
-        <v-btn fab @click="next" class="peach-gradient" dark large>
+      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="ml-1">
+        <v-btn fab class="peach-gradient" dark large @click="next">
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-flex>
     </v-layout>
     <v-expansion-panel
+      v-if="!$vuetify.breakpoint.mdAndUp"
       v-model="expansionPanel"
       class="elevation-12 mb-4"
       style="position: -webkit-sticky; position: sticky; top: 0; z-index: 1"
-      v-if="!$vuetify.breakpoint.mdAndUp"
     >
       <v-expansion-panel-content ripple>
         <template #header>
@@ -54,6 +54,11 @@
           <template v-for="(item, i) in items">
             <v-list-tile
               :key="item.title"
+              v-scroll="onScroll"
+              :value="activeElement === i"
+              ripple
+              class="active-border-default"
+              active-class="primary--text active-border"
               @click.stop.prevent="
                 $vuetify.goTo(`#${item.title.toLowerCase().replace(/\s/g, '')}`, {
                   duration: 1000,
@@ -61,11 +66,6 @@
                   offset: 6,
                 })
               "
-              :value="activeElement === i"
-              ripple
-              class="active-border-default"
-              active-class="primary--text active-border"
-              v-scroll="onScroll"
             >
               <v-list-tile-action>
                 <v-icon>mdi-{{ item.icon }}</v-icon>
@@ -75,9 +75,9 @@
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-divider :key="i" v-if="i !== items.length"></v-divider>
+            <v-divider v-if="i !== items.length" :key="i"></v-divider>
           </template>
-          <v-list-tile @click="expansionPanel = null" ripple>
+          <v-list-tile ripple @click="expansionPanel = null">
             <v-list-tile-action>
               <v-icon color="red">mdi-close-circle</v-icon>
             </v-list-tile-action>
@@ -89,13 +89,18 @@
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-layout justify-space-between>
-      <v-flex shrink class="mr-4" v-if="$vuetify.breakpoint.mdAndUp">
+      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="mr-4">
         <v-card class="d-inline-block elevation-12" style="position: -webkit-sticky; position: sticky; top: 70px;">
           <v-navigation-drawer floating permanent stateless value="true">
             <v-list style="padding: 0">
               <template v-for="(item, i) in items">
                 <v-list-tile
                   :key="item.title"
+                  v-scroll="onScroll"
+                  :value="activeElement === i"
+                  ripple
+                  class="active-border-default"
+                  active-class="primary--text active-border"
                   @click.stop.prevent="
                     $vuetify.goTo(`#${item.title.toLowerCase().replace(/\s/g, '')}`, {
                       duration: 1000,
@@ -103,11 +108,6 @@
                       offset: 6,
                     })
                   "
-                  :value="activeElement === i"
-                  ripple
-                  class="active-border-default"
-                  active-class="primary--text active-border"
-                  v-scroll="onScroll"
                 >
                   <v-list-tile-action>
                     <v-icon>mdi-{{ item.icon }}</v-icon>
@@ -117,7 +117,7 @@
                     <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                   </v-list-tile-content>
                 </v-list-tile>
-                <v-divider :key="i" v-if="i !== items.length - 1"></v-divider>
+                <v-divider v-if="i !== items.length - 1" :key="i"></v-divider>
               </template>
             </v-list>
           </v-navigation-drawer>
@@ -125,11 +125,11 @@
       </v-flex>
       <v-flex xs12 md10>
         <v-card
-          class="mb-4"
           v-for="(item, i) in items"
-          :key="i"
           :id="item.title.toLowerCase().replace(/\s/g, '')"
+          :key="i"
           ref="cards"
+          class="mb-4"
         >
           <v-card-title class="headline">{{ item.title }}</v-card-title>
           <v-card-text class="text-xs-justify"
@@ -222,6 +222,9 @@ export default {
       expansionPanel: null,
     };
   },
+  mounted() {
+    this.findIndex();
+  },
   methods: {
     onScroll() {
       this.currentOffset = window.pageYOffset || document.documentElement.offsetTop;
@@ -242,9 +245,6 @@ export default {
     next() {
       this.slide++;
     },
-  },
-  mounted() {
-    this.findIndex();
   },
 };
 </script>

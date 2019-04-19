@@ -50,7 +50,7 @@
           </v-card-text>
           <v-divider />
           <v-card-actions>
-            <v-layout align-space-around justify-center v-if="!answered" row wrap>
+            <v-layout v-if="!answered" align-space-around justify-center row wrap>
               <v-hover>
                 <template #default="{ hover }">
                   <v-btn
@@ -84,7 +84,7 @@
                 </template>
               </v-hover>
             </v-layout>
-            <v-layout align-space-around justify-center v-if="answered" row wrap>
+            <v-layout v-if="answered" align-space-around justify-center row wrap>
               <v-hover>
                 <template #default="{ hover }">
                   <v-btn
@@ -106,7 +106,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <exam-result :points="points" :maxPoints="questions.length" v-if="finished" />
+    <exam-result v-if="finished" :points="points" :max-points="questions.length" />
     <v-snackbar v-model="showSnackbar" :color="snackbarData.color" :timeout="3000" auto-height>
       {{ snackbarData.text }}
       <v-btn dark flat @click="showSnackbar = false">
@@ -129,7 +129,7 @@ export default {
     return {
       radioSelection: null,
       chipStore: [],
-      resultOptions: Object.freeze({ correct: 0, wrong: 1, intermidiate: 2 }),
+      resultOptions: Object.freeze({ correct: 0, wrong: 1, intermediate: 2 }),
       questionPosition: 0,
       answered: false,
       points: 0,
@@ -154,7 +154,7 @@ export default {
         }
       }
       if (chipId === this.questions[this.questionPosition].correctAnswer && this.radioSelection != null) {
-        return { result: true, value: this.resultOptions.intermidiate };
+        return { result: true, value: this.resultOptions.intermediate };
       }
       return { result: false };
     },
@@ -166,12 +166,12 @@ export default {
     getLabelText(value) {
       if (value === this.resultOptions.correct) return "Corect";
       if (value === this.resultOptions.wrong) return "Gresit";
-      if (value === this.resultOptions.intermidiate) return "Raspunsul Corect";
+      if (value === this.resultOptions.intermediate) return "Raspunsul Corect";
     },
     getAnswerColor(value) {
       if (value === this.resultOptions.correct) return "#c6e377";
       if (value === this.resultOptions.wrong) return "#ef6c57";
-      if (value === this.resultOptions.intermidiate) return "#c6e377";
+      if (value === this.resultOptions.intermediate) return "#c6e377";
       return "";
     },
     checkAnswer() {
@@ -196,7 +196,7 @@ export default {
     skipQuestion() {
       this.$set(this.chipStore, this.questions[this.questionPosition].correctAnswer, {
         result: true,
-        value: this.resultOptions.intermidiate,
+        value: this.resultOptions.intermediate,
       });
       this.answered = true;
     },
