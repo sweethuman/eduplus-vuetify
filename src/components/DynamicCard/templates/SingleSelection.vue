@@ -1,6 +1,6 @@
 <template>
   <form>
-    <v-radio-group v-model="radioSelection" :disabled="answered">
+    <v-radio-group v-model="radioSelection" :disabled="answered" hide-details>
       <v-layout
         v-for="(option, i) in exercise.options"
         :key="i"
@@ -8,6 +8,7 @@
         row
         :style="`background: ${getAnswerColor(chipStore[i].value)}; border-radius: 10px`"
         my-1
+        px-2
       >
         <v-flex xs12>
           <v-radio :value="i" class="py-2">
@@ -39,6 +40,7 @@ export default {
     exercise: {
       type: Object,
       default: undefined,
+      required: true,
     },
   },
   data() {
@@ -59,6 +61,7 @@ export default {
       if (value === this.resultOptions.correct) return "Corect";
       if (value === this.resultOptions.wrong) return "Gresit";
       if (value === this.resultOptions.intermediate) return "Raspunsul Corect";
+      return "";
     },
     getAnswerColor(value) {
       if (value === this.resultOptions.correct) return "#c6e377";
