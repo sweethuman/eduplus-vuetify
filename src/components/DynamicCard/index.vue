@@ -8,22 +8,29 @@
         {{ data.question }}
       </h3>
       <v-divider />
-      <component :is="'SingleSelection'" ref="component" :exercise="data" />
+      <component :is="activeComponent" ref="component" :exercise="data" />
     </v-card-text>
   </v-card>
 </template>
 
 <script>
 import SingleSelection from "./templates/SingleSelection";
+import MultipleSelection from "./templates/MultipleSelection";
 export default {
   name: "DynamicCard",
   components: {
     SingleSelection,
+    MultipleSelection,
   },
   props: {
     data: {
       type: Object,
       default: undefined,
+    },
+  },
+  computed: {
+    activeComponent() {
+      return Array.isArray(this.data.correctAnswer) ? "MultipleSelection" : "SingleSelection";
     },
   },
 };
