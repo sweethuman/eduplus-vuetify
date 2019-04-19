@@ -106,7 +106,11 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <exam-result v-if="finished" :points="points" :max-points="questions.length" />
+    <v-layout v-if="finished" justify-center text-xs-center>
+      <v-flex xs12 md8>
+        <exam-result :points="points" :max-points="questions.length" />
+      </v-flex>
+    </v-layout>
     <v-snackbar v-model="showSnackbar" :color="snackbarData.color" :timeout="3000" auto-height>
       {{ snackbarData.text }}
       <v-btn dark flat @click="showSnackbar = false">

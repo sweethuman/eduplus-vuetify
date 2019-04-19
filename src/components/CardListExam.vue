@@ -19,7 +19,7 @@
             </template>
           </v-hover>
         </v-layout>
-        <exam-result v-if="answered" :points="points" :max-points="questions.length" />
+        <exam-result v-if="answered" :points="points" :max-points="questions.length" class="text-xs-center" />
       </v-flex>
     </v-layout>
     <v-snackbar
