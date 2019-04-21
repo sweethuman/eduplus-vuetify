@@ -36,7 +36,7 @@ export default {
             "întotdeauna pozitiv şi necesar",
             "nefiresc, manifestat sub forma erorilor sau omisiunilor",
           ],
-          correctAnswer: 0,
+          correctAnswer: [0, 3],
         },
         {
           id: 2,
@@ -86,14 +86,15 @@ export default {
         },
         {
           id: 6,
-          question: "Clasificarea formelor memoriei în memorie logică şi memorie mecanică are la bază:",
+          question:
+            "Clasificarea formelor memoriei în memorie logică şi memorie mecanică are la bază: (test-question; correct-answers: 2 and 3)",
           options: [
             "prezenţa sau absenţa intenţiei de memorare",
             "durata păstrării informaţiilor",
             "gradul de înţelegere a celor memorate",
             "modalitatea informaţională preferenţială",
           ],
-          correctAnswer: 2,
+          correctAnswer: [1, 2],
         },
         {
           id: 7,
