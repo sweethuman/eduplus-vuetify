@@ -42,7 +42,7 @@
           >
             <v-carousel-item v-for="(slide, i) in slideFormatted" :key="i">
               <v-layout align-center justify-space-between fill-height>
-                <v-flex v-for="card in slide" :key="card.id" xs12 sm4>
+                <v-flex v-for="card in slide" :key="card.id" xs12 md4>
                   <v-card height="400">
                     <v-layout fill-height column>
                       <v-flex shrink>

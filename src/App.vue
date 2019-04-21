@@ -36,11 +36,14 @@
         </v-list-tile>
         <v-list-tile>
           <v-list-tile-action>
-            <v-switch v-model="darkTheme" color="primary"></v-switch>
+            <v-icon>mdi-weather-night</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{ darkSwitchLabel }}</v-list-tile-title>
           </v-list-tile-content>
+          <v-list-tile-action style="min-width: 0; margin-right: -5%;">
+            <v-switch v-model="darkTheme" color="primary"></v-switch>
+          </v-list-tile-action>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
