@@ -1,6 +1,6 @@
 <template>
   <form>
-    <v-radio-group v-model="radioSelection" :disabled="answered" hide-details>
+    <v-radio-group v-model="radioSelection" :disabled="disabled" hide-details>
       <v-layout
         v-for="(option, i) in exercise.options"
         :key="i"
@@ -42,13 +42,16 @@ export default {
       default: undefined,
       required: true,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       radioSelection: null,
       chipStore: [],
       resultOptions: Object.freeze({ correct: 0, wrong: 1, intermediate: 2 }),
-      answered: false,
     };
   },
   beforeMount() {
@@ -95,10 +98,6 @@ export default {
     },
     isAnswerChecked() {
       return this.radioSelection != null;
-    },
-    //TODO use vuex store to set page to answered
-    makeAnswered() {
-      this.answered = true;
     },
   },
 };

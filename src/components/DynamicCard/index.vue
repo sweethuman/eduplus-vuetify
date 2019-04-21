@@ -8,7 +8,7 @@
         {{ data.question }}
       </h3>
       <v-divider />
-      <component :is="activeComponent" ref="component" :exercise="data" />
+      <component :is="activeComponent" ref="component" :exercise="data" :disabled="disabled" />
     </v-card-text>
   </v-card>
 </template>
@@ -26,6 +26,10 @@ export default {
     data: {
       type: Object,
       default: undefined,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

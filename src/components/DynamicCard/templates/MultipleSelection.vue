@@ -15,7 +15,7 @@
             <v-checkbox
               v-model="checkboxSelection"
               :value="i"
-              :disabled="answered"
+              :disabled="disabled"
               hide-details
               style="margin-top: 0; padding-bottom: 4px"
             >
@@ -50,13 +50,16 @@ export default {
       default: undefined,
       required: true,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       checkboxSelection: [],
       chipStore: [],
       resultOptions: Object.freeze({ correct: 0, wrong: 1, intermediate: 2 }),
-      answered: false,
     };
   },
   beforeMount() {
@@ -103,10 +106,6 @@ export default {
     },
     isAnswerChecked() {
       return this.checkboxSelection.length !== 0;
-    },
-    //TODO use vuex store to set page to answered
-    makeAnswered() {
-      this.answered = true;
     },
   },
 };

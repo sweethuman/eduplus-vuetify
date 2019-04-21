@@ -2,7 +2,7 @@
   <div>
     <v-layout justify-center>
       <v-flex md8>
-        <dynamic-card v-for="(test, j) in questions" :key="j" ref="exerciseCards" :data="test" />
+        <dynamic-card v-for="(test, j) in questions" :key="j" ref="exerciseCards" :data="test" :disabled="answered" />
         <v-layout v-if="!answered" align-space-around justify-center row wrap>
           <v-hover>
             <template #default="{ hover }">
@@ -86,7 +86,6 @@ export default {
     },
     calculateCards() {
       for (let i = 0; i < this.exerciseCards.length; i++) {
-        this.exerciseCards[i].makeAnswered();
         this.points += this.exerciseCards[i].calculateChips();
       }
     },
