@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :dark="darkTheme">
     <v-navigation-drawer v-if="this.$vuetify.breakpoint.smAndDown" v-model="drawer" fixed app temporary>
       <v-list>
         <v-list-tile to="/" ripple>
@@ -34,6 +34,14 @@
             <v-list-tile-title>About</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-switch v-model="darkTheme" color="primary"></v-switch>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ darkSwitchLabel }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app scroll-off-screen :scroll-threshold="200" class="orange-gradient elevation-12" dark>
@@ -54,6 +62,9 @@
         <v-btn to="/about" flat>
           <v-icon left>{{ iconPath("/about", "mdi-information") }}</v-icon
           >About
+        </v-btn>
+        <v-btn flat @click="darkTheme = !darkTheme">
+          <v-icon left> {{ darkTheme ? "mdi-brightness-3" : "mdi-white-balance-sunny" }} </v-icon>{{ darkSwitchLabel }}
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
@@ -87,7 +98,13 @@ export default {
     return {
       snackbar: false,
       drawer: null,
+      darkTheme: false,
     };
+  },
+  computed: {
+    darkSwitchLabel() {
+      return this.darkTheme ? "Switch to Light Theme" : "Switch to Dark Theme";
+    },
   },
   methods: {
     iconPath: function(path, baseIconName) {
