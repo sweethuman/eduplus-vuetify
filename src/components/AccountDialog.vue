@@ -35,24 +35,24 @@
             <v-card-text>
               <v-form>
                 <v-text-field
-                  v-model="loginId"
+                  v-model="loginForm.loginId"
                   prepend-icon="mdi-account"
                   name="loginId"
                   label="Username sau Email"
                   type="text"
                   color="orange"
                   :error-messages="loginIdErrors"
-                  @blur="$v.loginId.$touch"
+                  @blur="$v.loginForm.loginId.$touch"
                 ></v-text-field>
                 <v-text-field
-                  v-model="loginPassword"
+                  v-model="loginForm.loginPassword"
                   prepend-icon="mdi-lock"
                   name="password"
                   label="Parola"
                   type="password"
                   color="red"
                   :error-messages="loginPasswordErrors"
-                  @blur="$v.loginPassword.$touch"
+                  @blur="$v.loginForm.loginPassword.$touch"
                 ></v-text-field>
               </v-form>
             </v-card-text>
@@ -68,7 +68,7 @@
             <v-card-text>
               <v-form ref="form">
                 <v-text-field
-                  v-model="registerUsername"
+                  v-model="registerForm.registerUsername"
                   prepend-icon="mdi-account"
                   name="registerUsername"
                   label="Username"
@@ -76,20 +76,20 @@
                   color="orange"
                   :error-messages="registerUsernameErrors"
                   hint="Lungime minima de 5 caractere"
-                  @blur="$v.registerUsername.$touch"
+                  @blur="$v.registerForm.registerUsername.$touch"
                 ></v-text-field>
                 <v-text-field
-                  v-model="registerEmail"
+                  v-model="registerForm.registerEmail"
                   prepend-icon="mdi-at"
                   name="registerEmail"
                   label="Email"
                   type="text"
                   color="#FF8C00"
                   :error-messages="registerEmailErrors"
-                  @blur="$v.registerEmail.$touch"
+                  @blur="$v.registerForm.registerEmail.$touch"
                 ></v-text-field>
                 <v-text-field
-                  v-model="registerPassword"
+                  v-model="registerForm.registerPassword"
                   prepend-icon="mdi-lock"
                   name="registerPassword"
                   label="Parola"
@@ -97,17 +97,17 @@
                   color="#ff4500"
                   :error-messages="registerPasswordErrors"
                   hint="Parola trebuie sa aiba minim 8 caractere"
-                  @blur="$v.registerPassword.$touch"
+                  @blur="$v.registerForm.registerPassword.$touch"
                 ></v-text-field>
                 <v-text-field
-                  v-model="registerPasswordRepeat"
+                  v-model="registerForm.registerPasswordRepeat"
                   prepend-icon="mdi-lock"
                   name="registerPasswordRepeat"
                   label="Repeta Parola"
                   type="password"
                   color="#ff4500"
                   :error-messages="registerPasswordRepeatErrors"
-                  @blur="$v.registerPasswordRepeat.$touch"
+                  @blur="$v.registerForm.registerPasswordRepeat.$touch"
                 ></v-text-field>
               </v-form>
             </v-card-text>
@@ -127,68 +127,76 @@ import { required, minLength, email, alphaNum, sameAs, or, and } from "vuelidate
 export default {
   name: "AccountDialog",
   validations: {
-    loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
-    loginPassword: { required, minLength: minLength(8) },
-    registerUsername: { required, minLength: minLength(5), alphaNum },
-    registerEmail: { required, email },
-    registerPassword: { required, minLength: minLength(8) },
-    registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
+    loginForm: {
+      loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
+      loginPassword: { required, minLength: minLength(8) },
+    },
+    registerForm: {
+      registerUsername: { required, minLength: minLength(5), alphaNum },
+      registerEmail: { required, email },
+      registerPassword: { required, minLength: minLength(8) },
+      registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
+    },
   },
   data() {
     return {
       activeTab: 0,
       dialog: false,
-      loginId: "",
-      loginPassword: "",
-      registerUsername: "",
-      registerEmail: "",
-      registerPassword: "",
-      registerPasswordRepeat: "",
+      loginForm: {
+        loginId: "",
+        loginPassword: "",
+      },
+      registerForm: {
+        registerUsername: "",
+        registerEmail: "",
+        registerPassword: "",
+        registerPasswordRepeat: "",
+      },
     };
   },
   computed: {
     loginIdErrors() {
       const errors = [];
-      if (!this.$v.loginId.$dirty) return errors;
-      !this.$v.loginId.required && errors.push("Username sau Email este necesar");
-      !this.$v.loginId.emailOrUsername && errors.push("Username sau Email invalid");
+      if (!this.$v.loginForm.loginId.$dirty) return errors;
+      !this.$v.loginForm.loginId.required && errors.push("Username sau Email este necesar");
+      !this.$v.loginForm.loginId.emailOrUsername && errors.push("Username sau Email invalid");
       return errors;
     },
     loginPasswordErrors() {
       const errors = [];
-      if (!this.$v.loginPassword.$dirty) return errors;
-      !this.$v.loginPassword.required && errors.push("Parola este necesara");
-      !this.$v.loginPassword.minLength && errors.push("Lungimea minima este de 8 caractere");
+      if (!this.$v.loginForm.loginPassword.$dirty) return errors;
+      !this.$v.loginForm.loginPassword.required && errors.push("Parola este necesara");
+      !this.$v.loginForm.loginPassword.minLength && errors.push("Lungimea minima este de 8 caractere");
       return errors;
     },
     registerUsernameErrors() {
       const errors = [];
-      !this.$v.registerUsername.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
-      if (!this.$v.registerUsername.$dirty) return errors;
-      !this.$v.registerUsername.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
-      !this.$v.registerUsername.required && errors.push("Numele contului este necesar");
+      !this.$v.registerForm.registerUsername.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
+      if (!this.$v.registerForm.registerUsername.$dirty) return errors;
+      !this.$v.registerForm.registerUsername.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
+      !this.$v.registerForm.registerUsername.required && errors.push("Numele contului este necesar");
       return errors;
     },
     registerEmailErrors() {
       const errors = [];
-      if (!this.$v.registerEmail.$dirty) return errors;
-      !this.$v.registerEmail.email && errors.push("Trebuie sa fie un Email Valid");
-      !this.$v.registerEmail.required && errors.push("Emailul este necesar");
+      if (!this.$v.registerForm.registerEmail.$dirty) return errors;
+      !this.$v.registerForm.registerEmail.email && errors.push("Trebuie sa fie un Email Valid");
+      !this.$v.registerForm.registerEmail.required && errors.push("Emailul este necesar");
       return errors;
     },
     registerPasswordErrors() {
       const errors = [];
-      if (!this.$v.registerPassword.$dirty) return errors;
-      !this.$v.registerPassword.required && errors.push("Parola este necesara");
-      !this.$v.registerPassword.minLength && errors.push("Trebuie sa aiba minim 8 caractere");
+      if (!this.$v.registerForm.registerPassword.$dirty) return errors;
+      !this.$v.registerForm.registerPassword.required && errors.push("Parola este necesara");
+      !this.$v.registerForm.registerPassword.minLength && errors.push("Trebuie sa aiba minim 8 caractere");
       return errors;
     },
     registerPasswordRepeatErrors() {
       const errors = [];
-      if (!this.$v.registerPasswordRepeat.$dirty) return errors;
-      !this.$v.registerPasswordRepeat.sameAsRegisterPassword &&
+      if (!this.$v.registerForm.registerPasswordRepeat.$dirty) return errors;
+      !this.$v.registerForm.registerPasswordRepeat.sameAsRegisterPassword &&
         errors.push("Trebuie sa fie identica cu parola originala!");
-      !this.$v.registerPasswordRepeat.required && errors.push("Repetarea Parolei este necesara");
+      !this.$v.registerForm.registerPasswordRepeat.required && errors.push("Repetarea Parolei este necesara");
       return errors;
     },
   },
