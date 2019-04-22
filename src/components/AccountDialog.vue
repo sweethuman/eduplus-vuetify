@@ -56,9 +56,12 @@
                 ></v-text-field>
               </v-form>
             </v-card-text>
+            <v-alert :value="$v.loginForm.$invalid && $v.loginForm.$dirty" type="error" transition="scale-transition">
+              Formularul de Logare este Gresit</v-alert
+            >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" class="wiretap-gradient-angled" large @click="dialog = false">Login </v-btn>
+              <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitLogin">Login </v-btn>
             </v-card-actions>
           </v-card>
         </v-tab-item>
@@ -111,9 +114,16 @@
                 ></v-text-field>
               </v-form>
             </v-card-text>
+            <v-alert
+              :value="$v.registerForm.$invalid && $v.registerForm.$dirty"
+              type="error"
+              transition="scale-transition"
+            >
+              Formularul de Inregistrare este Gresit</v-alert
+            >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" class="wiretap-gradient-angled" large @click="dialog = false">Creeaza Cont </v-btn>
+              <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitRegister">Creeaza Cont </v-btn>
             </v-card-actions>
           </v-card>
         </v-tab-item>
@@ -203,6 +213,14 @@ export default {
   methods: {
     tabIcon: function(tabNumber, baseIconName) {
       return tabNumber === this.activeTab ? baseIconName : baseIconName + "-outline";
+    },
+    submitLogin() {
+      this.$v.loginForm.$touch();
+      if (!this.$v.loginForm.$invalid) this.dialog = false;
+    },
+    submitRegister() {
+      this.$v.registerForm.$touch();
+      if (!this.$v.registerForm.$invalid) this.dialog = false;
     },
   },
 };
