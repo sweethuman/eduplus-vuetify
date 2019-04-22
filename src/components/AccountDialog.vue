@@ -62,45 +62,58 @@
             </v-card-actions>
           </v-card>
         </v-tab-item>
+
         <v-tab-item>
           <v-card flat>
             <v-card-text>
               <v-form ref="form">
                 <v-text-field
+                  v-model="registerUsername"
                   prepend-icon="mdi-account"
-                  name="username"
+                  name="registerUsername"
                   label="Username"
                   type="text"
                   color="orange"
+                  :error-messages="registerUsernameErrors"
+                  hint="Lungime minima de 5 caractere"
+                  @blur="$v.registerUsername.$touch"
                 ></v-text-field>
                 <v-text-field
+                  v-model="registerEmail"
                   prepend-icon="mdi-at"
-                  name="email"
+                  name="registerEmail"
                   label="Email"
                   type="text"
                   color="#FF8C00"
+                  :error-messages="registerEmailErrors"
+                  @blur="$v.registerEmail.$touch"
                 ></v-text-field>
                 <v-text-field
+                  v-model="registerPassword"
                   prepend-icon="mdi-lock"
-                  name="password"
-                  label="Password"
+                  name="registerPassword"
+                  label="Parola"
                   type="password"
-                  color="red"
+                  color="#ff4500"
+                  :error-messages="registerPasswordErrors"
+                  hint="Parola trebuie sa aiba minim 8 caractere"
+                  @blur="$v.registerPassword.$touch"
                 ></v-text-field>
                 <v-text-field
+                  v-model="registerPasswordRepeat"
                   prepend-icon="mdi-lock"
-                  name="passwordRepeat"
-                  label="Repeat Password"
+                  name="registerPasswordRepeat"
+                  label="Repeta Parola"
                   type="password"
-                  color="#8b0000"
+                  color="#ff4500"
+                  :error-messages="registerPasswordRepeatErrors"
+                  @blur="$v.registerPasswordRepeat.$touch"
                 ></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" class="wiretap-gradient-angled" large @click="dialog = false"
-                >Create Account
-              </v-btn>
+              <v-btn color="primary" class="wiretap-gradient-angled" large @click="dialog = false">Creeaza Cont </v-btn>
             </v-card-actions>
           </v-card>
         </v-tab-item>
@@ -109,8 +122,16 @@
   </v-dialog>
 </template>
 <script>
+import { required, minLength, email, alphaNum, sameAs } from "vuelidate/lib/validators";
+
 export default {
   name: "AccountDialog",
+  validations: {
+    registerUsername: { required, minLength: minLength(5), alphaNum },
+    registerEmail: { required, email },
+    registerPassword: { required, minLength: minLength(8) },
+    registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
+  },
   data() {
     return {
       activeTab: 0,
@@ -118,9 +139,45 @@ export default {
       validLogin: false,
       loginId: "",
       loginPassword: "",
+      registerUsername: "",
+      registerEmail: "",
+      registerPassword: "",
+      registerPasswordRepeat: "",
       loginIdRules: [v => !!v || "Username/Email is required"],
       passwordRules: [v => !!v || "Password is required"],
     };
+  },
+  computed: {
+    registerUsernameErrors() {
+      const errors = [];
+      !this.$v.registerUsername.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
+      if (!this.$v.registerUsername.$dirty) return errors;
+      !this.$v.registerUsername.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
+      !this.$v.registerUsername.required && errors.push("Numele contului este necesar");
+      return errors;
+    },
+    registerEmailErrors() {
+      const errors = [];
+      if (!this.$v.registerEmail.$dirty) return errors;
+      !this.$v.registerEmail.email && errors.push("Trebuie sa fie un Email Valid");
+      !this.$v.registerEmail.required && errors.push("Emailul este necesar");
+      return errors;
+    },
+    registerPasswordErrors() {
+      const errors = [];
+      if (!this.$v.registerPassword.$dirty) return errors;
+      !this.$v.registerPassword.required && errors.push("Parola este necesara");
+      !this.$v.registerPassword.minLength && errors.push("Trebuie sa aiba minim 8 caractere");
+      return errors;
+    },
+    registerPasswordRepeatErrors() {
+      const errors = [];
+      if (!this.$v.registerPasswordRepeat.$dirty) return errors;
+      !this.$v.registerPasswordRepeat.sameAsRegisterPassword &&
+        errors.push("Trebuie sa fie identica cu parola originala!");
+      !this.$v.registerPasswordRepeat.required && errors.push("Repetarea Parolei este necesara");
+      return errors;
+    },
   },
   methods: {
     tabIcon: function(tabNumber, baseIconName) {
