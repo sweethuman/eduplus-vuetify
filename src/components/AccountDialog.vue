@@ -33,26 +33,26 @@
         <v-tab-item>
           <v-card flat>
             <v-card-text>
-              <v-form v-model="validLogin">
+              <v-form>
                 <v-text-field
                   v-model="loginId"
                   prepend-icon="mdi-account"
                   name="loginId"
-                  label="Username/Email"
+                  label="Username sau Email"
                   type="text"
                   color="orange"
-                  :rules="loginIdRules"
-                  required
+                  :error-messages="loginIdErrors"
+                  @blur="$v.loginId.$touch"
                 ></v-text-field>
                 <v-text-field
                   v-model="loginPassword"
                   prepend-icon="mdi-lock"
                   name="password"
-                  label="Password"
+                  label="Parola"
                   type="password"
                   color="red"
-                  :rules="passwordRules"
-                  required
+                  :error-messages="loginPasswordErrors"
+                  @blur="$v.loginPassword.$touch"
                 ></v-text-field>
               </v-form>
             </v-card-text>
@@ -122,11 +122,13 @@
   </v-dialog>
 </template>
 <script>
-import { required, minLength, email, alphaNum, sameAs } from "vuelidate/lib/validators";
+import { required, minLength, email, alphaNum, sameAs, or, and } from "vuelidate/lib/validators";
 
 export default {
   name: "AccountDialog",
   validations: {
+    loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
+    loginPassword: { required, minLength: minLength(8) },
     registerUsername: { required, minLength: minLength(5), alphaNum },
     registerEmail: { required, email },
     registerPassword: { required, minLength: minLength(8) },
@@ -136,18 +138,29 @@ export default {
     return {
       activeTab: 0,
       dialog: false,
-      validLogin: false,
       loginId: "",
       loginPassword: "",
       registerUsername: "",
       registerEmail: "",
       registerPassword: "",
       registerPasswordRepeat: "",
-      loginIdRules: [v => !!v || "Username/Email is required"],
-      passwordRules: [v => !!v || "Password is required"],
     };
   },
   computed: {
+    loginIdErrors() {
+      const errors = [];
+      if (!this.$v.loginId.$dirty) return errors;
+      !this.$v.loginId.required && errors.push("Username sau Email este necesar");
+      !this.$v.loginId.emailOrUsername && errors.push("Username sau Email invalid");
+      return errors;
+    },
+    loginPasswordErrors() {
+      const errors = [];
+      if (!this.$v.loginPassword.$dirty) return errors;
+      !this.$v.loginPassword.required && errors.push("Parola este necesara");
+      !this.$v.loginPassword.minLength && errors.push("Lungimea minima este de 8 caractere");
+      return errors;
+    },
     registerUsernameErrors() {
       const errors = [];
       !this.$v.registerUsername.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
