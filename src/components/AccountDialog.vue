@@ -56,9 +56,6 @@
                 ></v-text-field>
               </v-form>
             </v-card-text>
-            <v-alert :value="$v.loginForm.$invalid && $v.loginForm.$dirty" type="error" transition="scale-transition">
-              Formularul de Logare este Gresit</v-alert
-            >
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitLogin">Login </v-btn>
@@ -114,13 +111,6 @@
                 ></v-text-field>
               </v-form>
             </v-card-text>
-            <v-alert
-              :value="$v.registerForm.$invalid && $v.registerForm.$dirty"
-              type="error"
-              transition="scale-transition"
-            >
-              Formularul de Inregistrare este Gresit</v-alert
-            >
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitRegister">Creeaza Cont </v-btn>
@@ -128,6 +118,16 @@
           </v-card>
         </v-tab-item>
       </v-tabs>
+      <v-alert
+        v-model="alert.show"
+        :type="alert.type"
+        transition="scale-transition"
+        dismissible
+        mode="in-out"
+        style="margin-bottom: 0; margin-top: 4px"
+      >
+        {{ alert.message }}</v-alert
+      >
     </v-card>
   </v-dialog>
 </template>
@@ -161,6 +161,11 @@ export default {
         registerEmail: "",
         registerPassword: "",
         registerPasswordRepeat: "",
+      },
+      alert: {
+        show: false,
+        type: "error",
+        message: "GENERIC ERROR",
       },
     };
   },
@@ -216,11 +221,29 @@ export default {
     },
     submitLogin() {
       this.$v.loginForm.$touch();
-      if (!this.$v.loginForm.$invalid) this.dialog = false;
+      if (this.$v.loginForm.$invalid) {
+        this.displayError("Sunt greseli in formularul de Login");
+        return;
+      }
+      this.hideError();
+      this.dialog = false;
     },
     submitRegister() {
       this.$v.registerForm.$touch();
-      if (!this.$v.registerForm.$invalid) this.dialog = false;
+      if (this.$v.registerForm.$invalid) {
+        this.displayError("Sunt greseli in formularul de Inregistrare");
+        return;
+      }
+      this.hideError();
+      this.dialog = false;
+    },
+    displayError(message) {
+      this.alert.message = message;
+      this.alert.type = "error";
+      this.alert.show = true;
+    },
+    hideError() {
+      this.alert.show = false;
     },
   },
 };
