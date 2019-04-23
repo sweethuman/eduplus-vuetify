@@ -1,136 +1,124 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    max-width="500"
-    :fullscreen="!this.$vuetify.breakpoint.mdAndUp"
-    :transition="this.$vuetify.breakpoint.mdAndUp ? 'dialog-transition' : 'dialog-bottom-transition'"
-  >
-    <template #activator="{ on }">
-      <v-btn class="orange-gradient" flat large v-on="on">
-        <v-icon left>mdi-login-variant</v-icon>
+  <v-card>
+    <v-tabs v-model="activeTab" color="#F27121" dark slider-color="#E94057" grow icons-and-text>
+      <v-tab ripple class="wiretap-gradient-reversed">
         Login
+        <v-icon>{{ tabIcon(0, "mdi-account") }}</v-icon>
+      </v-tab>
+      <v-btn
+        v-if="!this.$vuetify.breakpoint.mdAndUp"
+        style="margin: auto"
+        class="wiretap-gradient-halved"
+        round
+        @click="$emit('close-dialog')"
+      >
+        <v-icon>mdi-close</v-icon>
       </v-btn>
-    </template>
-    <v-card>
-      <v-tabs v-model="activeTab" color="#F27121" dark slider-color="#E94057" grow icons-and-text>
-        <v-tab ripple class="wiretap-gradient-reversed">
-          Login
-          <v-icon>{{ tabIcon(0, "mdi-account") }}</v-icon>
-        </v-tab>
-        <v-btn
-          v-if="!this.$vuetify.breakpoint.mdAndUp"
-          style="margin: auto"
-          class="wiretap-gradient-halved"
-          round
-          @click="dialog = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-tab ripple class="wiretap-gradient">
-          Register
-          <v-icon>{{ tabIcon(1, "mdi-account-plus") }}</v-icon>
-        </v-tab>
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-              <v-form>
-                <v-text-field
-                  v-model="loginForm.loginId"
-                  prepend-icon="mdi-account"
-                  name="loginId"
-                  label="Username sau Email"
-                  type="text"
-                  color="orange"
-                  :error-messages="loginIdErrors"
-                  @blur="$v.loginForm.loginId.$touch"
-                ></v-text-field>
-                <v-text-field
-                  v-model="loginForm.loginPassword"
-                  prepend-icon="mdi-lock"
-                  name="password"
-                  label="Parola"
-                  type="password"
-                  color="red"
-                  :error-messages="loginPasswordErrors"
-                  @blur="$v.loginForm.loginPassword.$touch"
-                ></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitLogin">Login </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-tab-item>
+      <v-tab ripple class="wiretap-gradient">
+        Register
+        <v-icon>{{ tabIcon(1, "mdi-account-plus") }}</v-icon>
+      </v-tab>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                v-model="loginForm.loginId"
+                prepend-icon="mdi-account"
+                name="loginId"
+                label="Username sau Email"
+                type="text"
+                color="orange"
+                :error-messages="loginIdErrors"
+                @blur="$v.loginForm.loginId.$touch"
+              ></v-text-field>
+              <v-text-field
+                v-model="loginForm.loginPassword"
+                prepend-icon="mdi-lock"
+                name="password"
+                label="Parola"
+                type="password"
+                color="red"
+                :error-messages="loginPasswordErrors"
+                @blur="$v.loginForm.loginPassword.$touch"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitLogin">Login </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-tab-item>
 
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-              <v-form ref="form">
-                <v-text-field
-                  v-model="registerForm.registerUsername"
-                  prepend-icon="mdi-account"
-                  name="registerUsername"
-                  label="Username"
-                  type="text"
-                  color="orange"
-                  :error-messages="registerUsernameErrors"
-                  hint="Lungime minima de 5 caractere"
-                  @blur="$v.registerForm.registerUsername.$touch"
-                ></v-text-field>
-                <v-text-field
-                  v-model="registerForm.registerEmail"
-                  prepend-icon="mdi-at"
-                  name="registerEmail"
-                  label="Email"
-                  type="text"
-                  color="#FF8C00"
-                  :error-messages="registerEmailErrors"
-                  @blur="$v.registerForm.registerEmail.$touch"
-                ></v-text-field>
-                <v-text-field
-                  v-model="registerForm.registerPassword"
-                  prepend-icon="mdi-lock"
-                  name="registerPassword"
-                  label="Parola"
-                  type="password"
-                  color="#ff4500"
-                  :error-messages="registerPasswordErrors"
-                  hint="Parola trebuie sa aiba minim 8 caractere"
-                  @blur="$v.registerForm.registerPassword.$touch"
-                ></v-text-field>
-                <v-text-field
-                  v-model="registerForm.registerPasswordRepeat"
-                  prepend-icon="mdi-lock"
-                  name="registerPasswordRepeat"
-                  label="Repeta Parola"
-                  type="password"
-                  color="#ff4500"
-                  :error-messages="registerPasswordRepeatErrors"
-                  @blur="$v.registerForm.registerPasswordRepeat.$touch"
-                ></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitRegister">Creeaza Cont </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-tab-item>
-      </v-tabs>
-      <v-alert
-        v-model="alert.show"
-        :type="alert.type"
-        transition="scale-transition"
-        dismissible
-        mode="in-out"
-        style="margin-bottom: 0; margin-top: 4px"
-      >
-        {{ alert.message }}</v-alert
-      >
-    </v-card>
-  </v-dialog>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            <v-form ref="form">
+              <v-text-field
+                v-model="registerForm.registerUsername"
+                prepend-icon="mdi-account"
+                name="registerUsername"
+                label="Username"
+                type="text"
+                color="orange"
+                :error-messages="registerUsernameErrors"
+                hint="Lungime minima de 5 caractere"
+                @blur="$v.registerForm.registerUsername.$touch"
+              ></v-text-field>
+              <v-text-field
+                v-model="registerForm.registerEmail"
+                prepend-icon="mdi-at"
+                name="registerEmail"
+                label="Email"
+                type="text"
+                color="#FF8C00"
+                :error-messages="registerEmailErrors"
+                @blur="$v.registerForm.registerEmail.$touch"
+              ></v-text-field>
+              <v-text-field
+                v-model="registerForm.registerPassword"
+                prepend-icon="mdi-lock"
+                name="registerPassword"
+                label="Parola"
+                type="password"
+                color="#ff4500"
+                :error-messages="registerPasswordErrors"
+                hint="Parola trebuie sa aiba minim 8 caractere"
+                @blur="$v.registerForm.registerPassword.$touch"
+              ></v-text-field>
+              <v-text-field
+                v-model="registerForm.registerPasswordRepeat"
+                prepend-icon="mdi-lock"
+                name="registerPasswordRepeat"
+                label="Repeta Parola"
+                type="password"
+                color="#ff4500"
+                :error-messages="registerPasswordRepeatErrors"
+                @blur="$v.registerForm.registerPasswordRepeat.$touch"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitRegister">Creeaza Cont </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-tab-item>
+    </v-tabs>
+    <v-alert
+      v-model="alert.show"
+      :type="alert.type"
+      transition="scale-transition"
+      dismissible
+      mode="in-out"
+      style="margin-bottom: 0; margin-top: 4px"
+    >
+      {{ alert.message }}</v-alert
+    >
+  </v-card>
 </template>
+
 <script>
 import { required, minLength, email, alphaNum, sameAs, or, and, helpers } from "vuelidate/lib/validators";
 
@@ -143,7 +131,7 @@ function emailNotExist(value) {
 }
 
 export default {
-  name: "AccountDialog",
+  name: "LogIn",
   validations: {
     loginForm: {
       loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
@@ -159,7 +147,6 @@ export default {
   data() {
     return {
       activeTab: 0,
-      dialog: false,
       loginForm: {
         loginId: "",
         loginPassword: "",
@@ -247,7 +234,7 @@ export default {
       this.hideError();
       this.clearFields(this.loginForm);
       this.$v.loginForm.$reset();
-      this.dialog = false;
+      this.$emit("close-dialog");
     },
     submitRegister() {
       this.$v.registerForm.$touch();
@@ -263,7 +250,7 @@ export default {
       this.hideError();
       this.clearFields(this.registerForm);
       this.$v.registerForm.$reset();
-      this.dialog = false;
+      this.$emit("close-dialog");
     },
     clearFields(object) {
       this._.forEach(object, (value, key) => {
@@ -281,3 +268,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>

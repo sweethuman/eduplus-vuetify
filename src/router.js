@@ -22,12 +22,12 @@ export default new Router({
     {
       path: "/exam",
       name: "Exam",
-      component: () => import(/* webpackChunkName: "about" */ "./views/Exam.vue"),
+      component: () => import(/* webpackChunkName: "exam" */ "./views/Exam.vue"),
     },
     {
       path: "**",
       name: "404",
-      component: () => import(/* webpackChunkName: "about" */ "./views/404Page.vue"),
+      component: () => import(/* webpackChunkName: "notfound" */ "./views/404Page.vue"),
     },
   ],
 });
