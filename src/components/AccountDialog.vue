@@ -245,6 +245,8 @@ export default {
         return;
       }
       this.hideError();
+      this.clearFields(this.loginForm);
+      this.$v.loginForm.$reset();
       this.dialog = false;
     },
     submitRegister() {
@@ -259,7 +261,14 @@ export default {
       newUser.password = this.registerForm.registerPassword;
       this.$store.commit("userDatabase/addUser", newUser);
       this.hideError();
+      this.clearFields(this.registerForm);
+      this.$v.registerForm.$reset();
       this.dialog = false;
+    },
+    clearFields(object) {
+      this._.forEach(object, (value, key) => {
+        object[key] = "";
+      });
     },
     displayError(message) {
       this.alert.message = message;
