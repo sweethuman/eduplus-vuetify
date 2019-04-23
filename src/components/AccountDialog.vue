@@ -132,7 +132,15 @@
   </v-dialog>
 </template>
 <script>
-import { required, minLength, email, alphaNum, sameAs, or, and } from "vuelidate/lib/validators";
+import { required, minLength, email, alphaNum, sameAs, or, and, helpers } from "vuelidate/lib/validators";
+
+function usernameNotExist(value) {
+  return !helpers.req(value) || !this.$store.getters["userDatabase/checkIfUsernameExists"](value);
+}
+
+function emailNotExist(value) {
+  return !helpers.req(value) || !this.$store.getters["userDatabase/checkIfEmailExists"](value);
+}
 
 export default {
   name: "AccountDialog",
@@ -142,8 +150,8 @@ export default {
       loginPassword: { required, minLength: minLength(8) },
     },
     registerForm: {
-      registerUsername: { required, minLength: minLength(5), alphaNum },
-      registerEmail: { required, email },
+      registerUsername: { required, minLength: minLength(5), alphaNum, usernameNotExist },
+      registerEmail: { required, email, emailNotExist },
       registerPassword: { required, minLength: minLength(8) },
       registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
     },
@@ -187,6 +195,7 @@ export default {
     registerUsernameErrors() {
       const errors = [];
       !this.$v.registerForm.registerUsername.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
+      !this.$v.registerForm.registerUsername.usernameNotExist && errors.push("Username deja prezent");
       if (!this.$v.registerForm.registerUsername.$dirty) return errors;
       !this.$v.registerForm.registerUsername.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
       !this.$v.registerForm.registerUsername.required && errors.push("Numele contului este necesar");
@@ -194,6 +203,7 @@ export default {
     },
     registerEmailErrors() {
       const errors = [];
+      !this.$v.registerForm.registerEmail.emailNotExist && errors.push("Email deja prezent");
       if (!this.$v.registerForm.registerEmail.$dirty) return errors;
       !this.$v.registerForm.registerEmail.email && errors.push("Trebuie sa fie un Email Valid");
       !this.$v.registerForm.registerEmail.required && errors.push("Emailul este necesar");
