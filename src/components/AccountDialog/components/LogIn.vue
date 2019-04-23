@@ -31,6 +31,7 @@
                 color="orange"
                 :error-messages="loginIdErrors"
                 @blur="$v.loginForm.loginId.$touch"
+                @keyup.enter="focusNextInputOnEvent"
               ></v-text-field>
               <v-text-field
                 v-model="loginForm.loginPassword"
@@ -41,6 +42,7 @@
                 color="red"
                 :error-messages="loginPasswordErrors"
                 @blur="$v.loginForm.loginPassword.$touch"
+                @keyup.enter="callFuncAfterInputEvent($event, submitLogin)"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -54,7 +56,7 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            <v-form ref="form">
+            <form ref="form">
               <v-text-field
                 v-model="registerForm.registerUsername"
                 prepend-icon="mdi-account"
@@ -65,6 +67,7 @@
                 :error-messages="registerUsernameErrors"
                 hint="Lungime minima de 5 caractere"
                 @blur="$v.registerForm.registerUsername.$touch"
+                @keyup.enter="focusNextInputOnEvent"
               ></v-text-field>
               <v-text-field
                 v-model="registerForm.registerEmail"
@@ -75,6 +78,7 @@
                 color="#FF8C00"
                 :error-messages="registerEmailErrors"
                 @blur="$v.registerForm.registerEmail.$touch"
+                @keyup.enter="focusNextInputOnEvent"
               ></v-text-field>
               <v-text-field
                 v-model="registerForm.registerPassword"
@@ -86,6 +90,7 @@
                 :error-messages="registerPasswordErrors"
                 hint="Parola trebuie sa aiba minim 8 caractere"
                 @blur="$v.registerForm.registerPassword.$touch"
+                @keyup.enter="focusNextInputOnEvent"
               ></v-text-field>
               <v-text-field
                 v-model="registerForm.registerPasswordRepeat"
@@ -96,8 +101,9 @@
                 color="#ff4500"
                 :error-messages="registerPasswordRepeatErrors"
                 @blur="$v.registerForm.registerPasswordRepeat.$touch"
+                @keyup.enter="callFuncAfterInputEvent($event, submitRegister)"
               ></v-text-field>
-            </v-form>
+            </form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -121,6 +127,7 @@
 
 <script>
 import { required, minLength, email, alphaNum, sameAs, or, and, helpers } from "vuelidate/lib/validators";
+import { formUtilitiesMixin } from "../../../mixins/formUtilitiesMixin";
 
 function usernameNotExist(value) {
   return !helpers.req(value) || !this.$store.getters["userDatabase/checkIfUsernameExists"](value);
@@ -132,6 +139,7 @@ function emailNotExist(value) {
 
 export default {
   name: "LogIn",
+  mixins: [formUtilitiesMixin],
   validations: {
     loginForm: {
       loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
@@ -233,8 +241,8 @@ export default {
       }
       this.hideError();
       this.clearFields(this.loginForm);
-      this.$v.loginForm.$reset();
       this.$emit("close-dialog");
+      this.$v.loginForm.$reset();
     },
     submitRegister() {
       this.$v.registerForm.$touch();
@@ -249,8 +257,8 @@ export default {
       this.$store.commit("userDatabase/addUser", newUser);
       this.hideError();
       this.clearFields(this.registerForm);
-      this.$v.registerForm.$reset();
       this.$emit("close-dialog");
+      this.$v.registerForm.$reset();
     },
     clearFields(object) {
       this._.forEach(object, (value, key) => {
