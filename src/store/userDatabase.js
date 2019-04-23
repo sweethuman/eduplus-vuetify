@@ -7,7 +7,7 @@ export default {
     addUser(state, payload) {
       const newUser = {};
       newUser.id = state.users.length;
-      newUser.username = payload.username;
+      newUser.username = payload.username.toLowerCase();
       newUser.email = payload.email;
       newUser.password = payload.password;
       state.users.push(newUser);
@@ -18,11 +18,12 @@ export default {
       return state.users.find(user => user.email === email);
     },
     getUserByUsername: state => username => {
+      username = username.toLowerCase();
       return state.users.find(user => user.username === username);
     },
-    getUserByUsernameOrEmail: (state, getters) => payload => {
-      let result = getters.getUserByEmail(payload);
-      if (result == null) result = getters.getUserByUsername(payload);
+    getUserByUsernameOrEmail: (state, getters) => loginId => {
+      let result = getters.getUserByEmail(loginId);
+      if (result == null) result = getters.getUserByUsername(loginId);
       return result;
     },
 
