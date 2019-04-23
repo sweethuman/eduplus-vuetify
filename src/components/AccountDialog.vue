@@ -225,6 +225,15 @@ export default {
         this.displayError("Sunt greseli in formularul de Login");
         return;
       }
+      let result = this.$store.getters["userDatabase/getUserByUsernameOrEmail"](this.loginForm.loginId);
+      if (result == null) {
+        this.displayError("Username sau Email gresit");
+        return;
+      }
+      if (result.password !== this.loginForm.loginPassword) {
+        this.displayError("Parola Gresita");
+        return;
+      }
       this.hideError();
       this.dialog = false;
     },
@@ -234,6 +243,11 @@ export default {
         this.displayError("Sunt greseli in formularul de Inregistrare");
         return;
       }
+      const newUser = {};
+      newUser.username = this.registerForm.registerUsername;
+      newUser.email = this.registerForm.registerEmail;
+      newUser.password = this.registerForm.registerPassword;
+      this.$store.commit("userDatabase/addUser", newUser);
       this.hideError();
       this.dialog = false;
     },
