@@ -262,21 +262,30 @@ export default {
         this.displayError(e.message);
       }
     },
-    submitRegister() {
+    async submitRegister() {
       this.$v.registerForm.$touch();
       if (this.$v.registerForm.$invalid) {
         this.displayError("Sunt greseli in formularul de Inregistrare");
         return;
       }
-      const newUser = {};
-      newUser.username = this.registerForm.registerUsername;
-      newUser.email = this.registerForm.registerEmail;
-      newUser.password = this.registerForm.registerPassword;
-      this.$store.commit("userDatabase/addUser", newUser);
-      this.hideError();
-      this.clearFields(this.registerForm);
-      this.$emit("close-dialog");
-      this.$v.registerForm.$reset();
+      try {
+        await this.$store.dispatch("userManagement/register", {
+          username: this.registerForm.registerUsername,
+          name: this.registerForm.registerName,
+          email: this.registerForm.registerEmail,
+          password: this.registerForm.registerPassword,
+        });
+        await this.$store.dispatch("userManagement/logIn", {
+          loginId: this.registerForm.registerUsername,
+          password: this.registerForm.registerPassword,
+        });
+        this.hideError();
+        this.clearFields(this.registerForm);
+        this.$emit("close-dialog");
+        this.$v.registerForm.$reset();
+      } catch (e) {
+        this.displayError(e.message);
+      }
     },
     clearFields(object) {
       this._.forEach(object, (value, key) => {
