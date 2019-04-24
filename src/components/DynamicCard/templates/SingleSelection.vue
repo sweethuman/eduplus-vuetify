@@ -13,7 +13,7 @@
         <v-flex xs12>
           <v-radio :value="i" class="py-2">
             <template #label>
-              <span class="black--text">{{ option }}</span>
+              <span :class="textColorOnTheme">{{ option }}</span>
             </template>
           </v-radio>
         </v-flex>
@@ -35,10 +35,11 @@
 
 <script>
 import { examSelectionMixin } from "../../../mixins/examSelectionMixin";
+import { textUtilitiesMixin } from "../../../mixins/utilitiesMixins";
 
 export default {
   name: "SingleSelection",
-  mixins: [examSelectionMixin],
+  mixins: [examSelectionMixin, textUtilitiesMixin],
   data() {
     return {
       radioSelection: null,

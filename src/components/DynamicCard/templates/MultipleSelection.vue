@@ -20,7 +20,7 @@
               style="margin-top: 0; padding-bottom: 4px"
             >
               <template #label>
-                <span class="black--text">{{ option }}</span>
+                <span :class="textColorOnTheme">{{ option }}</span>
               </template>
             </v-checkbox>
           </v-flex>
@@ -43,10 +43,11 @@
 
 <script>
 import { examSelectionMixin } from "../../../mixins/examSelectionMixin";
+import { textUtilitiesMixin } from "../../../mixins/utilitiesMixins";
 
 export default {
   name: "MultipleSelection",
-  mixins: [examSelectionMixin],
+  mixins: [examSelectionMixin, textUtilitiesMixin],
   data() {
     return {
       checkboxSelection: [],
