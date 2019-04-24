@@ -34,5 +34,27 @@ export default {
       if (result.password !== payload.password) throw new Error("Parola Gresita");
       commit("setNewUser", result);
     },
+    register({ commit, rootGetters }, payload) {
+      if (
+        payload == null ||
+        payload.username == null ||
+        payload.name == null ||
+        payload.email == null ||
+        payload.password == null
+      )
+        throw new Error("Unul sau Mai multe campuri sunt goale");
+      if (rootGetters["userDatabase/checkIfEmailExists"](payload.email)) throw new Error("Email exista deja");
+      if (rootGetters["userDatabase/checkIfUsernameExists"](payload.username)) throw new Error("Username exista deja");
+      commit(
+        "userDatabase/addUser",
+        {
+          username: payload.username,
+          name: payload.name,
+          email: payload.email,
+          password: payload.password,
+        },
+        { root: true }
+      );
+    },
   },
 };
