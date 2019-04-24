@@ -8,6 +8,7 @@ export default {
       const newUser = {};
       newUser.id = state.users.length;
       newUser.username = payload.username.toLowerCase();
+      newUser.name = payload.name;
       newUser.email = payload.email;
       newUser.password = payload.password;
       state.users.push(newUser);

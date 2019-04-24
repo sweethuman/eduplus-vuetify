@@ -70,6 +70,17 @@
                 @keyup.enter="focusNextInputOnEvent"
               ></v-text-field>
               <v-text-field
+                v-model="registerForm.registerName"
+                prepend-icon="mdi-face"
+                name="registerName"
+                label="Numele Tau"
+                type="text"
+                color="orange"
+                :error-messages="registerNameErrors"
+                @blur="$v.registerForm.registerName.$touch"
+                @keyup.enter="focusNextInputOnEvent"
+              ></v-text-field>
+              <v-text-field
                 v-model="registerForm.registerEmail"
                 prepend-icon="mdi-at"
                 name="registerEmail"
@@ -147,6 +158,7 @@ export default {
     },
     registerForm: {
       registerUsername: { required, minLength: minLength(5), alphaNum, usernameNotExist },
+      registerName: { required },
       registerEmail: { required, email, emailNotExist },
       registerPassword: { required, minLength: minLength(8) },
       registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
@@ -161,6 +173,7 @@ export default {
       },
       registerForm: {
         registerUsername: "",
+        registerName: "",
         registerEmail: "",
         registerPassword: "",
         registerPasswordRepeat: "",
@@ -194,6 +207,12 @@ export default {
       if (!this.$v.registerForm.registerUsername.$dirty) return errors;
       !this.$v.registerForm.registerUsername.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
       !this.$v.registerForm.registerUsername.required && errors.push("Numele contului este necesar");
+      return errors;
+    },
+    registerNameErrors() {
+      const errors = [];
+      if (!this.$v.registerForm.registerName.$dirty) return errors;
+      !this.$v.registerForm.registerName.required && errors.push("Numele este necesar");
       return errors;
     },
     registerEmailErrors() {
