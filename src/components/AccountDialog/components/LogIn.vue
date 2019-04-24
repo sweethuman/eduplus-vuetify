@@ -224,25 +224,24 @@ export default {
     tabIcon: function(tabNumber, baseIconName) {
       return tabNumber === this.activeTab ? baseIconName : baseIconName + "-outline";
     },
-    submitLogin() {
+    async submitLogin() {
       this.$v.loginForm.$touch();
       if (this.$v.loginForm.$invalid) {
         this.displayError("Sunt greseli in formularul de Login");
         return;
       }
-      let result = this.$store.getters["userDatabase/getUserByUsernameOrEmail"](this.loginForm.loginId);
-      if (result == null) {
-        this.displayError("Username sau Email gresit");
-        return;
+      try {
+        await this.$store.dispatch("userManagement/logIn", {
+          loginId: this.loginForm.loginId,
+          password: this.loginForm.loginPassword,
+        });
+        this.hideError();
+        this.clearFields(this.loginForm);
+        this.$emit("close-dialog");
+        this.$v.loginForm.$reset();
+      } catch (e) {
+        this.displayError(e.message);
       }
-      if (result.password !== this.loginForm.loginPassword) {
-        this.displayError("Parola Gresita");
-        return;
-      }
-      this.hideError();
-      this.clearFields(this.loginForm);
-      this.$emit("close-dialog");
-      this.$v.loginForm.$reset();
     },
     submitRegister() {
       this.$v.registerForm.$touch();

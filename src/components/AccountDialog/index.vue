@@ -11,7 +11,7 @@
         Login
       </v-btn>
     </template>
-    <component :is="'LogIn'" @close-dialog="dialog = false" />
+    <component :is="activeComponent" @close-dialog="dialog = false" />
   </v-dialog>
 </template>
 <script>
@@ -23,11 +23,21 @@ export default {
         /* webpackChunkName: 'login' */
         "./components/LogIn"
       ),
+    MyProfile: () =>
+      import(
+        /* webpackChunkName: 'myProfile' */
+        "./components/MyProfile"
+      ),
   },
   data() {
     return {
       dialog: false,
     };
+  },
+  computed: {
+    activeComponent() {
+      return this.$store.state.userManagement.loggedIn ? "MyProfile" : "LogIn";
+    },
   },
 };
 </script>
