@@ -46,7 +46,13 @@
                   <v-card height="400">
                     <v-layout fill-height column>
                       <v-flex shrink>
-                        <v-img :src="card.image" aspect-ratio="2.75"></v-img>
+                        <v-img :src="card.image" aspect-ratio="2.75">
+                          <template #placeholder>
+                            <v-layout fill-height align-center justify-center ma-0>
+                              <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                            </v-layout>
+                          </template>
+                        </v-img>
                       </v-flex>
 
                       <v-flex grow>
