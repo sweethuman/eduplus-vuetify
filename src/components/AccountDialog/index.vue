@@ -1,13 +1,16 @@
 <template>
   <v-dialog
-    :key="activeButton"
+    key="AccountDialog"
     v-model="dialog"
     max-width="500"
     :fullscreen="!this.$vuetify.breakpoint.mdAndUp"
     :transition="this.$vuetify.breakpoint.mdAndUp ? 'dialog-transition' : 'dialog-bottom-transition'"
+    lazy
   >
     <template #activator="{ on }">
-      <component :is="activeButton" @click="dialog = true" />
+      <v-flex shrink>
+        <component :is="activeButton" @click="dialog = true" />
+      </v-flex>
     </template>
     <component :is="activeComponent" @close-dialog="dialog = false" />
   </v-dialog>
