@@ -2,7 +2,7 @@
   <v-dialog
     key="AccountDialog"
     v-model="dialog"
-    max-width="500"
+    :max-width="$store.state.userManagement.loggedIn ? '70%' : '500'"
     :fullscreen="!this.$vuetify.breakpoint.mdAndUp"
     :transition="this.$vuetify.breakpoint.mdAndUp ? 'dialog-transition' : 'dialog-bottom-transition'"
     lazy
