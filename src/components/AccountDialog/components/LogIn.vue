@@ -48,7 +48,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitLogin">Login </v-btn>
+            <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitLogin">Login</v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -73,11 +73,22 @@
                 v-model="registerForm.registerName"
                 prepend-icon="mdi-face"
                 name="registerName"
-                label="Numele Tau"
+                label="Nume"
                 type="text"
                 color="orange"
-                :error-messages="registerNameErrors"
+                :error-messages="requiredOnlyFieldErrors($v.registerForm.registerName, 'Numele')"
                 @blur="$v.registerForm.registerName.$touch"
+                @keyup.enter="focusNextInputOnEvent"
+              ></v-text-field>
+              <v-text-field
+                v-model="registerForm.registerForename"
+                prepend-icon="mdi-face"
+                name="registerForename"
+                label="Prenume"
+                type="text"
+                color="orange"
+                :error-messages="requiredOnlyFieldErrors($v.registerForm.registerForename, 'Prenumele')"
+                @blur="$v.registerForm.registerForename.$touch"
                 @keyup.enter="focusNextInputOnEvent"
               ></v-text-field>
               <v-text-field
@@ -118,7 +129,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitRegister">Creeaza Cont </v-btn>
+            <v-btn color="primary" class="wiretap-gradient-angled" large @click="submitRegister">Creeaza Cont</v-btn>
           </v-card-actions>
         </v-card>
       </v-tab-item>
@@ -131,8 +142,8 @@
       mode="in-out"
       style="margin-bottom: 0; margin-top: 4px"
     >
-      {{ alert.message }}</v-alert
-    >
+      {{ alert.message }}
+    </v-alert>
   </v-card>
 </template>
 
@@ -159,6 +170,7 @@ export default {
     registerForm: {
       registerUsername: { required, minLength: minLength(5), alphaNum, usernameNotExist },
       registerName: { required },
+      registerForename: { required },
       registerEmail: { required, email, emailNotExist },
       registerPassword: { required, minLength: minLength(8) },
       registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
@@ -174,6 +186,7 @@ export default {
       registerForm: {
         registerUsername: "",
         registerName: "",
+        registerForename: "",
         registerEmail: "",
         registerPassword: "",
         registerPasswordRepeat: "",
@@ -209,12 +222,6 @@ export default {
       !this.$v.registerForm.registerUsername.required && errors.push("Numele contului este necesar");
       return errors;
     },
-    registerNameErrors() {
-      const errors = [];
-      if (!this.$v.registerForm.registerName.$dirty) return errors;
-      !this.$v.registerForm.registerName.required && errors.push("Numele este necesar");
-      return errors;
-    },
     registerEmailErrors() {
       const errors = [];
       !this.$v.registerForm.registerEmail.emailNotExist && errors.push("Email deja prezent");
@@ -242,6 +249,12 @@ export default {
   methods: {
     tabIcon: function(tabNumber, baseIconName) {
       return tabNumber === this.activeTab ? baseIconName : baseIconName + "-outline";
+    },
+    requiredOnlyFieldErrors(field, fieldName) {
+      const errors = [];
+      if (!field.$dirty) return errors;
+      !field.required && errors.push(`${fieldName} este necesar`);
+      return errors;
     },
     async submitLogin() {
       this.$v.loginForm.$touch();
@@ -272,6 +285,7 @@ export default {
         await this.$store.dispatch("userManagement/register", {
           username: this.registerForm.registerUsername,
           name: this.registerForm.registerName,
+          forename: this.registerForm.registerForename,
           email: this.registerForm.registerEmail,
           password: this.registerForm.registerPassword,
         });

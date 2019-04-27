@@ -15,6 +15,7 @@ export default {
       state.currentUser.id = payload.id;
       state.currentUser.username = payload.username;
       state.currentUser.name = payload.name;
+      state.currentUser.forename = payload.forename;
       state.currentUser.email = payload.email;
     },
     resetState(state) {
@@ -23,6 +24,7 @@ export default {
         id: 0,
         username: null,
         name: null,
+        forename: null,
         email: null,
       };
     },
@@ -39,6 +41,7 @@ export default {
         payload == null ||
         payload.username == null ||
         payload.name == null ||
+        payload.forename == null ||
         payload.email == null ||
         payload.password == null
       )
@@ -50,6 +53,7 @@ export default {
         {
           username: payload.username,
           name: payload.name,
+          forename: payload.forename,
           email: payload.email,
           password: payload.password,
         },

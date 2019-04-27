@@ -13,7 +13,7 @@
         </template>
       </v-img>
     </v-avatar>
-    {{ $store.state.userManagement.currentUser.name }}
+    {{ $store.state.userManagement.currentUser.forename }}
   </v-btn>
 </template>
 
