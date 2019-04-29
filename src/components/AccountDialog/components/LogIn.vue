@@ -150,6 +150,7 @@
 <script>
 import { required, minLength, email, alphaNum, sameAs, or, and, helpers } from "vuelidate/lib/validators";
 import { formUtilitiesMixin } from "../../../mixins/formUtilitiesMixin";
+import { genericErrorMethodsMixin } from "../../../mixins/genericErrorMethodsMixin";
 
 function usernameNotExist(value) {
   return !helpers.req(value) || !this.$store.getters["userDatabase/checkIfUsernameExists"](value);
@@ -161,7 +162,7 @@ function emailNotExist(value) {
 
 export default {
   name: "LogIn",
-  mixins: [formUtilitiesMixin],
+  mixins: [formUtilitiesMixin, genericErrorMethodsMixin],
   validations: {
     loginForm: {
       loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
@@ -249,12 +250,6 @@ export default {
   methods: {
     tabIcon: function(tabNumber, baseIconName) {
       return tabNumber === this.activeTab ? baseIconName : baseIconName + "-outline";
-    },
-    requiredOnlyFieldErrors(field, fieldName) {
-      const errors = [];
-      if (!field.$dirty) return errors;
-      !field.required && errors.push(`${fieldName} este necesar`);
-      return errors;
     },
     async submitLogin() {
       this.$v.loginForm.$touch();

@@ -9,7 +9,7 @@
   >
     <template #activator="{ on }">
       <v-flex shrink>
-        <component :is="activeButton" @click="dialog = true" />
+        <component :is="activeButton" v-on="on" />
       </v-flex>
     </template>
     <component :is="activeComponent" @close-dialog="dialog = false" />
