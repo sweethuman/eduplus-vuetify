@@ -150,6 +150,7 @@
 <script>
 import { required, minLength, email, alphaNum, sameAs, or, and, helpers } from "vuelidate/lib/validators";
 import { formUtilitiesMixin } from "../../../mixins/formUtilitiesMixin";
+import { utilityMethodsMixin } from "../../../mixins/utilitiesMixins";
 import { genericErrorMethodsMixin } from "../../../mixins/genericErrorMethodsMixin";
 
 function usernameNotExist(value) {
@@ -162,7 +163,7 @@ function emailNotExist(value) {
 
 export default {
   name: "LogIn",
-  mixins: [formUtilitiesMixin, genericErrorMethodsMixin],
+  mixins: [formUtilitiesMixin, genericErrorMethodsMixin, utilityMethodsMixin],
   validations: {
     loginForm: {
       loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
@@ -263,7 +264,7 @@ export default {
           password: this.loginForm.loginPassword,
         });
         this.hideError();
-        this.clearFields(this.loginForm);
+        this.clearObjFields(this.loginForm);
         this.$emit("close-dialog");
         this.$v.loginForm.$reset();
       } catch (e) {
@@ -289,17 +290,12 @@ export default {
           password: this.registerForm.registerPassword,
         });
         this.hideError();
-        this.clearFields(this.registerForm);
+        this.clearObjFields(this.registerForm);
         this.$emit("close-dialog");
         this.$v.registerForm.$reset();
       } catch (e) {
         this.displayError(e.message);
       }
-    },
-    clearFields(object) {
-      this._.forEach(object, (value, key) => {
-        object[key] = "";
-      });
     },
     displayError(message) {
       this.alert.message = message;

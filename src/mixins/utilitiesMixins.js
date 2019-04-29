@@ -9,3 +9,13 @@ export const textUtilitiesMixin = {
     },
   },
 };
+
+export const utilityMethodsMixin = {
+  methods: {
+    clearObjFields(object) {
+      this._.forEach(object, (value, key) => {
+        object[key] = "";
+      });
+    },
+  },
+};
