@@ -61,7 +61,8 @@
                     :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
                     @click="checkAnswer()"
                   >
-                    Verifica Raspunul<v-icon right>
+                    Verifica Raspunul
+                    <v-icon right>
                       mdi-checkbox-marked-circle-outline
                     </v-icon>
                   </v-btn>
@@ -77,7 +78,8 @@
                     :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
                     @click="skipQuestion()"
                   >
-                    Sari Peste<v-icon right>
+                    Sari Peste
+                    <v-icon right>
                       mdi-skip-next
                     </v-icon>
                   </v-btn>
@@ -95,7 +97,8 @@
                     :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
                     @click="resetAndLoadPosition(++questionPosition)"
                   >
-                    Urmatoarea Intrebare<v-icon right>
+                    Urmatoarea Intrebare
+                    <v-icon right>
                       mdi-arrow-right
                     </v-icon>
                   </v-btn>

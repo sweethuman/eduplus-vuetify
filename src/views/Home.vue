@@ -16,7 +16,8 @@
                     <v-flex grow>
                       <v-card-title primary-title>
                         <h3 class="headline mb-0">
-                          <span class="font-weight-bold">{{ "" + i + j }}:</span> Is Seaweed good Seaweed?
+                          <span class="font-weight-bold">{{ "" + i + j }}:</span>
+                          Is Seaweed good Seaweed?
                         </h3>
                       </v-card-title>
                     </v-flex>
@@ -132,8 +133,8 @@
           class="mb-4"
         >
           <v-card-title class="headline">{{ item.title }}</v-card-title>
-          <v-card-text class="text-xs-justify"
-            ><p>
+          <v-card-text class="text-xs-justify">
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
               dolore magna aliqua. Phasellus faucibus scelerisque eleifend donec. Vitae justo eget magna fermentum
               iaculis eu. Netus et malesuada fames ac turpis egestas integer eget aliquet. Purus in mollis nunc sed id.

@@ -1,8 +1,8 @@
 <template>
   <v-container class="backing" fill-height fluid>
-    <v-layout row align-center justify-center
-      ><v-flex v-if="this.$vuetify.breakpoint.mdAndUp" d-flex md3 offset-md3
-        ><svg height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <v-layout row align-center justify-center>
+      <v-flex v-if="this.$vuetify.breakpoint.mdAndUp" d-flex md3 offset-md3>
+        <svg height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg">
           <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <path
               id="Polygon-1"
@@ -34,8 +34,9 @@
               stroke="#36B455"
               stroke-width="6"
             ></path>
-          </g></svg
-      ></v-flex>
+          </g>
+        </svg>
+      </v-flex>
       <v-flex xs12 md6>
         <v-layout column :align-center="!this.$vuetify.breakpoint.mdAndUp">
           <v-flex xs12 py-5>

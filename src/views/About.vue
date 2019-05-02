@@ -22,8 +22,12 @@
               </h5>
               <h5 class="headline">
                 There are plenty of options for a lot of subject such as
-                <span class="font-weight-medium">Maths</span>, <span class="font-weight-medium">Romanian</span>,
-                <span class="font-weight-medium">Psychology</span> and
+                <span class="font-weight-medium">Maths</span>
+                ,
+                <span class="font-weight-medium">Romanian</span>
+                ,
+                <span class="font-weight-medium">Psychology</span>
+                and
                 <span class="font-weight-medium">Physics</span>
               </h5>
             </v-card-text>
@@ -67,7 +71,8 @@
                       <v-flex shrink class="ml-2 mb-2">
                         <v-card-actions>
                           <v-btn color="orange" class="peach-gradient" large @click="snackbar = true">
-                            <v-icon left>mdi-book-open-page-variant</v-icon>Learn
+                            <v-icon left>mdi-book-open-page-variant</v-icon>
+                            Learn
                           </v-btn>
                         </v-card-actions>
                       </v-flex>

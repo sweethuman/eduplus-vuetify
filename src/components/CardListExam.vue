@@ -14,7 +14,8 @@
                 :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
                 @click="finishTest()"
               >
-                Termina Testul<v-icon right>mdi-checkbox-marked-circle-outline</v-icon>
+                Termina Testul
+                <v-icon right>mdi-checkbox-marked-circle-outline</v-icon>
               </v-btn>
             </template>
           </v-hover>
@@ -30,7 +31,8 @@
       class="font-weight-bold title"
       :multi-line="!$vuetify.breakpoint.mdAndUp"
     >
-      {{ snackbarData.text }} <v-btn dark flat @click="showSnackbar = false">Close</v-btn>
+      {{ snackbarData.text }}
+      <v-btn dark flat @click="showSnackbar = false">Close</v-btn>
     </v-snackbar>
   </div>
 </template>
