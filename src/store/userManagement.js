@@ -60,5 +60,21 @@ export default {
         { root: true }
       );
     },
+    updateCurrentUser({ state, commit }, payload) {
+      const userToUpdate = {};
+      userToUpdate.id = state.currentUser.id;
+      userToUpdate.username = payload.username != null ? payload.username : state.currentUser.username;
+      userToUpdate.name = payload.name != null ? payload.name : state.currentUser.name;
+      userToUpdate.forename = payload.forename != null ? payload.forename : state.currentUser.forename;
+      userToUpdate.email = payload.email != null ? payload.email : state.currentUser.email;
+      commit("setNewUser", userToUpdate);
+      commit("userDatabase/updateUser", userToUpdate, { root: true });
+    },
+    updateCurrentPassword({ state, commit, rootGetters }, payload) {
+      let user = rootGetters["userDatabase/getUserById"](state.currentUser.id);
+      if (user == null) throw new Error("USER DOES NOT EXIST! CRITICAL ERROR!");
+      if (user.password !== payload.oldPassword) throw new Error("Old Password is Wrong!");
+      commit("userDatabase/updateUser", { id: state.currentUser.id, password: payload.newPassword }, { root: true });
+    },
   },
 };

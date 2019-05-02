@@ -14,6 +14,14 @@ export default {
       newUser.password = payload.password;
       state.users.push(newUser);
     },
+    updateUser(state, payload) {
+      const userToUpdate = state.users.find(user => user.id === payload.id);
+      userToUpdate.username = payload.username != null ? payload.username : userToUpdate.username;
+      userToUpdate.name = payload.name != null ? payload.name : userToUpdate.name;
+      userToUpdate.forename = payload.forename != null ? payload.forename : userToUpdate.forename;
+      userToUpdate.email = payload.email != null ? payload.email : userToUpdate.email;
+      userToUpdate.password = payload.password != null ? payload.password : userToUpdate.password;
+    },
   },
   getters: {
     getUserByEmail: state => email => {
@@ -22,6 +30,11 @@ export default {
     getUserByUsername: state => username => {
       username = username.toLowerCase();
       return state.users.find(user => user.username === username);
+    },
+    getUserById: state => id => {
+      if (isNaN(id)) throw Error("Id is not a number!");
+      id = parseInt(id);
+      return state.users.find(user => user.id === id);
     },
     getUserByUsernameOrEmail: (state, getters) => loginId => {
       let result = getters.getUserByEmail(loginId);
