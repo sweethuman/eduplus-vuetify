@@ -7,15 +7,15 @@
             <v-icon>{{ iconPath("/", "mdi-home") }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <v-list-tile-title>Acasa</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile ripple @click="snackbar = true">
+        <v-list-tile ripple to="/disciplines">
           <v-list-tile-action>
-            <v-icon>mdi-book-outline</v-icon>
+            <v-icon>{{ iconPath("/disciplines", "mdi-book") }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Lessons</v-list-tile-title>
+            <v-list-tile-title>Discipline</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile ripple @click="snackbar = true">
@@ -23,7 +23,7 @@
             <v-icon>mdi-trophy-variant-outline</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Badges</v-list-tile-title>
+            <v-list-tile-title>Ultimele Lectii</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile to="/about" ripple>
@@ -31,7 +31,7 @@
             <v-icon>{{ iconPath("/about", "mdi-information") }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>About</v-list-tile-title>
+            <v-list-tile-title>Despre</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile>
@@ -58,19 +58,19 @@
       <v-toolbar-items v-if="this.$vuetify.breakpoint.mdAndUp">
         <v-btn to="/" flat>
           <v-icon left>{{ iconPath("/", "mdi-home") }}</v-icon>
-          Home
+          Acasa
         </v-btn>
-        <v-btn flat @click="snackbar = true">
-          <v-icon left>mdi-book-outline</v-icon>
-          Lessons
+        <v-btn flat to="/disciplines">
+          <v-icon left>{{ iconPath("/disciplines", "mdi-book") }}</v-icon>
+          Discipline
         </v-btn>
         <v-btn flat @click="snackbar = true">
           <v-icon left>mdi-trophy-variant-outline</v-icon>
-          Badges
+          Ultimele Lectii
         </v-btn>
         <v-btn to="/about" flat>
           <v-icon left>{{ iconPath("/about", "mdi-information") }}</v-icon>
-          About
+          Despre
         </v-btn>
         <v-btn flat @click="darkTheme = !darkTheme">
           <v-icon left>{{ darkTheme ? "mdi-brightness-3" : "mdi-white-balance-sunny" }}</v-icon>
@@ -90,14 +90,14 @@
           <span class="subheading">
             &copy;2019 —
             <strong>EDU+</strong>
-            by Avram Gheorghe and Vlad Schiller
+            de Avram Gheorghe and Vlad Schiller
           </span>
         </v-card-actions>
       </v-card>
     </v-footer>
     <v-snackbar v-model="snackbar" color="error" :timeout="5000">
-      <span class="font-weight-bold">PAGE NOT AVAILABLE!</span>
-      <v-btn dark flat @click="snackbar = false">Close</v-btn>
+      <span class="font-weight-bold">Pagina nu este disponibila!</span>
+      <v-btn dark flat @click="snackbar = false">Inchide</v-btn>
     </v-snackbar>
   </v-app>
 </template>
