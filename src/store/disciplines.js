@@ -49,7 +49,7 @@ export default {
       {
         id: 7,
         image:
-          "https://images.unsplash.com/photo-1549925245-8a7a48495212?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
+          "https://images.unsplash.com/photo-1528217580778-96e570819666?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
         title: "Filozofie",
         description:
           'Daca vrei sa intelegi "De ce?" si vrei sa diseci orice decizie umana atunci Filozofia este pentru tine.',
@@ -57,14 +57,14 @@ export default {
       {
         id: 8,
         image:
-          "https://images.unsplash.com/photo-1549925245-8a7a48495212?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
+          "https://images.unsplash.com/photo-1496065187959-7f07b8353c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
         title: "Technologia Informatiei",
         description: "De la explorarea universului la casa ta, afla cum functioneaza tehnologia si conceptele ei.",
       },
       {
         id: 9,
         image:
-          "https://images.unsplash.com/photo-1549925245-8a7a48495212?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
+          "https://images.unsplash.com/photo-1480334026689-1ee5069c978f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
         title: "Biologie",
         description: "Hai cu noi la Facultatea de Medicina.",
       },

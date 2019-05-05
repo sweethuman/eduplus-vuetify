@@ -25,7 +25,7 @@ export default {
   methods: {
     generateConent(index) {
       let that = this.$store.state.disciplines.disciplines[index];
-      return new CardContent(that.title, that.description, that.image + "&w=10000", that.image + "&w=200&q=80");
+      return new CardContent(that.title, that.description, that.image + "&w=1000", that.image + "&w=200&q=80");
     },
   },
 };
