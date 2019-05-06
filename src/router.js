@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 
 Vue.use(Router);
 
@@ -9,7 +8,7 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home,
+      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue"),
     },
     {
       path: "/about",
@@ -25,9 +24,18 @@ export default new Router({
       component: () => import(/* webpackChunkName: "exam" */ "./views/Exam.vue"),
     },
     {
+      path: "/discipline",
+      redirect: "/disciplines",
+    },
+    {
+      path: "/discipline/:name",
+      name: "DisciplinePage",
+      component: () => import(/* webpackChunkName: "discipPage" */ "./views/DisciplinePage"),
+    },
+    {
       path: "/disciplines",
       name: "Disciplines",
-      component: () => import(/* webpackChunkName: "discipPage" */ "./views/Disciplines.vue"),
+      component: () => import(/* webpackChunkName: "disciplines" */ "./views/Disciplines.vue"),
     },
     {
       path: "**",
