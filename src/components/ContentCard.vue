@@ -1,7 +1,7 @@
 <template>
   <v-hover>
     <template #default="{ hover }">
-      <v-card dark :elevation="hover ? 24 : 2" :style="{ 'border-radius': borderRadius }">
+      <v-card dark :elevation="hover ? 24 : 2" :style="{ 'border-radius': borderRadius }" :to="to">
         <v-img :src="content.photo" :lazy-src="content.lazyPhoto" aspect-ratio="1.3">
           <template #placeholder>
             <v-layout fill-height align-center justify-center ma-0>
@@ -49,6 +49,10 @@ export default {
     round: {
       type: Boolean,
       default: false,
+    },
+    to: {
+      type: String,
+      default: undefined,
     },
   },
   computed: {
