@@ -1,0 +1,64 @@
+<template>
+  <v-card height="100%" width="100%">
+    <v-layout align-center fill-height justify-center>
+      <v-flex grow>
+        <v-expansion-panel popout>
+          <v-expansion-panel-content v-for="(chapter, i) in data" :key="i" ripple lazy>
+            <template #actions>
+              <v-icon color="primary">$vuetify.icons.expand</v-icon>
+            </template>
+            <template #header>
+              <div>{{ romanization(i + 1) }}. {{ chapter.name }}</div>
+            </template>
+            <v-card>
+              <v-card-title primary-title></v-card-title>
+              <v-expansion-panel popout>
+                <v-expansion-panel-content v-for="(lesson, j) in chapter.lessons" :key="j" ripple lazy>
+                  <template #actions>
+                    <v-icon color="primary">$vuetify.icons.expand</v-icon>
+                  </template>
+                  <template #header>
+                    <div>{{ romanization(i + 1) }}.{{ j + 1 }}. {{ lesson.name }}</div>
+                  </template>
+                  <v-card>
+                    <v-card-text>
+                      {{ lesson.description }}
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn dark large round class="soundcloud-gradient">Invata</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-flex>
+    </v-layout>
+  </v-card>
+</template>
+
+<script>
+import romanize from "romanize";
+export default {
+  name: "DisciplineViewer",
+  props: {
+    data: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    romanization(number) {
+      return romanize(number);
+    },
+  },
+};
+</script>
+
+<style>
+.v-expansion-panel--popout .v-expansion-panel--popout .v-expansion-panel__container--active {
+  max-width: 95%;
+}
+</style>
