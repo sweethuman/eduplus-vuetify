@@ -1,0 +1,10 @@
+{
+  "name": "Moara cu noroc",
+  "description": "O decriere despre lectie",
+  "styles": [
+    {
+      "type": "visual",
+      "source": "moaraFull.md"
+    }
+  ]
+}

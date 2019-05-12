@@ -1,0 +1,17 @@
+[
+  {
+    "id": "opere",
+    "title": "Opere Literare",
+    "order": 0
+  },
+  {
+  "id": "autori",
+  "title": "Autori Literari",
+  "order": 2
+  },
+  {
+    "id" : "curente",
+    "title": "Curente Literare",
+    "order": 1
+  }
+]
