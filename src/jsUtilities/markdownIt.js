@@ -1,0 +1,22 @@
+import MarkdownIt from "markdown-it";
+import markdownItAttrs from "markdown-it-attrs";
+import markdownItAbbr from "markdown-it-abbr";
+import markdownItContainer from "markdown-it-container";
+import markdownItDeflist from "markdown-it-deflist";
+import markdownItFootnote from "markdown-it-footnote";
+import markdownItIns from "markdown-it-ins";
+import markdownItMark from "markdown-it-mark";
+import markdownItSub from "markdown-it-sub";
+import markdownItSup from "markdown-it-sup";
+const markdownIt = new MarkdownIt();
+markdownIt.use(markdownItAttrs);
+markdownIt.use(markdownItAbbr);
+markdownIt.use(markdownItContainer);
+markdownIt.use(markdownItDeflist);
+markdownIt.use(markdownItFootnote);
+markdownIt.use(markdownItIns);
+markdownIt.use(markdownItMark);
+markdownIt.use(markdownItSub);
+markdownIt.use(markdownItSup);
+
+export default markdownIt;
