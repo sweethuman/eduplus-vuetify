@@ -23,6 +23,7 @@ export default {
       if (this.isLessonStructure)
         return {
           data: this.$store.state.disciplines.lessonStructure[this.$route.params.discipline],
+          disciplineId: this.$route.params.discipline,
         };
       let disciplineTitle = this.$store.getters["disciplines/getDisciplineTitle"](this.$route.params.discipline);
       disciplineTitle = disciplineTitle == null ? this.$route.params.discipline : disciplineTitle;

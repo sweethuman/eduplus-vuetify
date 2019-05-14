@@ -30,9 +30,17 @@
                     <v-card-text>
                       {{ lesson.description }}
                     </v-card-text>
-                    <v-card-actions>
+                    <v-card-actions v-if="lesson.styles != null && lesson.styles.length !== 0">
                       <v-spacer></v-spacer>
-                      <v-btn dark large round class="soundcloud-gradient">Invata</v-btn>
+                      <v-btn
+                        dark
+                        large
+                        round
+                        class="soundcloud-gradient"
+                        :to="generateLink(disciplineId, chapter.id, lesson.id)"
+                      >
+                        Invata
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-expansion-panel-content>
@@ -54,10 +62,17 @@ export default {
       type: Array,
       required: true,
     },
+    disciplineId: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     romanization(number) {
       return romanize(number);
+    },
+    generateLink(disciplineId, chapterId, lessonId) {
+      return "/lesson/" + disciplineId + "/" + chapterId + "/" + lessonId;
     },
   },
 };
