@@ -14,7 +14,7 @@
               <v-icon color="primary">$vuetify.icons.expand</v-icon>
             </template>
             <template #header>
-              <div>{{ romanization(i + 1) }}. {{ chapter.name }}</div>
+              <div>{{ romanization(i + 1) }}. {{ chapter.title }}</div>
             </template>
             <v-card>
               <v-card-title primary-title></v-card-title>

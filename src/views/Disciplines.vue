@@ -22,6 +22,9 @@ export default {
   components: {
     ContentCard,
   },
+  async beforeCreate() {
+    await this.$store.dispatch("disciplines/loadDisciplines");
+  },
   methods: {
     generateConent(index) {
       let that = this.$store.state.disciplines.disciplines[index];
