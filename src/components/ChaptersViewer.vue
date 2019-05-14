@@ -3,7 +3,13 @@
     <v-layout align-center fill-height justify-center>
       <v-flex grow>
         <v-expansion-panel popout>
-          <v-expansion-panel-content v-for="(chapter, i) in data" :key="i" ripple lazy>
+          <v-expansion-panel-content
+            v-for="(chapter, i) in data"
+            :key="i"
+            ripple
+            lazy
+            :disabled="chapter.lessons == null || chapter.lessons.length === 0"
+          >
             <template #actions>
               <v-icon color="primary">$vuetify.icons.expand</v-icon>
             </template>

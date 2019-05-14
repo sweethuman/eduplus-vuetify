@@ -28,9 +28,9 @@ export default new Router({
       redirect: "/disciplines",
     },
     {
-      path: "/discipline/:name",
-      name: "DisciplinePage",
-      component: () => import(/* webpackChunkName: "discipPage" */ "./views/DisciplinePage"),
+      path: "/chapters/:discipline",
+      name: "Chapters",
+      component: () => import(/* webpackChunkName: "chapters" */ "./views/Chapters"),
     },
     {
       path: "/disciplines",
