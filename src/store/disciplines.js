@@ -1,118 +1,16 @@
 import _ from "lodash";
+import reflectPromise from "../jsUtilities/promiseReflect";
 export default {
   namespaced: true,
   state: {
-    disciplines: [
-      {
-        id: 1,
-        name: "coding",
-        image:
-          "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Programare",
-        description: "Step by step guide with problems based on the latest Bacalaureat Exam.",
-      },
-      {
-        id: 2,
-        name: "maths",
-        image:
-          "https://images.unsplash.com/photo-1457904375453-3e1fc2fc76f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Matematica",
-        description: "From the basics to the advanced. Complete lessons on everything you need to know about maths.",
-      },
-      {
-        id: 3,
-        name: "romanian",
-        image:
-          "https://images.unsplash.com/photo-1542412138098-8f997794d3d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Romana",
-        description: "Take this class and improve all your knowledge about Bacovia, Eminescu and may others.",
-      },
-      {
-        id: 4,
-        name: "physics",
-        image:
-          "https://images.unsplash.com/photo-1470172201050-cecdf8133607?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Fizica",
-        description: "Discover the inner-workings of The Universe!",
-      },
-      {
-        id: 5,
-        name: "chemistry",
-        image:
-          "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Chimie",
-        description:
-          "Atoms are special. So are the relationships between them. Now let's see how combining them can create the most amazing things!",
-      },
-      {
-        id: 6,
-        name: "psychology",
-        image:
-          "https://images.unsplash.com/photo-1549925245-8a7a48495212?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Psihologie",
-        description:
-          "What if we learned how the inside works? Let's delve deep into the human consciousness and analyze why people do what they do..",
-      },
-      {
-        id: 7,
-        name: "philosophy",
-        image:
-          "https://images.unsplash.com/photo-1528217580778-96e570819666?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Filozofie",
-        description:
-          'Daca vrei sa intelegi "De ce?" si vrei sa diseci orice decizie umana atunci Filozofia este pentru tine.',
-      },
-      {
-        id: 8,
-        name: "tic",
-        image:
-          "https://images.unsplash.com/photo-1496065187959-7f07b8353c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Technologia Informatiei",
-        description: "De la explorarea universului la casa ta, afla cum functioneaza tehnologia si conceptele ei.",
-      },
-      {
-        id: 9,
-        name: "biology",
-        image:
-          "https://images.unsplash.com/photo-1480334026689-1ee5069c978f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format",
-        title: "Biologie",
-        description: "Hai cu noi la Facultatea de Medicina.",
-      },
-    ],
+    disciplines: [],
+    //this lesson structure is only for example
     lessonStructure: {
       romanian: [
         {
-          name: "Opere",
-          lessons: [
-            {
-              name: "Moara cu Noroc",
-              description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            },
-            {
-              name: "Baltagul",
-              description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            },
-            {
-              name: "Morometii",
-              description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            },
-            {
-              name: "Enigma Otiliei",
-              description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            },
-            {
-              name: "Patul lui Procust",
-              description:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            },
-          ],
-        },
-        {
+          id: "autori",
           name: "Autori",
+          order: 0,
           lessons: [
             {
               name: "Mircea Eliate",
@@ -150,6 +48,70 @@ export default {
       let result = _.find(state.disciplines, ["name", disciplineName]);
       if (result == null) return result;
       return result.title;
+    },
+  },
+  actions: {
+    async loadDisciplines({ commit }) {
+      let disciplines = await import("../data/disciplines");
+      commit("setDisciplines", disciplines.default);
+    },
+    async getDisciplineChapters({ commit }, discipline) {
+      let chapters = await import(`../data/chapters/${discipline}.json`);
+      let sendPayload = {};
+      let sortedChapters = _.sortBy(chapters.default, o => o.order);
+      sendPayload.discipline = discipline;
+      sendPayload.chapters = sortedChapters;
+      commit("setChapters", sendPayload);
+    },
+    async getChapterLessons({ commit }, payload) {
+      let lessonsList = {};
+      try {
+        lessonsList = await import(`../data/lessons/${payload.disciplineId}/${payload.chapterId}/lessons.json`);
+      } catch (e) {
+        throw new Error(
+          `There is no Discipline or Chapter with the given ID: ${payload.disciplineId}/${payload.chapterId}`
+        );
+      }
+      let lessonPromises = [];
+      _.forEach(lessonsList.default, async function(lessonId) {
+        lessonPromises.push(
+          import(`../data/lessons/${payload.disciplineId}/${payload.chapterId}/${lessonId}/data.json`)
+        );
+      });
+      let lessonFinishedPromises = await Promise.all(lessonPromises.map(reflectPromise));
+      let lessonArray = [];
+      _.forEach(lessonFinishedPromises, function(lessonFin, index) {
+        if (lessonFin.succeeded) {
+          lessonFin.result.default.id = lessonsList.default[index];
+          lessonArray.push(lessonFin.result.default);
+        }
+        //TODO add a way to show error, because if a lesson is declared and it is not added an error should be shown
+        //NOTE must add a way to handle network errors for weird imports and detect error types
+      });
+      commit("setLessonsToChapter", {
+        ...payload,
+        lessons: lessonArray,
+      });
+    },
+    async setDisciplineLessonStructure({ state, dispatch }, discipline) {
+      try {
+        await dispatch("getDisciplineChapters", discipline);
+      } catch (e) {
+        throw new Error(`${discipline} NOT FOUND`);
+      }
+      let chapterPromises = [];
+      _.forEach(state.lessonStructure[discipline], function(chapter) {
+        chapterPromises.push(
+          dispatch("getChapterLessons", {
+            disciplineId: discipline,
+            chapterId: chapter.id,
+          })
+        );
+      });
+      let chapterFinishedPromises = await Promise.all(chapterPromises.map(reflectPromise));
+      _.forEach(chapterFinishedPromises, function(chapterPromise) {
+        //TODO add here the high order function to handle weird error in getChapter
+      });
     },
   },
 };
