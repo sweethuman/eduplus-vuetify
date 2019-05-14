@@ -55,8 +55,6 @@ export default {
 <style lang="scss">
 .lesson-content {
   margin: 0 auto;
-  background-color: white;
-  color: #333333;
   line-height: 1;
   padding: 30px;
   font-size: 18px;
@@ -64,7 +62,6 @@ export default {
     line-height: 150%;
     max-width: 960px;
     font-weight: 400;
-    color: #333333;
   }
 
   h1,
@@ -157,14 +154,12 @@ export default {
       content: "\2014 \00A0";
     }
     p {
-      color: #666;
       max-width: 460px;
     }
   }
   hr {
     text-align: left;
     margin: 0 auto 0 0;
-    color: #999;
   }
 }
 </style>
