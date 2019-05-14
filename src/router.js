@@ -38,6 +38,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "disciplines" */ "./views/Disciplines.vue"),
     },
     {
+      path: "/lesson/:discipline/:chapter/:lesson",
+      name: "Lesson",
+      component: () => import(/* webpackChunkName: "lesson" */ "./views/Lesson"),
+    },
+    {
       path: "**",
       name: "404",
       component: () => import(/* webpackChunkName: "notfound" */ "./views/404Page.vue"),
