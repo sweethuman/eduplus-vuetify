@@ -82,7 +82,9 @@
     </v-toolbar>
 
     <v-content>
-      <router-view />
+      <v-fade-transition mode="out-in">
+        <router-view />
+      </v-fade-transition>
     </v-content>
     <v-footer dark absolute app>
       <v-card class="flex peach-gradient-reversed" flat>
