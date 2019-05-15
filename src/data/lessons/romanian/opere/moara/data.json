@@ -5,6 +5,11 @@
     {
       "type": "visual",
       "source": "moaraFull.md"
+    },
+    {
+      "type": "audio",
+      "youtube-id": "BBJa32lCaaY",
+      "source": "moaraAudio.md"
     }
   ]
 }

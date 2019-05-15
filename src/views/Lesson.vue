@@ -21,31 +21,45 @@ export default {
     };
   },
   async beforeRouteUpdate(to, from, next) {
-    await this.loadMarkdown(to.params);
-    next();
+    if ((await this.loadMarkdown(to)) === false) next(false);
+    else next();
   },
   async created() {
-    await this.loadMarkdown(this.$route.params);
+    if ((await this.loadMarkdown(this.$route)) === false) this.$router.replace(this.$route.path);
   },
   methods: {
     markation(markdownString) {
       return markdownIt.render(markdownString);
     },
-    async loadMarkdown(params) {
+    async loadMarkdown(routeObject) {
       try {
         let jsonDataFile = await import(
-          `../data/lessons/${params.discipline}/${params.chapter}/${params.lesson}/data.json`
+          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
+            routeObject.params.lesson
+          }/data.json`
         );
+        if (jsonDataFile.styles == null || jsonDataFile.styles.length === 0) {
+          this.markdown = "LECTIA NU PREZINTA CONTINUT{.display-3 .error}";
+          return;
+        }
+        let lessonObject = this._.find(jsonDataFile.styles, {
+          //NOTE defaults to visual because ALL LESSONS SHOULD HAS VISUAL STYLE
+          type: routeObject.query.style != null ? routeObject.query.style : "visual",
+        });
+        if (lessonObject == null) {
+          return false;
+        }
         let markdownFile = await import(
-          `../data/lessons/${params.discipline}/${params.chapter}/${params.lesson}/${
-            jsonDataFile.default.styles[0].source
-          }`
+          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
+            routeObject.params.lesson
+          }/${lessonObject.source}`
         );
         //NOTE used to be console log here
         this.markdown = (await this.axios.get(markdownFile.default)).data;
       } catch (e) {
         //NOTE used to be console log here
-        this.markdown = "LESSON NOT FOUND{.display-4 .error}";
+        //NOTE check between import error and actual error
+        this.markdown = "LECTIA NU A FOST GASITA{.display-3 .error}";
       }
     },
   },
