@@ -53,6 +53,23 @@
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
     </v-speed-dial>
+    <v-expand-transition>
+      <v-layout v-if="youtubeId != null" align-center justify-center class="mb-3">
+        <v-flex md10 lg8>
+          <v-card class="pa-2">
+            <div class="youtube-container">
+              <div class="youtube-content">
+                <youtube
+                  video-id="BBJa32lCaaY"
+                  :player-vars="playerVars"
+                  style="margin-bottom: -6px; width: 100%;height: 100%"
+                ></youtube>
+              </div>
+            </div>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-expand-transition>
     <v-layout align-center justify-center>
       <v-flex md10 lg8>
         <v-card>
@@ -73,6 +90,10 @@ export default {
     return {
       markdown: "",
       fab: false,
+      youtubeId: null,
+      playerVars: {
+        origin: window.location.origin,
+      },
     };
   },
   async beforeRouteUpdate(to, from, next) {
@@ -104,6 +125,9 @@ export default {
         if (lessonObject == null) {
           return false;
         }
+        if (lessonObject.type === lessonStyles.AUDIO || lessonObject.type === lessonStyles.TACTILE)
+          this.youtubeId = lessonObject["youtube-id"];
+        else this.youtubeId = null;
         let markdownFile = await import(
           `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
             routeObject.params.lesson
@@ -229,5 +253,21 @@ export default {
     text-align: left;
     margin: 0 auto 0 0;
   }
+}
+</style>
+
+<style scoped>
+.youtube-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.youtube-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 </style>
