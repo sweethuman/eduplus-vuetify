@@ -14,7 +14,7 @@ You will like those projects!
 
 <h1> asta e h1 </h1>
 
-## h2 Heading {.display-4}
+## h2 Heading
 ### h3 Heading
 #### h4 Heading
 ##### h5 Heading
@@ -148,12 +148,12 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 
 ## Images
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+![Minion](https://octodex.github.com/images/minion.png){style="max-width: 100%"}
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat"){style="max-width: 100%"}
 
 Like links, Images also have a footnote style syntax
 
-![Alt text][id]
+![Alt text][id]{style="max-width: 100%"}
 
 With a reference later in the document defining the URL location:
 

@@ -65,6 +65,7 @@
 
 <script>
 import markdownIt from "../jsUtilities/markdownIt";
+import lessonStyles from "../enums/lessonStyles";
 
 export default {
   name: "Lesson",
@@ -75,17 +76,17 @@ export default {
     };
   },
   async beforeRouteUpdate(to, from, next) {
-    if ((await this.loadMarkdown(to)) === false) next(false);
+    if ((await this.loadLesson(to)) === false) next(false);
     else next();
   },
   async created() {
-    if ((await this.loadMarkdown(this.$route)) === false) this.$router.replace(this.$route.path);
+    if ((await this.loadLesson(this.$route)) === false) this.$router.replace(this.$route.path);
   },
   methods: {
     markation(markdownString) {
       return markdownIt.render(markdownString);
     },
-    async loadMarkdown(routeObject) {
+    async loadLesson(routeObject) {
       try {
         let jsonDataFile = await import(
           `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
@@ -98,7 +99,7 @@ export default {
         }
         let lessonObject = this._.find(jsonDataFile.styles, {
           //NOTE defaults to visual because ALL LESSONS SHOULD HAS VISUAL STYLE
-          type: routeObject.query.style != null ? routeObject.query.style : "visual",
+          type: routeObject.query.style != null ? routeObject.query.style : lessonStyles.VISUAL,
         });
         if (lessonObject == null) {
           return false;
