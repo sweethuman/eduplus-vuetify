@@ -1,5 +1,4 @@
 import Vue from "vue";
-import "./plugins";
 import App from "./App.vue";
 import router from "./router";
 import "./registerServiceWorker";
@@ -8,6 +7,7 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "./css/gradients.css";
 import "./css/utility.css";
 import store from "./store";
+import "./plugins";
 
 Vue.config.productionTip = false;
 

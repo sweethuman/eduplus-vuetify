@@ -1,5 +1,58 @@
 <template>
   <v-container>
+    <v-speed-dial v-model="fab" fixed bottom right>
+      <template #activator>
+        <v-btn v-model="fab" class="soundcloud-gradient" dark fab>
+          <v-icon>mdi-format-line-style</v-icon>
+          <v-icon>close</v-icon>
+        </v-btn>
+      </template>
+      <v-btn
+        fab
+        dark
+        small
+        color="green"
+        :to="this.$route.path + '?style=visual'"
+        active-class="v-btn--active lighten-2"
+        :input-value="$route.query.style == null ? true : undefined"
+        exact
+      >
+        <v-icon>mdi-eye</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="indigo"
+        :to="this.$route.path + '?style=audio'"
+        active-class="v-btn--active lighten-2"
+        exact
+      >
+        <v-icon>mdi-ear-hearing</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="red"
+        :to="this.$route.path + '?style=tactile'"
+        active-class="v-btn--active lighten-2"
+        exact
+      >
+        <v-icon>mdi-gesture-double-tap</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="purple"
+        :to="this.$route.path + '?style=puzzle'"
+        active-class="v-btn--active lighten-2"
+        exact
+      >
+        <v-icon>mdi-puzzle</v-icon>
+      </v-btn>
+    </v-speed-dial>
     <v-layout align-center justify-center>
       <v-flex md10 lg8>
         <v-card>
@@ -18,6 +71,7 @@ export default {
   data() {
     return {
       markdown: "",
+      fab: false,
     };
   },
   async beforeRouteUpdate(to, from, next) {
@@ -142,7 +196,6 @@ export default {
 
   pre {
     padding: 0 24px;
-    max-width: 800px;
     white-space: pre-wrap;
   }
   code {
