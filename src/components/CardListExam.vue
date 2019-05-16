@@ -21,7 +21,7 @@
                 :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
                 @click="finishTest()"
               >
-                Termina Testul
+                {{ finishButton }}
                 <v-icon right>mdi-checkbox-marked-circle-outline</v-icon>
               </v-btn>
             </template>
@@ -72,6 +72,13 @@ export default {
   computed: {
     questions() {
       return this.examData[this.page].subject;
+    },
+    finishButton() {
+      if (this.isLastPage) return "Termina Testul";
+      return "Verifica Subiectul";
+    },
+    isLastPage() {
+      return this.page === this.examData.length - 1;
     },
   },
   watch: {
