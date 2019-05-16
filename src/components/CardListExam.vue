@@ -1,13 +1,15 @@
 <template>
   <v-layout justify-center>
     <v-flex md8>
-      <dynamic-card
-        v-for="(test, j) in questions"
-        :key="'id' + j + '&page=' + page"
-        ref="exerciseCards"
-        :data="test"
-        :disabled="answered"
-      />
+      <v-fade-transition group mode="out-in">
+        <dynamic-card
+          v-for="(test, j) in questions"
+          :key="'id' + j + '&page=' + page"
+          ref="exerciseCards"
+          :data="test"
+          :disabled="answered"
+        />
+      </v-fade-transition>
       <v-divider id="examResultDivider" class="my-3"></v-divider>
       <v-layout v-if="!answered" align-space-around justify-center row wrap>
         <v-hover>
