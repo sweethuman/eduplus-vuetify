@@ -31,7 +31,7 @@ export const examSelectionMixin = {
     getAnswerColor(value) {
       if (value === this.resultOptions.correct) return "#c6e377";
       if (value === this.resultOptions.wrong) return "#ef6c57";
-      if (value === this.resultOptions.intermediate) return "#c6e377";
+      if (value === this.resultOptions.intermediate) return "#848081";
       return "";
     },
     calculateChips() {
