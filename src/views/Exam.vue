@@ -2,10 +2,10 @@
   <v-container align-content-space-around>
     <v-layout text-xs-center>
       <v-flex>
-        <h2 id="examTitle" class="display-3 my-5">Test Memorie</h2>
+        <h2 id="examTitle" class="display-3 my-5">{{ examData.title }}</h2>
       </v-flex>
     </v-layout>
-    <card-list-exam :exam-data="examData" />
+    <card-list-exam :exam-data="examData.exam" />
   </v-container>
 </template>
 

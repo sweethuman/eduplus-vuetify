@@ -43,7 +43,7 @@
                 dark
                 large
                 round
-                class="soundcloud-gradient-reversed"
+                class="soundcloud-gradient-reversed mt-2"
                 :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
                 @click="loadNextPage()"
               >
