@@ -9,7 +9,7 @@
         :ma-4="$vuetify.breakpoint.sm"
         :ma-5="$vuetify.breakpoint.mdAndUp"
       >
-        <v-flex shrink lg6>
+        <v-flex shrink lg6 xl4>
           <svg :height="svgHeight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="align-self-center">
             <path
               id="dizzy-face"
@@ -19,7 +19,7 @@
             ></path>
           </svg>
         </v-flex>
-        <v-flex grow lg6>
+        <v-flex grow lg6 xl8>
           <v-card-text class="text-xs-center px-0" :class="[textSize]">{{ text }}</v-card-text>
         </v-flex>
       </v-layout>
