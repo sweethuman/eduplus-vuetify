@@ -4,7 +4,7 @@
       <v-flex text-xs-center>
         <h2 id="examTitle" class="display-3 my-5">{{ examData.title }}</h2>
       </v-flex>
-      <card-list-exam v-if="examData.exam != null && !notFound" :exam-data="examData.exam" />
+      <card-list-exam v-if="examData.exam != null && !notFound" :key="$route.params.name" :exam-data="examData.exam" />
     </v-layout>
     <item-not-found v-if="notFound" :text="$route.params.name + ' examen nu a fost gasit!'"></item-not-found>
   </v-container>
