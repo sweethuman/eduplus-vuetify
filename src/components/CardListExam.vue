@@ -27,7 +27,15 @@
             </template>
           </v-hover>
         </v-layout>
-        <exam-result v-if="answered" :points="points" :max-points="questions.length" class="text-xs-center" />
+        <exam-result
+          v-if="answered"
+          :points="points"
+          :max-points="maxPoints"
+          :all-points="isLastPage ? allPoints : null"
+          :max-all-points="maxAllPoints"
+          :text="examResultText"
+          class="text-xs-center"
+        />
       </v-flex>
     </v-layout>
     <v-snackbar
@@ -60,6 +68,9 @@ export default {
     return {
       answered: false,
       points: 0,
+      maxPoints: 0,
+      allPoints: 0,
+      maxAllPoints: 0,
       snackbarData: {
         color: null,
         text: null,
@@ -79,6 +90,10 @@ export default {
     },
     isLastPage() {
       return this.page === this.examData.length - 1;
+    },
+    examResultText() {
+      if (this.isLastPage) return "Ai terminat Testul";
+      return "Mergi la subiectul urmator!";
     },
   },
   watch: {
@@ -116,6 +131,7 @@ export default {
     calculateCards() {
       for (let i = 0; i < this.exerciseCards.length; i++) {
         this.points += this.exerciseCards[i].calculateChips();
+        this.maxPoints += this.exerciseCards[i].calculateMaxPoints();
       }
     },
   },
