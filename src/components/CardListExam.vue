@@ -2,7 +2,14 @@
   <div>
     <v-layout justify-center>
       <v-flex md8>
-        <dynamic-card v-for="(test, j) in questions" :key="j" ref="exerciseCards" :data="test" :disabled="answered" />
+        <dynamic-card
+          v-for="(test, j) in questions"
+          :key="'id' + j + '&page=' + page"
+          ref="exerciseCards"
+          :data="test"
+          :disabled="answered"
+        />
+        <v-divider id="examResultDivider" class="my-3"></v-divider>
         <v-layout v-if="!answered" align-space-around justify-center row wrap>
           <v-hover>
             <template #default="{ hover }">
@@ -44,9 +51,9 @@ export default {
   name: "CardListExam",
   components: { ExamResult, DynamicCard },
   props: {
-    questions: {
+    examData: {
       type: Array,
-      default: undefined,
+      required: true,
     },
   },
   data() {
@@ -58,16 +65,22 @@ export default {
         text: null,
       },
       showSnackbar: null,
+      page: 0,
+      exerciseCards: [],
     };
   },
   computed: {
-    exerciseCards() {
-      let exerciseCardsChildren = [];
-      for (let i = 0; i < this.$refs["exerciseCards"].length; i++) {
-        exerciseCardsChildren[i] = this.$refs["exerciseCards"][i].$refs["component"];
-      }
-      return exerciseCardsChildren;
+    questions() {
+      return this.examData[this.page].subject;
     },
+  },
+  watch: {
+    page() {
+      this.$nextTick(this.loadExerciseCards);
+    },
+  },
+  mounted() {
+    this.$nextTick(this.loadExerciseCards());
   },
   methods: {
     validateAnswers() {
@@ -85,6 +98,13 @@ export default {
       if (this.validateAnswers() === false) return;
       this.answered = true;
       this.calculateCards();
+    },
+    loadExerciseCards() {
+      let exerciseCardsChildren = [];
+      for (let i = 0; i < this.$refs["exerciseCards"].length; i++) {
+        exerciseCardsChildren[i] = this.$refs["exerciseCards"][i].$refs["component"];
+      }
+      this.exerciseCards = exerciseCardsChildren;
     },
     calculateCards() {
       for (let i = 0; i < this.exerciseCards.length; i++) {
