@@ -36,6 +36,23 @@
           :text="examResultText"
           class="text-xs-center"
         />
+        <v-layout v-if="answered && !isLastPage" align-space-around justify-center row wrap>
+          <v-hover>
+            <template #default="{ hover }">
+              <v-btn
+                dark
+                large
+                round
+                class="soundcloud-gradient-reversed"
+                :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
+                @click="loadNextPage()"
+              >
+                Urmatorul Subiect
+                <v-icon right>mdi-page-next-outline</v-icon>
+              </v-btn>
+            </template>
+          </v-hover>
+        </v-layout>
       </v-flex>
     </v-layout>
     <v-snackbar
@@ -133,6 +150,15 @@ export default {
         this.points += this.exerciseCards[i].calculateChips();
         this.maxPoints += this.exerciseCards[i].calculateMaxPoints();
       }
+    },
+    async loadNextPage() {
+      await this.$vuetify.goTo("#examTitle", { duration: 1000 });
+      this.page++;
+      this.answered = false;
+      this.allPoints += this.points;
+      this.maxAllPoints += this.maxPoints;
+      this.points = 0;
+      this.maxPoints = 0;
     },
   },
 };
