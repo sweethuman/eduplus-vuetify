@@ -70,6 +70,9 @@ export default {
     isAnswerChecked() {
       return this.checkboxSelection.length !== 0;
     },
+    calculateMaxPoints() {
+      return this.exercise.correctAnswer.length;
+    },
   },
 };
 </script>

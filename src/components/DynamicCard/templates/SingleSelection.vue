@@ -62,6 +62,9 @@ export default {
     isAnswerChecked() {
       return this.radioSelection != null;
     },
+    calculateMaxPoints() {
+      return 1;
+    },
   },
 };
 </script>
