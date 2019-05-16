@@ -1,60 +1,58 @@
 <template>
-  <div>
-    <v-layout justify-center>
-      <v-flex md8>
-        <dynamic-card
-          v-for="(test, j) in questions"
-          :key="'id' + j + '&page=' + page"
-          ref="exerciseCards"
-          :data="test"
-          :disabled="answered"
-        />
-        <v-divider id="examResultDivider" class="my-3"></v-divider>
-        <v-layout v-if="!answered" align-space-around justify-center row wrap>
-          <v-hover>
-            <template #default="{ hover }">
-              <v-btn
-                dark
-                color="green"
-                large
-                round
-                :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
-                @click="finishTest()"
-              >
-                {{ finishButton }}
-                <v-icon right>mdi-checkbox-marked-circle-outline</v-icon>
-              </v-btn>
-            </template>
-          </v-hover>
-        </v-layout>
-        <exam-result
-          v-if="answered"
-          :points="points"
-          :max-points="maxPoints"
-          :all-points="isLastPage ? allPoints : null"
-          :max-all-points="maxAllPoints"
-          :text="examResultText"
-          class="text-xs-center"
-        />
-        <v-layout v-if="answered && !isLastPage" align-space-around justify-center row wrap>
-          <v-hover>
-            <template #default="{ hover }">
-              <v-btn
-                dark
-                large
-                round
-                class="soundcloud-gradient-reversed mt-2"
-                :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
-                @click="loadNextPage()"
-              >
-                Urmatorul Subiect
-                <v-icon right>mdi-page-next-outline</v-icon>
-              </v-btn>
-            </template>
-          </v-hover>
-        </v-layout>
-      </v-flex>
-    </v-layout>
+  <v-layout justify-center>
+    <v-flex md8>
+      <dynamic-card
+        v-for="(test, j) in questions"
+        :key="'id' + j + '&page=' + page"
+        ref="exerciseCards"
+        :data="test"
+        :disabled="answered"
+      />
+      <v-divider id="examResultDivider" class="my-3"></v-divider>
+      <v-layout v-if="!answered" align-space-around justify-center row wrap>
+        <v-hover>
+          <template #default="{ hover }">
+            <v-btn
+              dark
+              color="green"
+              large
+              round
+              :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
+              @click="finishTest()"
+            >
+              {{ finishButton }}
+              <v-icon right>mdi-checkbox-marked-circle-outline</v-icon>
+            </v-btn>
+          </template>
+        </v-hover>
+      </v-layout>
+      <exam-result
+        v-if="answered"
+        :points="points"
+        :max-points="maxPoints"
+        :all-points="isLastPage ? allPoints : null"
+        :max-all-points="maxAllPoints"
+        :text="examResultText"
+        class="text-xs-center"
+      />
+      <v-layout v-if="answered && !isLastPage" align-space-around justify-center row wrap>
+        <v-hover>
+          <template #default="{ hover }">
+            <v-btn
+              dark
+              large
+              round
+              class="soundcloud-gradient-reversed mt-2"
+              :class="`elevation-${hover ? 12 : 2}` + ' ma-1'"
+              @click="loadNextPage()"
+            >
+              Urmatorul Subiect
+              <v-icon right>mdi-page-next-outline</v-icon>
+            </v-btn>
+          </template>
+        </v-hover>
+      </v-layout>
+    </v-flex>
     <v-snackbar
       v-model="showSnackbar"
       :color="snackbarData.color"
@@ -66,7 +64,7 @@
       {{ snackbarData.text }}
       <v-btn dark flat @click="showSnackbar = false">Close</v-btn>
     </v-snackbar>
-  </div>
+  </v-layout>
 </template>
 
 <script>
