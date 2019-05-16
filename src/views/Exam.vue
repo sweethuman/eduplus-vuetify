@@ -5,18 +5,16 @@
         <h2 class="display-3 my-5">Test Memorie</h2>
       </v-flex>
     </v-layout>
-    <card-slide-exam v-if="$route.query.display === 'slide'" :questions="questions" />
-    <card-list-exam v-if="$route.query.display === 'list' || !$route.query.display" :questions="questions" />
+    <card-list-exam :exam-data="examData" />
   </v-container>
 </template>
 
 <script>
-import CardSlideExam from "../components/CardSlideExam";
 import CardListExam from "../components/CardListExam";
 
 export default {
   name: "Exam",
-  components: { CardSlideExam, CardListExam },
+  components: { CardListExam },
   data() {
     return {
       questions: [
