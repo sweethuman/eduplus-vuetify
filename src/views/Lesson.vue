@@ -16,6 +16,7 @@
         active-class="v-btn--active lighten-2"
         :input-value="$route.query.style == null ? true : undefined"
         exact
+        replace
       >
         <v-icon>mdi-eye</v-icon>
       </v-btn>
@@ -27,6 +28,7 @@
         :to="this.$route.path + '?style=audio'"
         active-class="v-btn--active lighten-2"
         exact
+        replace
       >
         <v-icon>mdi-ear-hearing</v-icon>
       </v-btn>
@@ -38,6 +40,7 @@
         :to="this.$route.path + '?style=tactile'"
         active-class="v-btn--active lighten-2"
         exact
+        replace
       >
         <v-icon>mdi-gesture-double-tap</v-icon>
       </v-btn>
@@ -49,6 +52,7 @@
         :to="this.$route.path + '?style=puzzle'"
         active-class="v-btn--active lighten-2"
         exact
+        replace
       >
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
