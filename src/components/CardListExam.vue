@@ -152,7 +152,7 @@ export default {
       }
     },
     async loadNextPage() {
-      await this.$vuetify.goTo("#examTitle", { duration: 1000 });
+      await this.$vuetify.goTo(0, { duration: 1000 });
       this.page++;
       this.answered = false;
       this.allPoints += this.points;
