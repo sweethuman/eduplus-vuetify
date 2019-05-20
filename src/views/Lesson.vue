@@ -2,7 +2,7 @@
   <v-container>
     <v-speed-dial v-model="fab" fixed bottom right>
       <template #activator>
-        <v-btn v-model="fab" class="soundcloud-gradient" dark fab>
+        <v-btn v-model="fab" class="soundcloud-gradient" dark fab :large="$vuetify.breakpoint.lgAndUp">
           <v-icon>mdi-format-line-style</v-icon>
           <v-icon>close</v-icon>
         </v-btn>
