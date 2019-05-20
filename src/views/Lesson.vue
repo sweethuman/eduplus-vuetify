@@ -93,16 +93,7 @@
           </v-card-title>
           <v-card-text class="pt-0">
             <references-item v-if="lessonData.testId" icon="mdi-format-list-checks" title="Teste">
-              <v-btn
-                v-if="lessonData.testId"
-                :to="'/exam/' + lessonData.testId"
-                dark
-                class="sublimelight-gradient"
-                large
-              >
-                <v-icon left>mdi-book-open-outline</v-icon>
-                Primul Test
-              </v-btn>
+              <go-to-exam-button :test-id="lessonData.testId" text="Primul Test"></go-to-exam-button>
             </references-item>
           </v-card-text>
         </v-card>
@@ -115,10 +106,11 @@
 import markdownIt from "../jsUtilities/markdownIt";
 import lessonStyles from "../enums/lessonStyles";
 import ReferencesItem from "../components/core/ReferencesItem";
+import GoToExamButton from "../components/core/GoToExamButton";
 
 export default {
   name: "Lesson",
-  components: { ReferencesItem },
+  components: { ReferencesItem, GoToExamButton },
   data() {
     return {
       markdown: "",

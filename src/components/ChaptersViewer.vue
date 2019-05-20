@@ -19,10 +19,7 @@
             <!--            TODO alignment of item needs to be improved-->
             <v-card>
               <v-card-title v-if="data[i]['test-id']" primary-title class="align-self-center ml-4">
-                <v-btn v-if="data[i]['test-id']" :to="'/exam/' + data.testId" dark class="sublimelight-gradient" large>
-                  <v-icon left>mdi-book-open-outline</v-icon>
-                  Examen Capitol
-                </v-btn>
+                <go-to-exam-button :test-id="data[i]['test-id']" text="Examen Capitol"></go-to-exam-button>
               </v-card-title>
               <v-expansion-panel popout>
                 <v-expansion-panel-content v-for="(lesson, j) in chapter.lessons" :key="j" ripple lazy>
@@ -61,8 +58,10 @@
 
 <script>
 import romanize from "romanize";
+import GoToExamButton from "./core/GoToExamButton";
 export default {
   name: "DisciplineViewer",
+  components: { GoToExamButton },
   props: {
     data: {
       type: Array,
