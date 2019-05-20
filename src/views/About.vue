@@ -117,5 +117,8 @@ export default {
       return this.$store.state.disciplines.disciplines;
     },
   },
+  async beforeCreate() {
+    await this.$store.dispatch("disciplines/loadDisciplines");
+  },
 };
 </script>
