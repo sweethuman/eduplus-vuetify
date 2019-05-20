@@ -91,7 +91,7 @@
         <v-card-actions class="justify-center">
           <span class="subheading">
             Versiunea
-            <strong>0.1 Alpha</strong>
+            <strong>0.1.1 Alpha</strong>
           </span>
           <span class="mx-2">—</span>
           <span class="subheading">
@@ -104,7 +104,6 @@
     </v-footer>
     <v-snackbar v-model="snackbar" color="error" :timeout="5000">
       <span class="font-weight-bold">Pagina nu este disponibila!</span>
-      <v-btn dark flat @click="snackbar = false">Inchide</v-btn>
     </v-snackbar>
   </v-app>
 </template>

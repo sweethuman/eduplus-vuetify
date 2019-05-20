@@ -85,7 +85,8 @@ export default {
           lessonFin.result.default.id = lessonsList.default[index];
           lessonArray.push(lessonFin.result.default);
         }
-        //TODO add a way to show error, because if a lesson is declared and it is not added an error should be shown
+        //TODO add a way to show error
+        //unhandled errored promises, happens when the id of the lesson is in lessons.json but the 'lessonId/data.json' doesn't exist
         //NOTE must add a way to handle network errors for weird imports and detect error types
       });
       commit("setLessonsToChapter", {
@@ -95,11 +96,13 @@ export default {
     },
     async setDisciplineLessonStructure({ state, dispatch }, discipline) {
       try {
+        //get's chapters, throws error if lesson json not found in 'data/chapters/'
         await dispatch("getDisciplineChapters", discipline);
       } catch (e) {
         throw new Error(`${discipline} NOT FOUND`);
       }
       let chapterPromises = [];
+      //runs through all the chapters and loads their lessons inside the lessonsStructure[discipline][chapterIndex].lessons
       _.forEach(state.lessonStructure[discipline], function(chapter) {
         chapterPromises.push(
           dispatch("getChapterLessons", {
@@ -109,6 +112,7 @@ export default {
         );
       });
       let chapterFinishedPromises = await Promise.all(chapterPromises.map(reflectPromise));
+      //errors are created when there is a chapter declared but there is no folder or lessons.json in a folder with the chapter name
       _.forEach(chapterFinishedPromises, function(chapterPromise) {
         //TODO add here the high order function to handle weird error in getChapter
       });

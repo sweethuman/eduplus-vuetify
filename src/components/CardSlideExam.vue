@@ -116,9 +116,6 @@
     </v-layout>
     <v-snackbar v-model="showSnackbar" :color="snackbarData.color" :timeout="3000" auto-height>
       {{ snackbarData.text }}
-      <v-btn dark flat @click="showSnackbar = false">
-        Close
-      </v-btn>
     </v-snackbar>
   </div>
 </template>
