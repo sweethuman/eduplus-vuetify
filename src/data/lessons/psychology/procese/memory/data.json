@@ -1,0 +1,21 @@
+{
+  "name": "Memoria",
+  "description": "O scurta lectie despre cum functioneaza memoria in Oameni",
+  "test-id": "testMemorie",
+  "styles": [
+    {
+      "type": "visual",
+      "source": "memoryVisual.md"
+    },
+    {
+      "type": "audio",
+      "youtube-id": "2fOsxrS_B_o",
+      "source": "memoryAudio.md"
+    },
+    {
+      "type": "tactile",
+      "youtube-id": "LRGSybcdhSk",
+      "source": "memoryTactile.md"
+    }
+  ]
+}

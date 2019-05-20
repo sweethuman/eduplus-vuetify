@@ -64,7 +64,7 @@
             <div class="youtube-container">
               <div class="youtube-content">
                 <youtube
-                  video-id="BBJa32lCaaY"
+                  :video-id="lessonData.youtubeId"
                   :player-vars="playerVars"
                   style="margin-bottom: -6px; width: 100%;height: 100%"
                 ></youtube>
@@ -206,6 +206,7 @@ export default {
     font-weight: 400;
   }
 
+  h1,
   h2,
   h3,
   h4,
@@ -216,7 +217,6 @@ export default {
   }
 
   h1 {
-    margin-bottom: 10px;
     font-size: 300%;
     padding: 0;
     font-variant: small-caps;
@@ -261,6 +261,10 @@ export default {
     margin-left: 24px;
   }
 
+  li > p {
+    margin-bottom: 0;
+  }
+
   pre {
     padding: 0 24px;
     white-space: pre-wrap;
@@ -294,6 +298,14 @@ export default {
   hr {
     text-align: left;
     margin: 0 auto 0 0;
+  }
+
+  .titlu {
+    color: lightcoral;
+  }
+  .emph {
+    text-decoration: underline;
+    color: red;
   }
 }
 </style>
