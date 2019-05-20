@@ -1,46 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout fill-height align-center justify-center>
-      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="mr-1">
-        <v-btn fab class="peach-gradient-reversed" dark large @click="prev()">
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs12 md12 lg8 xlg8>
-        <v-window v-model="slide" class="elevation-0 my-5" dark>
-          <v-window-item v-for="i in 5" :key="i">
-            <v-layout align-center justify-space-between fill-height>
-              <v-flex v-for="j in $vuetify.breakpoint.mdAndUp ? 3 : 1" :key="'' + i + j" xs12 md4>
-                <v-card class="mx-1" min-height="200px" hover>
-                  <v-layout fill-height column>
-                    <v-flex grow>
-                      <v-card-title primary-title>
-                        <h3 class="headline mb-0">
-                          <span class="font-weight-bold">{{ "" + i + j }}:</span>
-                          Is Seaweed good Seaweed?
-                        </h3>
-                      </v-card-title>
-                    </v-flex>
-
-                    <v-flex shrink>
-                      <v-card-text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-                      </v-card-text>
-                    </v-flex>
-                  </v-layout>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-window-item>
-        </v-window>
-      </v-flex>
-      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="ml-1">
-        <v-btn fab class="peach-gradient" dark large @click="next">
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <faq-section></faq-section>
     <v-expansion-panel
       v-if="!$vuetify.breakpoint.mdAndUp"
       v-model="expansionPanel"
@@ -185,7 +145,10 @@
 </template>
 
 <script>
+import FaqSection from "../components/FaqSection";
 export default {
+  name: "Home",
+  components: { FaqSection },
   data() {
     return {
       items: [
@@ -219,7 +182,6 @@ export default {
       activeElement: 0,
       currentOffset: 0,
       timeout: null,
-      slide: 0,
       expansionPanel: null,
     };
   },
@@ -239,12 +201,6 @@ export default {
       });
       this.activeElement = element === 0 ? 0 : element - 1;
       this.activeElement = element === -1 ? this.$refs.cards.length - 1 : this.activeElement;
-    },
-    prev() {
-      this.slide = this.slide - 1 < 0 ? 4 : this.slide - 1;
-    },
-    next() {
-      this.slide++;
     },
   },
 };
