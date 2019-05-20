@@ -57,8 +57,14 @@ export default {
     showChip(chipId) {
       if (this.checkboxSelection.includes(chipId)) {
         if (this.exercise.correctAnswer.includes(chipId)) {
+          if (this.checkboxSelection.length === this.exercise.options.length) {
+            return { result: true, value: this.resultOptions.intermediate };
+          }
           return { result: true, value: this.resultOptions.correct };
         } else {
+          if (this.checkboxSelection.length === this.exercise.options.length) {
+            return { result: false };
+          }
           return { result: true, value: this.resultOptions.wrong };
         }
       }

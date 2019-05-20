@@ -16,6 +16,7 @@
         active-class="v-btn--active lighten-2"
         :input-value="$route.query.style == null ? true : undefined"
         exact
+        replace
       >
         <v-icon>mdi-eye</v-icon>
       </v-btn>
@@ -27,6 +28,7 @@
         :to="this.$route.path + '?style=audio'"
         active-class="v-btn--active lighten-2"
         exact
+        replace
       >
         <v-icon>mdi-ear-hearing</v-icon>
       </v-btn>
@@ -38,6 +40,7 @@
         :to="this.$route.path + '?style=tactile'"
         active-class="v-btn--active lighten-2"
         exact
+        replace
       >
         <v-icon>mdi-gesture-double-tap</v-icon>
       </v-btn>
@@ -49,18 +52,19 @@
         :to="this.$route.path + '?style=puzzle'"
         active-class="v-btn--active lighten-2"
         exact
+        replace
       >
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
     </v-speed-dial>
     <v-expand-transition>
-      <v-layout v-if="youtubeId != null" align-center justify-center class="mb-3">
+      <v-layout v-if="lessonData.youtubeId != null" align-center justify-center class="mb-3">
         <v-flex md10 lg8>
           <v-card class="pa-2">
             <div class="youtube-container">
               <div class="youtube-content">
                 <youtube
-                  video-id="BBJa32lCaaY"
+                  :video-id="lessonData.youtubeId"
                   :player-vars="playerVars"
                   style="margin-bottom: -6px; width: 100%;height: 100%"
                 ></youtube>
@@ -77,22 +81,55 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-divider class="my-5"></v-divider>
+    <v-layout align-center justify-center>
+      <v-flex md10 lg8>
+        <v-card class="pl-3">
+          <v-card-title primary-title class="display-3 font-italic font-weight-bold pb-0">
+            Referinte Lectie
+          </v-card-title>
+          <v-card-title class="pt-0 title">
+            Contine Teste, Materiale Sursa sau alte Materiale Utile ce au legatura cu lectia
+          </v-card-title>
+          <v-card-text class="pt-0">
+            <references-item v-if="lessonData.testId" icon="mdi-format-list-checks" title="Teste">
+              <v-btn
+                v-if="lessonData.testId"
+                :to="'/exam/' + lessonData.testId"
+                dark
+                class="sublimelight-gradient"
+                large
+              >
+                <v-icon left>mdi-book-open-outline</v-icon>
+                Primul Test
+              </v-btn>
+            </references-item>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 import markdownIt from "../jsUtilities/markdownIt";
 import lessonStyles from "../enums/lessonStyles";
+import ReferencesItem from "../components/core/ReferencesItem";
 
 export default {
   name: "Lesson",
+  components: { ReferencesItem },
   data() {
     return {
       markdown: "",
       fab: false,
-      youtubeId: null,
       playerVars: {
         origin: window.location.origin,
+      },
+
+      lessonData: {
+        youtubeId: null,
+        testId: null,
       },
     };
   },
@@ -125,9 +162,14 @@ export default {
         if (lessonObject == null) {
           return false;
         }
+
+        //Load Additional Lesson Data
         if (lessonObject.type === lessonStyles.AUDIO || lessonObject.type === lessonStyles.TACTILE)
-          this.youtubeId = lessonObject["youtube-id"];
-        else this.youtubeId = null;
+          this.lessonData.youtubeId = lessonObject["youtube-id"];
+        else this.lessonData.youtubeId = null;
+        if (jsonDataFile["test-id"] != null) this.lessonData.testId = jsonDataFile["test-id"];
+        else this.lessonData.testId = null;
+
         let markdownFile = await import(
           `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
             routeObject.params.lesson
@@ -164,6 +206,7 @@ export default {
     font-weight: 400;
   }
 
+  h1,
   h2,
   h3,
   h4,
@@ -174,7 +217,6 @@ export default {
   }
 
   h1 {
-    margin-bottom: 10px;
     font-size: 300%;
     padding: 0;
     font-variant: small-caps;
@@ -219,6 +261,10 @@ export default {
     margin-left: 24px;
   }
 
+  li > p {
+    margin-bottom: 0;
+  }
+
   pre {
     padding: 0 24px;
     white-space: pre-wrap;
@@ -252,6 +298,14 @@ export default {
   hr {
     text-align: left;
     margin: 0 auto 0 0;
+  }
+
+  .titlu {
+    color: lightcoral;
+  }
+  .emph {
+    text-decoration: underline;
+    color: red;
   }
 }
 </style>

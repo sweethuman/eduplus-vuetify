@@ -1,6 +1,7 @@
 {
   "name": "Moara cu noroc",
   "description": "O decriere despre lectie",
+  "test-id": "secondExample",
   "styles": [
     {
       "type": "visual",

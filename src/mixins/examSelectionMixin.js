@@ -37,6 +37,8 @@ export const examSelectionMixin = {
     calculateChips() {
       let points = 0;
       for (let j = 0; j < this.exercise.options.length; j++) {
+        //NOTE showChip is not included in this mixin but it is ussualy found in the SelectionComponent of an Exam Page
+        //Should add a default show chip of something
         let tempChipValue = this.showChip(j);
         if (tempChipValue.result === true && tempChipValue.value === this.resultOptions.correct) {
           ++points;

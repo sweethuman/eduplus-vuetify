@@ -118,8 +118,9 @@ export default {
       this.$nextTick(this.loadExerciseCards);
     },
   },
-  mounted() {
+  async mounted() {
     this.$nextTick(this.loadExerciseCards());
+    await this.$vuetify.goTo(0, { duration: 1000 });
   },
   methods: {
     validateAnswers() {
@@ -152,7 +153,7 @@ export default {
       }
     },
     async loadNextPage() {
-      await this.$vuetify.goTo("#examTitle", { duration: 1000 });
+      await this.$vuetify.goTo(0, { duration: 1000 });
       this.page++;
       this.answered = false;
       this.allPoints += this.points;

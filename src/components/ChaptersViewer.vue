@@ -16,8 +16,14 @@
             <template #header>
               <div>{{ romanization(i + 1) }}. {{ chapter.title }}</div>
             </template>
+            <!--            TODO alignment of item needs to be improved-->
             <v-card>
-              <v-card-title primary-title></v-card-title>
+              <v-card-title v-if="data[i]['test-id']" primary-title class="align-self-center ml-4">
+                <v-btn v-if="data[i]['test-id']" :to="'/exam/' + data.testId" dark class="sublimelight-gradient" large>
+                  <v-icon left>mdi-book-open-outline</v-icon>
+                  Examen Capitol
+                </v-btn>
+              </v-card-title>
               <v-expansion-panel popout>
                 <v-expansion-panel-content v-for="(lesson, j) in chapter.lessons" :key="j" ripple lazy>
                   <template #actions>
