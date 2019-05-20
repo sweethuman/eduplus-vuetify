@@ -81,7 +81,7 @@
       <account-dialog />
     </v-toolbar>
 
-    <v-content>
+    <v-content class="mb-4">
       <v-fade-transition mode="out-in">
         <router-view />
       </v-fade-transition>
