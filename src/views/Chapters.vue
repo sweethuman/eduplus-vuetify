@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "DisciplinePage",
+  name: "Chapters",
   components: {
     ChaptersViewer: () => import(/* webpackChunkName: "chaptersViewer" */ "../components/ChaptersViewer"),
     ItemNotFound: () => import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
@@ -15,7 +15,11 @@ export default {
   async beforeRouteUpdate(to, from, next) {
     //TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
     //TODO high order function here, because sometimes lesson is specified in list but it is not present in files and it fails the import, must handle case
-    await this.$store.dispatch("disciplines/setDisciplineLessonStructure", to.params.discipline);
+    try {
+      await this.$store.dispatch("disciplines/setDisciplineLessonStructure", to.params.discipline);
+    } catch (e) {
+      //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
+    }
     next();
   },
   computed: {
@@ -47,10 +51,13 @@ export default {
     },
   },
   async beforeCreate() {
-    await this.$store.dispatch("disciplines/loadDisciplines");
-    //TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
-    //TODO high order function here, because sometimes lesson is specified in list but it is not present in files and it fails the import, must handle case
-    await this.$store.dispatch("disciplines/setDisciplineLessonStructure", this.$route.params.discipline);
+    /*TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
+     await this.$store.dispatch("disciplines/loadDisciplines"); because it is not needed, it was used to show discipline name when errored if chapters weren't found*/
+    try {
+      await this.$store.dispatch("disciplines/setDisciplineLessonStructure", this.$route.params.discipline);
+    } catch (e) {
+      //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
+    }
   },
 };
 </script>
