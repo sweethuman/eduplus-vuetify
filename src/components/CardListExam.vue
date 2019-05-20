@@ -138,6 +138,8 @@ export default {
       if (this.validateAnswers() === false) return;
       this.answered = true;
       this.calculateCards();
+      this.allPoints += this.points;
+      this.maxAllPoints += this.maxPoints;
     },
     loadExerciseCards() {
       let exerciseCardsChildren = [];
@@ -156,8 +158,6 @@ export default {
       await this.$vuetify.goTo(0, { duration: 1000 });
       this.page++;
       this.answered = false;
-      this.allPoints += this.points;
-      this.maxAllPoints += this.maxPoints;
       this.points = 0;
       this.maxPoints = 0;
     },
