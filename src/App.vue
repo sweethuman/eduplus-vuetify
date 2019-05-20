@@ -104,7 +104,6 @@
     </v-footer>
     <v-snackbar v-model="snackbar" color="error" :timeout="5000">
       <span class="font-weight-bold">Pagina nu este disponibila!</span>
-      <v-btn dark flat @click="snackbar = false">Inchide</v-btn>
     </v-snackbar>
   </v-app>
 </template>
