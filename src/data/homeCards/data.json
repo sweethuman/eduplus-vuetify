@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Salut",
+    "icon": "human-handsup",
+    "source": "salut.md"
+  },
+  {
+    "title": "Ghid Rapid",
+    "icon": "owl",
+    "source": "salut.md"
+  },
+  {
+    "title": "Prezentare Generala",
+    "icon": "compass",
+    "source": "salut.md"
+  },
+  {
+    "title": "Continut Aditional",
+    "icon": "book-multiple-plus",
+    "source": "salut.md"
+  },
+  {
+    "title": "Ajutor",
+    "icon": "help",
+    "source": "salut.md"
+  }
+]
