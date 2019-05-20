@@ -90,6 +90,11 @@
       <v-card class="flex peach-gradient-reversed" flat>
         <v-card-actions class="justify-center">
           <span class="subheading">
+            Versiunea
+            <strong>0.1 Alpha</strong>
+          </span>
+          <span class="mx-2">—</span>
+          <span class="subheading">
             &copy;2019 —
             <strong>EDU+</strong>
             de Avram Gheorghe and Vlad Schiller
