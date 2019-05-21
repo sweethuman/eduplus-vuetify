@@ -121,6 +121,7 @@ export default {
     this.findIndex();
   },
   async created() {
+    this.$wait.start("loading home");
     let that = this;
     this.items = homeCards;
     let markdownImportPromises = [];
@@ -136,6 +137,7 @@ export default {
     this._.forEach(markdownLoads, function(loaded, i) {
       that.$set(that.items[i], "content", loaded.data);
     });
+    this.$wait.end("loading home");
   },
   methods: {
     onScroll() {

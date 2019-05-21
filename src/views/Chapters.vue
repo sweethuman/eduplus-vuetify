@@ -15,11 +15,13 @@ export default {
   async beforeRouteUpdate(to, from, next) {
     //TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
     //TODO high order function here, because sometimes lesson is specified in list but it is not present in files and it fails the import, must handle case
+    this.$wait.start("loading chapters");
     try {
       await this.$store.dispatch("disciplines/setDisciplineLessonStructure", to.params.discipline);
     } catch (e) {
       //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
     }
+    this.$wait.end("loading chapters");
     next();
   },
   computed: {
@@ -53,11 +55,13 @@ export default {
   async beforeCreate() {
     /*TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
      await this.$store.dispatch("disciplines/loadDisciplines"); because it is not needed, it was used to show discipline name when errored if chapters weren't found*/
+    this.$wait.start("loading chapters");
     try {
       await this.$store.dispatch("disciplines/setDisciplineLessonStructure", this.$route.params.discipline);
     } catch (e) {
       //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
     }
+    this.$wait.end("loading chapters");
   },
 };
 </script>

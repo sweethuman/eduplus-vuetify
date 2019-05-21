@@ -137,6 +137,7 @@ export default {
       return markdownIt.render(markdownString);
     },
     async loadLesson(routeObject) {
+      this.$wait.start("loading lesson");
       try {
         let jsonDataFile = await import(
           `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
@@ -174,6 +175,7 @@ export default {
         //NOTE check between import error and actual error
         this.markdown = "LECTIA NU A FOST GASITA{.display-3 .error}";
       }
+      this.$wait.end("loading lesson");
     },
   },
 };

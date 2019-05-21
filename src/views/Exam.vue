@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     async loadExam(routeObject) {
+      this.$wait.start("loading exam");
       try {
         let exam = await import(`../data/exams/${routeObject.params.name}.json`);
         this.examData = exam.default;
@@ -41,6 +42,7 @@ export default {
       } catch (e) {
         this.notFound = true;
       }
+      this.$wait.end("loading exam");
     },
   },
 };

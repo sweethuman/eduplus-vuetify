@@ -118,7 +118,9 @@ export default {
     },
   },
   async beforeCreate() {
+    this.$wait.start("loading disciplinesForCarousel");
     await this.$store.dispatch("disciplines/loadDisciplines");
+    this.$wait.end("loading disciplinesForCarousel");
   },
 };
 </script>
