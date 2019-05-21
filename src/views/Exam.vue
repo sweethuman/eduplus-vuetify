@@ -31,6 +31,11 @@ export default {
       page: 0,
     };
   },
+  computed: {
+    pageTitle() {
+      return this.examData.title + " - " + this.page;
+    },
+  },
   async created() {
     await this.loadExam(this.$route);
   },

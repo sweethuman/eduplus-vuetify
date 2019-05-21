@@ -96,6 +96,7 @@ export default {
   data() {
     return {
       snackbar: false,
+      pageTitle: "Despre",
     };
   },
   computed: {

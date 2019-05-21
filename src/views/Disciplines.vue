@@ -22,6 +22,11 @@ export default {
   components: {
     ContentCard,
   },
+  data() {
+    return {
+      pageTitle: "Discipline",
+    };
+  },
   async beforeCreate() {
     this.$wait.start("loading disciplines");
     await this.$store.dispatch("disciplines/loadDisciplines");

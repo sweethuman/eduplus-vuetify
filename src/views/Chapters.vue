@@ -19,6 +19,7 @@ export default {
     try {
       await this.$store.dispatch("disciplines/setDisciplineLessonStructure", to.params.discipline);
     } catch (e) {
+      this.$log.warn(e);
       //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
     }
     this.$wait.end("loading chapters");
@@ -27,6 +28,10 @@ export default {
   computed: {
     isLessonStructure() {
       return this.$store.getters["disciplines/isLessonStructure"](this.$route.params.discipline);
+    },
+    disciplineTitle() {
+      let disciplineTitle = this.$store.getters["disciplines/getDisciplineTitle"](this.$route.params.discipline);
+      return disciplineTitle == null ? this.$route.params.discipline : disciplineTitle;
     },
     activeComponent() {
       if (this.isLessonStructure) return "ChaptersViewer";
@@ -45,20 +50,22 @@ export default {
           data: this.$store.state.disciplines.lessonStructure[this.$route.params.discipline],
           disciplineId: this.$route.params.discipline,
         };
-      let disciplineTitle = this.$store.getters["disciplines/getDisciplineTitle"](this.$route.params.discipline);
-      disciplineTitle = disciplineTitle == null ? this.$route.params.discipline : disciplineTitle;
       return {
-        text: disciplineTitle + " nu a fost gasita.",
+        text: this.disciplineTitle + " nu a fost gasita.",
       };
+    },
+    pageTitle() {
+      return this.disciplineTitle;
     },
   },
   async beforeCreate() {
-    /*TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
-     await this.$store.dispatch("disciplines/loadDisciplines"); because it is not needed, it was used to show discipline name when errored if chapters weren't found*/
+    //TODO CHECK IF DISCIPLINE IS IN LESSON STRUCTURE before doing dispatch otherwise you it will return an error and it is not handled
     this.$wait.start("loading chapters");
     try {
+      await this.$store.dispatch("disciplines/loadDisciplines");
       await this.$store.dispatch("disciplines/setDisciplineLessonStructure", this.$route.params.discipline);
     } catch (e) {
+      this.$log.warn(e);
       //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
     }
     this.$wait.end("loading chapters");

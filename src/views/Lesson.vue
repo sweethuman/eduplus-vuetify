@@ -123,7 +123,13 @@ export default {
         youtubeId: null,
         testId: null,
       },
+      lessonTitle: "",
     };
+  },
+  computed: {
+    pageTitle() {
+      return this.lessonTitle;
+    },
   },
   async beforeRouteUpdate(to, from, next) {
     if ((await this.loadLesson(to)) === false) next(false);
@@ -144,6 +150,7 @@ export default {
             routeObject.params.lesson
           }/data.json`
         );
+        this.lessonTitle = jsonDataFile.name;
         if (jsonDataFile.styles == null || jsonDataFile.styles.length === 0) {
           this.markdown = "LECTIA NU PREZINTA CONTINUT{.display-3 .error}";
           return;

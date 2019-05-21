@@ -62,6 +62,11 @@
 <script>
 export default {
   name: "NotFoundPage",
+  data() {
+    return {
+      pageTitle: "404 - Nu am gasit",
+    };
+  },
 };
 </script>
 
