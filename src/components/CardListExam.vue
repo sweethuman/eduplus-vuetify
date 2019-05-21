@@ -114,8 +114,9 @@ export default {
     },
   },
   watch: {
-    page() {
+    page(newValue) {
       this.$nextTick(this.loadExerciseCards);
+      this.$emit("page-change", newValue);
     },
   },
   async mounted() {
