@@ -9,6 +9,7 @@ import "./css/gradients.css";
 import "./css/utility.css";
 import store from "./store";
 import "./plugins";
+import VueWait from "vue-wait";
 
 Vue.config.productionTip = false;
 
@@ -16,4 +17,5 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  wait: new VueWait(),
 }).$mount("#app");
