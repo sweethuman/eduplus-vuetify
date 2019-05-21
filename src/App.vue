@@ -126,6 +126,18 @@ export default {
       return this.darkTheme ? "Switch to Light Theme" : "Switch to Dark Theme";
     },
   },
+  watch: {
+    "$wait.any": function(newValue) {
+      // eslint-disable-next-line no-undef
+      if (newValue === true) NProgress.start();
+      // eslint-disable-next-line no-undef
+      else NProgress.done();
+    },
+  },
+  beforeCreate() {
+    // eslint-disable-next-line no-undef
+    NProgress.configure({ easing: "ease-out", speed: 1000, trickleSpeed: 500 });
+  },
   methods: {
     iconPath: function(path, baseIconName) {
       return path === this.$route.path ? baseIconName : baseIconName + "-outline";
