@@ -117,5 +117,10 @@ export default {
       return this.$store.state.disciplines.disciplines;
     },
   },
+  async beforeCreate() {
+    this.$wait.start("loading disciplinesForCarousel");
+    await this.$store.dispatch("disciplines/loadDisciplines");
+    this.$wait.end("loading disciplinesForCarousel");
+  },
 };
 </script>

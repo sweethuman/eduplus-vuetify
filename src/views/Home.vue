@@ -1,46 +1,6 @@
 <template>
   <v-container fluid>
-    <v-layout fill-height align-center justify-center>
-      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="mr-1">
-        <v-btn fab class="peach-gradient-reversed" dark large @click="prev()">
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
-      </v-flex>
-      <v-flex xs12 md12 lg8 xlg8>
-        <v-window v-model="slide" class="elevation-0 my-5" dark>
-          <v-window-item v-for="i in 5" :key="i">
-            <v-layout align-center justify-space-between fill-height>
-              <v-flex v-for="j in $vuetify.breakpoint.mdAndUp ? 3 : 1" :key="'' + i + j" xs12 md4>
-                <v-card class="mx-1" min-height="200px" hover>
-                  <v-layout fill-height column>
-                    <v-flex grow>
-                      <v-card-title primary-title>
-                        <h3 class="headline mb-0">
-                          <span class="font-weight-bold">{{ "" + i + j }}:</span>
-                          Is Seaweed good Seaweed?
-                        </h3>
-                      </v-card-title>
-                    </v-flex>
-
-                    <v-flex shrink>
-                      <v-card-text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-                      </v-card-text>
-                    </v-flex>
-                  </v-layout>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-window-item>
-        </v-window>
-      </v-flex>
-      <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="ml-1">
-        <v-btn fab class="peach-gradient" dark large @click="next">
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    <faq-section></faq-section>
     <v-expansion-panel
       v-if="!$vuetify.breakpoint.mdAndUp"
       v-model="expansionPanel"
@@ -133,51 +93,7 @@
           class="mb-4"
         >
           <v-card-title class="headline">{{ item.title }}</v-card-title>
-          <v-card-text class="text-xs-justify">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Phasellus faucibus scelerisque eleifend donec. Vitae justo eget magna fermentum
-              iaculis eu. Netus et malesuada fames ac turpis egestas integer eget aliquet. Purus in mollis nunc sed id.
-              In arcu cursus euismod quis. Scelerisque viverra mauris in aliquam sem. Tempor nec feugiat nisl pretium.
-              Malesuada fames ac turpis egestas. Et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Sed
-              nisi lacus sed viverra tellus in hac habitasse. Sollicitudin aliquam ultrices sagittis orci a scelerisque
-              purus.
-            </p>
-
-            <p>
-              Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Eu feugiat pretium nibh ipsum
-              consequat nisl. Erat imperdiet sed euismod nisi. Eu nisl nunc mi ipsum faucibus vitae. Elementum curabitur
-              vitae nunc sed velit dignissim sodales ut. Posuere morbi leo urna molestie at elementum eu facilisis.
-              Imperdiet sed euismod nisi porta lorem mollis. Pellentesque sit amet porttitor eget dolor morbi. Sit amet
-              purus gravida quis blandit turpis cursus in. Placerat duis ultricies lacus sed turpis tincidunt id aliquet
-              risus. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec. In hac
-              habitasse platea dictumst quisque. Odio pellentesque diam volutpat commodo sed egestas. Arcu dui vivamus
-              arcu felis bibendum ut tristique. Viverra orci sagittis eu volutpat odio facilisis. Commodo nulla facilisi
-              nullam vehicula ipsum a. Quis lectus nulla at volutpat diam ut venenatis tellus in. Cursus vitae congue
-              mauris rhoncus.
-            </p>
-
-            <p>
-              Porta nibh venenatis cras sed. Ut sem nulla pharetra diam sit amet nisl suscipit adipiscing. Velit laoreet
-              id donec ultrices tincidunt. Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Adipiscing
-              commodo elit at imperdiet dui accumsan sit. Senectus et netus et malesuada fames. Eu feugiat pretium nibh
-              ipsum consequat nisl. Egestas erat imperdiet sed euismod nisi. Et malesuada fames ac turpis egestas
-              maecenas pharetra. Egestas diam in arcu cursus euismod quis viverra nibh. Accumsan in nisl nisi
-              scelerisque eu ultrices vitae auctor. Hac habitasse platea dictumst quisque sagittis purus sit amet
-              volutpat.
-            </p>
-
-            <p>
-              Sit amet venenatis urna cursus eget nunc scelerisque viverra. Orci a scelerisque purus semper eget. Cursus
-              eget nunc scelerisque viverra. Pulvinar elementum integer enim neque volutpat. Aliquam sem fringilla ut
-              morbi. Consectetur lorem donec massa sapien faucibus et molestie ac feugiat. Ut diam quam nulla porttitor
-              massa id. Id volutpat lacus laoreet non curabitur gravida arcu ac tortor. Senectus et netus et malesuada
-              fames ac turpis. Vitae sapien pellentesque habitant morbi tristique senectus et netus. Turpis egestas
-              pretium aenean pharetra magna ac. Sed ullamcorper morbi tincidunt ornare. Risus nullam eget felis eget
-              nunc lobortis mattis aliquam. Ut tortor pretium viverra suspendisse potenti nullam ac. Massa id neque
-              aliquam vestibulum morbi.
-            </p>
-          </v-card-text>
+          <v-card-text v-if="item.content" class="text-xs-justify" v-html="markation(item.content)"></v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -185,46 +101,43 @@
 </template>
 
 <script>
+import FaqSection from "../components/FaqSection";
+import homeCards from "../data/homeCards/data";
+import markdownIt from "../jsUtilities/markdownIt";
 export default {
+  name: "Home",
+  components: { FaqSection },
   data() {
     return {
-      items: [
-        {
-          title: "Welcome Message",
-          icon: "human-handsup",
-          content: null,
-        },
-        {
-          title: "Quick Guide",
-          icon: "owl",
-          content: null,
-        },
-        {
-          title: "Overview",
-          icon: "compass",
-          content: null,
-        },
-        {
-          title: "Aditional Content",
-          icon: "book-multiple-plus",
-          content: null,
-        },
-        {
-          title: "Support",
-          icon: "help",
-          content: null,
-        },
-      ],
+      items: [],
       right: null,
       activeElement: 0,
       currentOffset: 0,
       timeout: null,
-      slide: 0,
       expansionPanel: null,
     };
   },
   mounted() {
     this.findIndex();
+  },
+  async created() {
+    this.$wait.start("loading home");
+    let that = this;
+    this.items = homeCards;
+    let markdownImportPromises = [];
+    this._.forEach(homeCards, function(card) {
+      markdownImportPromises.push(import(`../data/homeCards/${card.source}`));
+    });
+    let markdownImports = await Promise.all(markdownImportPromises);
+    let markdownLoadPromises = [];
+    this._.forEach(markdownImports, function(markdown) {
+      markdownLoadPromises.push(that.axios.get(markdown.default));
+    });
+    let markdownLoads = await Promise.all(markdownLoadPromises);
+    this._.forEach(markdownLoads, function(loaded, i) {
+      that.$set(that.items[i], "content", loaded.data);
+    });
+    this.$wait.end("loading home");
   },
   methods: {
     onScroll() {
@@ -240,11 +153,8 @@ export default {
       this.activeElement = element === 0 ? 0 : element - 1;
       this.activeElement = element === -1 ? this.$refs.cards.length - 1 : this.activeElement;
     },
-    prev() {
-      this.slide = this.slide - 1 < 0 ? 4 : this.slide - 1;
-    },
-    next() {
-      this.slide++;
+    markation(markdownString) {
+      return markdownIt.render(markdownString);
     },
   },
 };

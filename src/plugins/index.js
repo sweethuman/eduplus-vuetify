@@ -4,3 +4,4 @@ import "./vue-lodash";
 import "./vue-axios";
 import "./vue-youtube";
 import "./vuejs-logger";
+import "./vue-wait";

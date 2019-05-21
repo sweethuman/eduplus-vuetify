@@ -23,7 +23,9 @@ export default {
     ContentCard,
   },
   async beforeCreate() {
+    this.$wait.start("loading disciplines");
     await this.$store.dispatch("disciplines/loadDisciplines");
+    this.$wait.end("loading disciplines");
   },
   methods: {
     generateConent(index) {

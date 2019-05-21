@@ -3,7 +3,7 @@ import Router from "vue-router";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: "/",
@@ -56,3 +56,15 @@ export default new Router({
     }
   },
 });
+
+router.beforeResolve((to, from, next) => {
+  router.app.$wait.start("loading route");
+  next();
+});
+
+router.afterEach((to, from) => {
+  //needs a timeout to ensure that the progress barshows, otherwise it moves too fast and the change of '$wait.any' is not detected
+  setTimeout(() => router.app.$wait.end("loading route"), 500);
+});
+
+export default router;

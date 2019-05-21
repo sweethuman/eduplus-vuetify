@@ -91,7 +91,7 @@
         <v-card-actions class="justify-center">
           <span class="subheading">
             Versiunea
-            <strong>0.1.1 Alpha</strong>
+            <strong>0.2.0 Alpha</strong>
           </span>
           <span class="mx-2">—</span>
           <span class="subheading">
@@ -125,6 +125,18 @@ export default {
     darkSwitchLabel() {
       return this.darkTheme ? "Switch to Light Theme" : "Switch to Dark Theme";
     },
+  },
+  watch: {
+    "$wait.any": function(newValue) {
+      // eslint-disable-next-line no-undef
+      if (newValue === true) NProgress.start();
+      // eslint-disable-next-line no-undef
+      else NProgress.done();
+    },
+  },
+  beforeCreate() {
+    // eslint-disable-next-line no-undef
+    NProgress.configure({ easing: "ease-out", speed: 1000, trickleSpeed: 500 });
   },
   methods: {
     iconPath: function(path, baseIconName) {
