@@ -1,3 +1,10 @@
+/*!
+ *
+ *   Sat Apr 07 2018 14:13:22 GMT-0500 (CDT)
+ *   Accessible NProgress, (c) 2018 Nicholas Mackey - http://nmackey.com/accessible-nprogress
+ *   @license MIT
+ *
+ */
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;
