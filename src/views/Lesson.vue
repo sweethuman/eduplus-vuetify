@@ -132,11 +132,16 @@ export default {
     },
   },
   async beforeRouteUpdate(to, from, next) {
-    if ((await this.loadLesson(to)) === false) next(false);
-    else next();
+    if ((await this.loadLesson(to)) === false) {
+      this.$showError("Acel stil nu exista momentan");
+      next(false);
+    } else next();
   },
   async created() {
-    if ((await this.loadLesson(this.$route)) === false) this.$router.replace(this.$route.path);
+    if ((await this.loadLesson(this.$route)) === false) {
+      this.$showError("Acel stil nu exista momentan");
+      this.$router.replace(this.$route.path);
+    }
   },
   methods: {
     markation(markdownString) {
