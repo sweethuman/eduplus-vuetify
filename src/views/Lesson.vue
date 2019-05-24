@@ -181,8 +181,9 @@ export default {
         //NOTE used to be console log here
         //NOTE check between import error and actual error
         this.markdown = "LECTIA NU A FOST GASITA{.display-3 .error}";
+      } finally {
+        this.$wait.end("loading lesson");
       }
-      this.$wait.end("loading lesson");
     },
   },
 };
