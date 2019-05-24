@@ -1,6 +1,6 @@
 {
-  "name": "eduplus-vuetify",
-  "short_name": "eduplus-vuetify",
+  "name": "EduPlus",
+  "short_name": "EduPlus",
   "icons": [
     {
       "src": "./img/icons/home-small.png",
@@ -10,6 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "background_color": "#ffb618",
+  "theme_color": "#ffb618"
 }
