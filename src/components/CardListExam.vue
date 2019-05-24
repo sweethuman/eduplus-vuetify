@@ -64,7 +64,6 @@
       :multi-line="!$vuetify.breakpoint.mdAndUp"
     >
       {{ snackbarData.text }}
-      <v-btn dark flat @click="showSnackbar = false">Close</v-btn>
     </v-snackbar>
   </v-layout>
 </template>
