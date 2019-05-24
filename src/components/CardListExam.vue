@@ -64,7 +64,6 @@
       :multi-line="!$vuetify.breakpoint.mdAndUp"
     >
       {{ snackbarData.text }}
-      <v-btn dark flat @click="showSnackbar = false">Close</v-btn>
     </v-snackbar>
   </v-layout>
 </template>
@@ -114,8 +113,9 @@ export default {
     },
   },
   watch: {
-    page() {
+    page(newValue) {
       this.$nextTick(this.loadExerciseCards);
+      this.$emit("page-change", newValue);
     },
   },
   async mounted() {

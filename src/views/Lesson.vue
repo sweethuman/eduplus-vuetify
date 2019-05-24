@@ -123,14 +123,25 @@ export default {
         youtubeId: null,
         testId: null,
       },
+      lessonTitle: "",
     };
   },
+  computed: {
+    pageTitle() {
+      return this.lessonTitle;
+    },
+  },
   async beforeRouteUpdate(to, from, next) {
-    if ((await this.loadLesson(to)) === false) next(false);
-    else next();
+    if ((await this.loadLesson(to)) === false) {
+      this.$showError("Acel stil nu exista momentan");
+      next(false);
+    } else next();
   },
   async created() {
-    if ((await this.loadLesson(this.$route)) === false) this.$router.replace(this.$route.path);
+    if ((await this.loadLesson(this.$route)) === false) {
+      this.$showError("Acel stil nu exista momentan");
+      this.$router.replace(this.$route.path);
+    }
   },
   methods: {
     markation(markdownString) {
@@ -144,6 +155,7 @@ export default {
             routeObject.params.lesson
           }/data.json`
         );
+        this.lessonTitle = jsonDataFile.name;
         if (jsonDataFile.styles == null || jsonDataFile.styles.length === 0) {
           this.markdown = "LECTIA NU PREZINTA CONTINUT{.display-3 .error}";
           return;
@@ -174,8 +186,9 @@ export default {
         //NOTE used to be console log here
         //NOTE check between import error and actual error
         this.markdown = "LECTIA NU A FOST GASITA{.display-3 .error}";
+      } finally {
+        this.$wait.end("loading lesson");
       }
-      this.$wait.end("loading lesson");
     },
   },
 };

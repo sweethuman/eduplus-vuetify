@@ -115,6 +115,7 @@ export default {
       currentOffset: 0,
       timeout: null,
       expansionPanel: null,
+      pageTitle: "Home",
     };
   },
   mounted() {

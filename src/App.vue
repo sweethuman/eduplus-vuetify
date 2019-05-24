@@ -105,15 +105,17 @@
     <v-snackbar v-model="snackbar" color="error" :timeout="5000">
       <span class="font-weight-bold">Pagina nu este disponibila!</span>
     </v-snackbar>
+    <error-snackbar />
   </v-app>
 </template>
 
 <script>
 import AccountDialog from "./components/AccountDialog";
+import ErrorSnackbar from "./components/ErrorSnackbar";
 
 export default {
   name: "App",
-  components: { AccountDialog },
+  components: { AccountDialog, ErrorSnackbar },
   data() {
     return {
       snackbar: false,
