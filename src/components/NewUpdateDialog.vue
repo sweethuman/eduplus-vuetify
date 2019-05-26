@@ -32,7 +32,7 @@ export default {
   name: "NewUpdateDialog",
   data() {
     return {
-      updateDialog: true,
+      updateDialog: false,
       refreshing: false,
       registration: null,
     };
