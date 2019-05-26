@@ -106,16 +106,18 @@
       <span class="font-weight-bold">Pagina nu este disponibila!</span>
     </v-snackbar>
     <error-snackbar />
+    <new-update-dialog />
   </v-app>
 </template>
 
 <script>
 import AccountDialog from "./components/AccountDialog";
 import ErrorSnackbar from "./components/ErrorSnackbar";
+import NewUpdateDialog from "./components/NewUpdateDialog";
 
 export default {
   name: "App",
-  components: { AccountDialog, ErrorSnackbar },
+  components: { AccountDialog, ErrorSnackbar, NewUpdateDialog },
   data() {
     return {
       snackbar: false,
