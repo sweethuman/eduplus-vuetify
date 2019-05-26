@@ -91,7 +91,7 @@
         <v-card-actions class="justify-center">
           <span class="subheading">
             Versiunea
-            <strong>0.2.3 Alpha</strong>
+            <strong>0.3.0 Alpha</strong>
           </span>
           <span class="mx-2">—</span>
           <span class="subheading">
@@ -106,16 +106,18 @@
       <span class="font-weight-bold">Pagina nu este disponibila!</span>
     </v-snackbar>
     <error-snackbar />
+    <new-update-dialog />
   </v-app>
 </template>
 
 <script>
 import AccountDialog from "./components/AccountDialog";
 import ErrorSnackbar from "./components/ErrorSnackbar";
+import NewUpdateDialog from "./components/NewUpdateDialog";
 
 export default {
   name: "App",
-  components: { AccountDialog, ErrorSnackbar },
+  components: { AccountDialog, ErrorSnackbar, NewUpdateDialog },
   data() {
     return {
       snackbar: false,
