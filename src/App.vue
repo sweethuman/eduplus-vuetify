@@ -137,10 +137,18 @@ export default {
       // eslint-disable-next-line no-undef
       else NProgress.done();
     },
+    darkTheme(newValue) {
+      localStorage.darkTheme = newValue;
+    },
   },
   beforeCreate() {
     // eslint-disable-next-line no-undef
     NProgress.configure({ easing: "ease-out", speed: 1000, trickleSpeed: 500 });
+  },
+  created() {
+    if (localStorage.darkTheme === "true") {
+      this.darkTheme = true;
+    }
   },
   methods: {
     iconPath: function(path, baseIconName) {
