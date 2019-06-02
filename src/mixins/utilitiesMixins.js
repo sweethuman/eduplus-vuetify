@@ -10,6 +10,18 @@ export const textUtilitiesMixin = {
   },
 };
 
+export const isDarkThemeOn = {
+  computed: {
+    isDark() {
+      let parent = this.$parent;
+      while (parent.isDark == null) {
+        parent = parent.$parent;
+      }
+      return parent.isDark;
+    },
+  },
+};
+
 export const utilityMethodsMixin = {
   methods: {
     clearObjFields(object) {
