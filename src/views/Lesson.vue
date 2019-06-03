@@ -77,7 +77,9 @@
     <v-layout align-center justify-center>
       <v-flex md10 lg8>
         <v-card>
-          <v-card-text class="lesson-content" v-html="markation(markdown)"></v-card-text>
+          <v-card-text class="lesson-content">
+            <render-advanced-markdown :markdown="markdown"></render-advanced-markdown>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -107,10 +109,11 @@ import markdownIt from "../jsUtilities/markdownIt";
 import lessonStyles from "../enums/lessonStyles";
 import ReferencesItem from "../components/core/ReferencesItem";
 import GoToExamButton from "../components/core/GoToExamButton";
+import RenderAdvancedMarkdown from "../components/RenderAdvancedMarkdown";
 
 export default {
   name: "Lesson",
-  components: { ReferencesItem, GoToExamButton },
+  components: { ReferencesItem, GoToExamButton, RenderAdvancedMarkdown },
   data() {
     return {
       markdown: "",
@@ -144,9 +147,6 @@ export default {
     }
   },
   methods: {
-    markation(markdownString) {
-      return markdownIt.render(markdownString);
-    },
     async loadLesson(routeObject) {
       this.$wait.start("loading lesson");
       try {

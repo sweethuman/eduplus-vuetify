@@ -10,6 +10,7 @@
   "dependencies": {
     "@mdi/font": "^3.5.95",
     "axios": "^0.18.0",
+    "knuth-shuffle-seeded": "^1.0.6",
     "lodash": "^4.17.11",
     "markdown-it": "^8.4.2",
     "markdown-it-abbr": "^1.0.4",
@@ -25,6 +26,7 @@
     "register-service-worker": "^1.6.2",
     "roboto-fontface": "*",
     "romanize": "^1.1.1",
+    "v-runtime-template": "https://github.com/Patrick-Remy/v-runtime-template#feature/parent-prop",
     "vue": "^2.6.8",
     "vue-axios": "^2.1.4",
     "vue-lodash": "^2.0.2",
