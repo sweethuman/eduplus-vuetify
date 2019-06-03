@@ -12,6 +12,7 @@ export default {
       newUser.forename = payload.forename;
       newUser.email = payload.email;
       newUser.password = payload.password;
+      newUser.learningStyle = null;
       state.users.push(newUser);
     },
     updateUser(state, payload) {
@@ -21,6 +22,7 @@ export default {
       userToUpdate.forename = payload.forename != null ? payload.forename : userToUpdate.forename;
       userToUpdate.email = payload.email != null ? payload.email : userToUpdate.email;
       userToUpdate.password = payload.password != null ? payload.password : userToUpdate.password;
+      userToUpdate.learningStyle = payload.learningStyle != null ? payload.learningStyle : userToUpdate.learningStyle;
     },
   },
   getters: {

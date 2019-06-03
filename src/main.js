@@ -18,5 +18,7 @@ new Vue({
   router,
   store,
   render: h => h(App),
-  wait: new VueWait(),
+  wait: new VueWait({
+    useVuex: true,
+  }),
 }).$mount("#app");
