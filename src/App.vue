@@ -97,7 +97,7 @@
           <span class="subheading">
             &copy;2019 —
             <strong>EDU+</strong>
-            de Avram Gheorghe and Vlad Schiller
+            de Gheorghe Avram si Vlad Schiller
           </span>
         </v-card-actions>
       </v-card>
