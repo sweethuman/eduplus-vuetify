@@ -11,6 +11,10 @@
       "type": "audio",
       "youtube-id": "BBJa32lCaaY",
       "source": "moaraAudio.md"
+    },
+    {
+      "type": "puzzle",
+      "source":"moaraPuzzle.md"
     }
   ]
 }
