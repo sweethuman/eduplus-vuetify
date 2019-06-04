@@ -38,8 +38,8 @@
                   <v-flex
                     v-for="(option, index) in selectionOptions"
                     :key="index"
-                    :xs6="selectionOptions.length !== 1"
-                    :xs12="selectionOptions.length === 1"
+                    :xs6="selectionOptions.length !== 1 && $vuetify.breakpoint.mdAndUp"
+                    :xs12="selectionOptions.length === 1 || $vuetify.breakpoint.smAndDown"
                     px-2
                   >
                     <v-btn
