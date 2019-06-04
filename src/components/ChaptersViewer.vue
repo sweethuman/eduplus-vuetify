@@ -14,7 +14,7 @@
               <v-icon color="primary">$vuetify.icons.expand</v-icon>
             </template>
             <template #header>
-              <div>{{ romanization(i + 1) }}. {{ chapter.title }}</div>
+              <div class="title">{{ romanization(i + 1) }}. {{ chapter.title }}</div>
             </template>
             <!--            TODO alignment of item needs to be improved-->
             <v-card>
