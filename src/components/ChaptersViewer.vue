@@ -77,7 +77,17 @@ export default {
       return romanize(number);
     },
     generateLink(disciplineId, chapterId, lessonId) {
-      return "/lesson/" + disciplineId + "/" + chapterId + "/" + lessonId;
+      return (
+        "/lesson/" +
+        disciplineId +
+        "/" +
+        chapterId +
+        "/" +
+        lessonId +
+        (this.$store.state.userManagement.currentUser.learningStyle != null
+          ? "?style=" + this.$store.state.userManagement.currentUser.learningStyle
+          : "")
+      );
     },
   },
 };

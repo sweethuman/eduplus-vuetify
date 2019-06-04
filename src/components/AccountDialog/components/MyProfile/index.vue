@@ -11,6 +11,25 @@
         <v-btn icon @click="$emit('close-dialog')"><v-icon>mdi-content-save</v-icon></v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <v-alert
+      :value="$store.state.userManagement.currentUser.learningStyle == null"
+      type="warning"
+      class="mt-0 large-child-icon"
+      icon="mdi-alert-decagram-outline"
+    >
+      <v-layout align-center justify-center :column="!$vuetify.breakpoint.lgAndUp">
+        <v-flex grow class="text-xs-center">
+          <span class="title">
+            Chestionarul pentru stabilirea stilului de invatare nu a fost completat. Completeaza-l acum!
+          </span>
+        </v-flex>
+        <v-flex shrink>
+          <v-btn to="/learningTest" class="sublimelight-gradient-reversed" dark @click="$emit('close-dialog')">
+            MERGI LA CHESTIONAR!
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-alert>
     <v-layout fill-height :column="!$vuetify.breakpoint.lgAndUp">
       <v-flex xs12 md4 my-3>
         <profile-picture></profile-picture>
@@ -43,4 +62,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.large-child-icon i {
+  font-size: 36px !important;
+}
+</style>

@@ -91,13 +91,13 @@
         <v-card-actions class="justify-center">
           <span class="subheading">
             Versiunea
-            <strong>0.4.0 Alpha</strong>
+            <strong>0.5.0 Alpha</strong>
           </span>
           <span class="mx-2">—</span>
           <span class="subheading">
             &copy;2019 —
             <strong>EDU+</strong>
-            de Avram Gheorghe and Vlad Schiller
+            de Gheorghe Avram si Vlad Schiller
           </span>
         </v-card-actions>
       </v-card>

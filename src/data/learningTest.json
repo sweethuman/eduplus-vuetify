@@ -1,0 +1,197 @@
+{
+  "title": "Test pentru Stilul de Invatare",
+  "exam": [
+    {
+      "subjectIndex": 0,
+      "subject": [
+        {
+          "id": 0,
+          "question": "1. Când întâlniţi o persoană necunoscută, ce va frapează prima oară la ea?",
+          "options": [
+            "înfăţişarea sau modul cum se îmbracă",
+            "felul cum vorbeşte, ceea ce spune, sau cuvintele sale",
+            "ceea ce simtiţi despre ea",
+            "modul cum se comportă persoana, sau acţiunile ei"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 1,
+          "question": "2. La câteva zile după ce aţi cunoscut o persoană, ce anume vă amintiţi cel mai bine despre ea?",
+          "options": [
+            "Chipul",
+            "Numele",
+            "Cum v-aţi simţit alături de ea, chiar dacă i-aţi uitat numele sau chipul",
+            "Ceea ce aţi făcut împreună cu ea, chiar dacă i-aţi uitat numele sau chipul"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 2,
+          "question": "3. Când intraţi într-o cameră în care n-aţi mai fost niciodată, ce vă atrage cel mai mult atenţia?",
+          "options": [
+            "Felul cum arată interiorul",
+            "Sunetele sau discuţiile dinăuntru",
+            "Cât de confortabil vă simţiţi, emoţional sau fizic, în cameră",
+            "Ce activităţi au loc înăuntru şi ce anume puteţi face acolo"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 3,
+          "question": "4. Când învăţaţi ceva nou, cum trebuie să procedaţi?",
+          "options": [
+            "Profesorul vă dă să citiţi ceva scris pe hârtie sau pe tablă şi vă arată cărţi, imagini, grafice, hărţi, desene sau obiecte, dar nu au loc discuţii şi nici nu se scrie nimic.",
+            "Profesorul explică totul verbal şi vă permite să discutaţi subiectul şi să puneţi întrebări, dar nu vă oferă nimic să priviţi, să citiţi, să scrieţi sau să faceţi",
+            "Profesorul vă permite să scrieţi sau să desenaţi informaţiile, să atingeţi în mod direct materialele, sau să faceţi ceva cu mâinile.",
+            "Profesorul vă permite să vă sculaţi din bancă pentru a executa proiecte, simulări: experienţe, să jucaţi jocuri, să interpretaţi personaje şi situaţii din viaţa reală, să exploraţi, să faceţi descoperiri ori activităţi care vă îngăduie să vă deplasaţi, în scopul învăţării"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 4,
+          "question": "5. Când îi învăţaţi pe alţii, cum procedaţi?",
+          "options": [
+            "Le oferiţi ceva la care să privească - un obiect, o imagine sau un grafic -, fără explicaţii verbale ori discuţii; sau cu un nivel redus al acestora",
+            "Le explicaţi verbal, fără a le oferi materiale vizuale",
+            "Desenaţi, scrieţi sau vă folosiţi de mâini pentru a le explica",
+            "Le demonstraţi o acţiune în mod practic şi le cereţi s-o facă împreună cu dumneavoastră"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 5,
+          "question": "6. Ce tip de cărţi preferaţi să citiţi?",
+          "options": [
+            "Cărţi ce conţin descrieri menite să vă ajute să vizualizaţi cele ce se întâmplă",
+            "Cărţi conţinând informaţii exacte, istorie, sau cu multe dialoguri",
+            "Cărţi despre sentimentele şi emoţiile personajelor, despre sentimente şi relaţii, sau despre perfecţionarea minţii şi a corpului",
+            "Cărţi scurte cu multă acţiune, sau carţi ce vă ajută să vă perfectionaţi într-un sport, într-un hobby sau să vă dezvoltaţi un anumit talent"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 6,
+          "question": "7. Ce preferaţi să faceţi în timpul liber?",
+          "options": [
+            "Să citiţi o carte ori să răsfoiţi o revistă",
+            "Să ascultaţi un talk-show radiofonic, să ascultaţi sau să interpretaţi muzică",
+            "Să scrieţi, să desenaţi, să dactilografiaţi, ori să faceţi ceva cu mâinile",
+            "Să faceţi sport, să construiţi ceva, sau să jucaţi un joc folosindu-vă de întregul corp"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 7,
+          "question": "8. Care dintre următoarele variante descrie modul în care puteţi citi sau studia cel mai bine?",
+          "options": [
+            "Puteţi studia în prezenţa muzicii, a zgomotelor sau a unor conversaţii, deoarece le eliminaţi mental.",
+            "Nu puteţi studia în prezenţa muzicii, a zgomotelor sau a unor conversaţii, deoarece nu le puteţi elimina mental.",
+            "Trebuie să va simţiţi confortabil, relaxat şi puteţi lucra cu sau fără muzică, dar va distrag  sentimentele negative ale altora.",
+            "Trebuie să vă simţiţi confortabil, relaxat şi puteţi lucra cu sau fără muzică, dar vă distrag activităţile sau mişcările din odaie."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 8,
+          "question": "9. Când vorbiţi cu cineva, în ce direcţie vi se deplasează ochii? (Puteţi ruga pe cineva să vă observe, pentru a vă ajuta să raspundeţi la întrebare.)",
+          "options": [
+            "Priviţi direct chipul interlocutorului şi doriţi ca şi el să vă privească",
+            "Priviţi interlocutorul doar scurt timp, apoi ochii vi se deplasează dintr-o parte în cealaltă, la stânga şi la dreapta.",
+            "Priviţi interlocutorul doar scurt timp, pentru a-i vedea expresia, apoi vă feriţi ochii.",
+            "Priviti arareori interlocutorul; în majoritate vă uitaţi în jos, sau în lateral, dar dacă există activitate sau mişcări, priviţi în direcţia respectivă."
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 9,
+          "question": "10. Care dintre următoarele atitudini vă descrie cel mai bine?",
+          "options": [
+            "Oriunde v-ati afla, remarcaţi culorile, formele şi desenele, şi vă pricepeţi la culori şi modele",
+            "Nu puteţi suporta liniştea şi, atunci când vi se pare că un loc este prea tăcut, fredonaţi, cântaţi, vorbiţi tare, sau deschideţi radioul, televizorul, casetofonul etc.  pentru a menţine un stimul auditiv în ambient",
+            "Sunteti sensibil faţă de sentimentele oamenilor, propriile dumneavoastra sentimente sunt rănite cu uşurinţă, nu vă puteţi concentra cand alţii nu vă plac, si - pentru a lucra - aveţi nevoie să vă simţiţi iubit şi acceptat",
+            "Vă vine greu să staţi nemişcat pe locul dumneavoastră, trebuie să vă mişcaţi mult; dacă nu vă puteţi părăsi scaunul, vă foiţi, vă mişcaţi mult picioarele, sau bateţi tactul cu vârfurile pantofilor în podea"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 10,
+          "question": "11. Care dintre următoarele atitudini vă descrie cel mai bine?",
+          "options": [
+            "Remarcaţi dacă îmbrăcămintea oamenilor nu este asortată, sau dacă părul le este răvăşit şi adesea doriţi să rectificaţi asemenea situaţii",
+            "Vă deranjează când cineva nu vorbeşte corect şi sunteţi sensibil faţă de anumite sunete, precum picuratul robinetelor sau zgomotul aparatelor casnice",
+            "Lacrimaţi la episoadele triste din filme sau cărţi",
+            "Vă foiţi şi nu vă găsiţi locul când sunteţi silit să rămâneţi nemişcat şi nu puteţi sta prea mult timp în acelaşi loc"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 11,
+          "question": "12. Ce anume vă deranjează cel mai mult?",
+          "options": [
+            "Un loc dezordonat",
+            "Un loc prea tăcut",
+            "Un loc inconfortabil din punct de vedere fizic sau emoţional",
+            "Un loc în care nu se permit activităţi, sau care nu oferă suficient spaţiu de mişcare"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 12,
+          "question": "13. Ce vă deranjează cel mai mult atunci când cineva vă preda un subiect?",
+          "options": [
+            "Să ascultaţi o expunere neînsoţită de materiale vizuale",
+            "Să fiţi nevoit să citiţi în tăcere, fără explicaţii verbale sau discuţii",
+            "Să nu vi se îngăduie să desenaţi, să mâzgăliţi, să atingeţi ceva cu mâinile, sau să faceţi însemnări, chiar dacă nu le veţi reciţi niciodată",
+            "Să fiţi nevoit să priviţi şi să ascultaţi, fără a vă putea clinti"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 13,
+          "question": "14. Rememoraţi o amintire fericită din viaţă. Petreceţi câteva secunde căutând să vă amintiţi cât mai multe detalii. După ce aţi retrăit episodul, ce amintiri ies în evidenţă?",
+          "options": [
+            "Cele văzute - descrierile vizuale ale oamenilor, locurilor şi obiectelor",
+            "Cele auzite - dialoguri şi conversaţii, replicile dumneavoastră şi sunetele din jur",
+            "Senzaţiile de pe piele si corp, precum şi felul cum v-ati simţit, fizic şi emoţional",
+            "Acţiunile şi activităţile întreprinse de dumneavoastră şi mişcările corpului"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 14,
+          "question": "15. Rememoraţi o vacanţă sau o călătorie. Petreceţi câteva secunde căutând să vă amintiţi cât mai multe detalii. După ce aţi retrăit episodul, ce amintiri ies în evidenţă?",
+          "options": [
+            "Cele văzute - descrierile vizuale ale oamenilor, locurilor şi obiectelor",
+            "Cele auzite - dialoguri şi conversaţii, replicile dumneavoastră şi sunetele din jur",
+            "Senzaţiile de pe piele şi corp, precum şi felul cum v-aţi simţit, fizic şi emoţional",
+            "Acţiunile şi activităţile întreprinse de dumneavoastră şi mişcările corpului"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 15,
+          "question": "16. Imaginaţi-vă că aţi fi nevoit să vă petreceţi tot timpul în unul din următoarele locuri, în care se desfăşoară activităţi diferite. Unde v-aţi simţi cel mai confortabil?",
+          "options": [
+            "Un loc în care puteţi să citiţi; să priviţi tablouri, opere de artă, hărţi, grafice şi fotografii; să rezolvaţi puzzle-uri vizuale, de felul labirinturilor sau descoperirii fragmentului lipsă dintr-un tablou; să jucaţi jocuri cu litere, de tip scrabble; să efectuaţi decoraţiuni interioare etc.",
+            "Un loc în care puteţi asculta muzică, talk-show-uri radiofonice sau TV, ori ştiri; să cântaţi, vocal sau la un instrument; să jucaţi jocuri verbale, să participaţi la dezbateri; să citiţi cu voce tare, să recitaţi fragmente din piese sau filme etc.",
+            "Un loc în care puteţi desena, picta, sculpta sau crea obiecte artizanale; să scrieţi sau să dactilografiaţi; să efectuaţi activităţi ce implică mâinile, aşa cum sunt cântatul la un instrument, jucatul de şah, dame etc.; să construiţi machete",
+            "Un loc în care puteţi să faceţi sport, să jucaţi jocuri cu mingea, ori jocuri de actiune, care implică mişcarea trupului, sau să jucaţi în piese ori spectacole; să efectuaţi proiecte în care să vă deplasaţi constant; să efectuaţi experienţe, sau să exploraţi şi să descoperiţi lucruri noi; să construiţi sau să reparaţi diverse obiecte; să participaţi în activităţi de echipă cu caracter competitiv"
+          ],
+          "correctAnswer": 0
+        },
+        {
+          "id": 16,
+          "question": "17. Dacă ar fi necesar să vă reamintiţi un cuvânt nou, vi l-aţi aminti cel mai bine:",
+          "options": [
+            "Văzându-l",
+            "Auzindu-l",
+            "Scriindu-l",
+            "Mimându-l, mental sau fizic"
+          ],
+          "correctAnswer": 0
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@ export default {
       username: null,
       name: null,
       email: null,
+      learningStyle: null,
     },
   },
   mutations: {
@@ -17,6 +18,10 @@ export default {
       state.currentUser.name = payload.name;
       state.currentUser.forename = payload.forename;
       state.currentUser.email = payload.email;
+      state.currentUser.learningStyle = payload.learningStyle;
+    },
+    updateLearningStyle(state, learningStyle) {
+      state.currentUser.learningStyle = learningStyle;
     },
     resetState(state) {
       state.loggedIn = false;
@@ -26,6 +31,7 @@ export default {
         name: null,
         forename: null,
         email: null,
+        learningStyle: null,
       };
     },
   },
@@ -75,6 +81,12 @@ export default {
       if (user == null) throw new Error("USER DOES NOT EXIST! CRITICAL ERROR!");
       if (user.password !== payload.oldPassword) throw new Error("Old Password is Wrong!");
       commit("userDatabase/updateUser", { id: state.currentUser.id, password: payload.newPassword }, { root: true });
+    },
+    updateLearningStyle({ state, commit }, learningStyle) {
+      commit("updateLearningStyle", learningStyle);
+      if (state.loggedIn) {
+        commit("userDatabase/updateUser", { id: state.currentUser.id, learningStyle: learningStyle }, { root: true });
+      }
     },
   },
 };
