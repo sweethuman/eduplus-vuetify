@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="500" lazy :fullscreen="$vuetify.breakpoint.smAndDown" :disabled="completed">
+  <v-dialog v-model="dialog" width="900" lazy :fullscreen="$vuetify.breakpoint.smAndDown" :disabled="completed">
     <template #activator="{ on }">
       <span
         class="font-weight-bold default-transition default"

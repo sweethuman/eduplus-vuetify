@@ -6,6 +6,10 @@
     {
       "type": "visual",
       "source": "imaginationVisual.md"
+    },
+    {
+      "type": "puzzle",
+      "source": "imaginationPuzzle.md"
     }
   ]
 }

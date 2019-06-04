@@ -7,21 +7,21 @@
   {
     "title": "Ghid Rapid",
     "icon": "owl",
-    "source": "salut.md"
+    "source": "ghid.md"
   },
   {
     "title": "Prezentare Generala",
     "icon": "compass",
-    "source": "salut.md"
+    "source": "presentation.md"
   },
   {
     "title": "Continut Aditional",
     "icon": "book-multiple-plus",
-    "source": "salut.md"
+    "source": "aditional.md"
   },
   {
     "title": "Ajutor",
     "icon": "help",
-    "source": "salut.md"
+    "source": "help.md"
   }
 ]

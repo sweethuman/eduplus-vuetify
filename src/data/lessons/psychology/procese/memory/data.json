@@ -16,6 +16,10 @@
       "type": "tactile",
       "youtube-id": "LRGSybcdhSk",
       "source": "memoryTactile.md"
+    },
+    {
+      "type": "puzzle",
+      "source": "memoryPuzzle.md"
     }
   ]
 }

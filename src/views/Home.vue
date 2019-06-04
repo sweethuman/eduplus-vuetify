@@ -49,7 +49,7 @@
         </v-list>
       </v-expansion-panel-content>
     </v-expansion-panel>
-    <v-layout justify-space-between>
+    <v-layout justify-center>
       <v-flex v-if="$vuetify.breakpoint.mdAndUp" shrink class="mr-4">
         <v-card class="d-inline-block elevation-12" style="position: -webkit-sticky; position: sticky; top: 70px;">
           <v-navigation-drawer floating permanent stateless value="true">
@@ -84,7 +84,7 @@
           </v-navigation-drawer>
         </v-card>
       </v-flex>
-      <v-flex xs12 md10>
+      <v-flex xs12 md6>
         <v-card
           v-for="(item, i) in items"
           :id="item.title.toLowerCase().replace(/\s/g, '')"
