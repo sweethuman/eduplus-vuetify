@@ -1,0 +1,11 @@
+{
+  "name": "Imaginatia",
+  "description": "O scurta lectie despre cum functioneaza Imaginatia in Oameni",
+  "test-id": "testImaginatie",
+  "styles": [
+    {
+      "type": "visual",
+      "source": "imaginationVisual.md"
+    }
+  ]
+}
