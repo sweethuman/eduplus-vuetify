@@ -91,7 +91,7 @@
         <v-card-actions class="justify-center">
           <span class="subheading">
             Versiunea
-            <strong>0.6.0 Alpha</strong>
+            <strong>0.6.1 Alpha</strong>
           </span>
           <span class="mx-2">—</span>
           <span class="subheading">
