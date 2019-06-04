@@ -1,0 +1,11 @@
+{
+  "name": "Gandirea",
+  "description": "O scurta lectie despre cum functioneaza Gandirea in Oameni",
+  "test-id": "testGandire",
+  "styles": [
+    {
+      "type": "visual",
+      "source": "thinkingVisual.md"
+    }
+  ]
+}
