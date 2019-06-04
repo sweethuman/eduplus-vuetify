@@ -2,6 +2,25 @@
   <v-card height="100%" width="100%">
     <v-layout align-center fill-height justify-center>
       <v-flex grow>
+        <v-alert
+          :value="$store.state.userManagement.currentUser.learningStyle == null"
+          type="warning"
+          class="mt-0 large-child-icon"
+          icon="mdi-alert-decagram-outline"
+        >
+          <v-layout align-center justify-center :column="!$vuetify.breakpoint.lgAndUp">
+            <v-flex grow class="text-xs-center">
+              <span class="title">
+                Chestionarul pentru stabilirea stilului de invatare nu a fost completat. Completeaza-l acum!
+              </span>
+            </v-flex>
+            <v-flex shrink>
+              <v-btn to="/learningTest" class="sublimelight-gradient-reversed" dark>
+                MERGI LA CHESTIONAR!
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-alert>
         <v-expansion-panel popout>
           <v-expansion-panel-content
             v-for="(chapter, i) in data"
