@@ -8,16 +8,16 @@
     <v-flex xs12 lg8>
       <v-window v-model="slide" class="elevation-0 my-5" dark>
         <v-window-item v-for="(itemGroup, i) in structuredItems" :key="i">
-          <v-layout align-center justify-space-between fill-height>
+          <v-layout justify-space-between fill-height>
             <v-flex
               v-for="(faqItem, j) in itemGroup"
               :key="'' + i + j"
               xs12
               v-bind="cardSizeOnMedium(itemGroup.length)"
             >
-              <v-card class="mx-1" min-height="200px" hover>
-                <v-layout fill-height column>
-                  <v-flex grow>
+              <v-card class="mx-1" min-height="200px" height="100%" hover>
+                <v-layout justify-center fill-height column>
+                  <v-flex shrink>
                     <v-card-title primary-title>
                       <h3 class="headline mb-0">
                         {{ faqItem.question }}
