@@ -1,0 +1,25 @@
+{
+    "name": "Perceptiile",
+    "description": "O scurta lectie despre cum identificam informatiile primite prin intermediul senzatiilor",
+    "test-id": "testPerceptii",
+    "styles": [
+      {
+        "type": "visual",
+        "source": "perceptiiVisual.md"
+      },
+      {
+        "type": "puzzle",
+        "source": "perceptiiPuzzle.md"
+      },
+      {
+        "type": "audio",
+        "youtube-id": "",
+        "source": "perceptiiShort.md"
+      },
+      {
+        "type": "tactile",
+        "youtube-id": "",
+        "source": "perceptiiShort.md"
+      }
+    ]
+  }

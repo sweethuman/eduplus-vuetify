@@ -1,6 +1,6 @@
 # DISCLAIMER: {style="color: red;"}
-### Nu retinem date personale pentru uz personal. Puteti folosi website-ul si daca nu ati completat chestinarul
+### Nu reţinem date personale pentru uz privat. Puteţi folosi platforma şi dacă nu ai completat chestionarul.
 
 
 
-Daca pe parcursul utilizarii platformei gasiti erori sau aveti sugestii legate de imbunatatirea platformei, va rugam sa ne contactati la adresa de mail [support@eduplus.net](mailto:support@eduplus.net)
+Dacă pe parcursul utilizării platformei găseşti erori sau ai sugestii legate de îmbunătăţirea conţinutului său, te rugăm să ne contactezi la adresa de e-mail: [support@eduplus.net](mailto:support@eduplus.net)

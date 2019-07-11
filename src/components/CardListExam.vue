@@ -35,6 +35,7 @@
         :all-points="isLastPage ? allPoints : null"
         :max-all-points="maxAllPoints"
         :text="examResultText"
+        :disableSubjectText="examData.length === 1"
         class="text-xs-center"
       />
       <v-layout v-if="answered && !isLastPage" align-space-around justify-center row wrap>

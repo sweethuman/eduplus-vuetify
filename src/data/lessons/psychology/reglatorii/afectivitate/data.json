@@ -1,0 +1,25 @@
+{
+    "name": "Afectivitatea",
+    "description": "O scurta lectie despre cum functioneaza Procesele afective",
+    "test-id": "testAfectivitate",
+    "styles": [
+      {
+        "type": "visual",
+        "source": "afectivitateVisual.md"
+      },
+      {
+        "type": "puzzle",
+        "source": "afectivitatePuzzle.md"
+      },
+      {
+        "type": "audio",
+        "youtube-id": "",
+        "source": "afectivitateaShort.md"
+      },
+      {
+        "type": "tactile",
+        "youtube-id": "",
+        "source": "afectivitateaShort.md"
+      }
+    ]
+  }

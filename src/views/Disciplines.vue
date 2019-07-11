@@ -4,7 +4,7 @@
       <v-flex xs12 md10 lg9 xl7>
         <v-container grid-list-lg fluid class="pa-0">
           <v-layout wrap>
-            <v-flex v-for="i in $store.state.disciplines.disciplines.length" :key="i" xs12 sm6 md4>
+            <v-flex v-for="i in $store.state.disciplines.disciplines.length" :key="i" xs12 sm6 md6>
               <content-card :content="generateConent(i - 1)" round :to="generateLink(i - 1)"></content-card>
             </v-flex>
           </v-layout>

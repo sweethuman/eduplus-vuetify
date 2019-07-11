@@ -1,18 +1,26 @@
 [
   {
-    "question": "Este posibila accesarea celorlalte stiluri daca am sustinut chestionarul si am aflat rezultatul?",
-    "response": "Da, este. Pur si simplu dati click pe butonul din dreapta jos penru a selecta stilul dorit."
+    "question": "Este posibilă accesarea lecţiilor în alt stil de învăţare dacă am completat deja chestionarul şi am aflat rezultatul? ",
+    "response": "Da, este. Pur şi simplu dai click pe butonul din dreapta jos a ecranului, pentru a selecta lecţia predate în stilul dorit de tine. "
   },
   {
-    "question": "Cum functioneaza chestionarul de personalitate? Ce se intampla cu datele personale?",
-    "response": "Chestionarul se bazeaza pe teoria stilurilor de invatare si a emisferelor cerebrale. Dupa sustinerea acestui chestionar, ti se va arata o scurta descriere a acestuia impreuna cu sfaturi pentru a invata mai bine. Asa ca in disclaimer, nu retinem datele personale. Site-ul se poate folosi fara sustinerea chestionarului, iar chestionarul poate fi completat fara a te conecta cu conturi pe website."
+    "question": "Cum funcţionează chestionarul de identificare a stilului de învăţare? ",
+    "response": "Chestionarul se bazează pe teoria stilurilor de învăţare şi a emisferelor cerebrale a lui Ricki Linksman. După completarea chestionarului, ţi se va arata o scurtă descriere a stilului tău, împreună cu recomandări pentru a învăţa mai eficient. "
   },
   {
     "question": "Nu gasesc testul pentru lectia ...",
-    "response": "Pentru a sustine un test pe capitol puteti gasi link la pagina de capitole. Pentru a sustine testul pentru o singura lectie, puteti gasi acest lucru la finalul lectiei."
+    "response": "Pentru a susţine un test de evaluare pe capitol găseşti link la pagina de capitole. Pentru a susţine testul pentru o singură lecţie, găseşti un buton la finalul lecţiei."
   },
   {
-    "question": "Am completat chestionarul si am aflat mai multe despre mine. Acum ce pot sa fac?",
-    "response": "Acum puteti sa va folositi de resursele oferite de acest website pentru a invata. Daca intalniti probleme pe parcurs va rog contactati-ne la adresa …"
-  }
+    "question": "Ce se întâmplă cu datele personale? ",
+    "response": "Nu reţinem datele  tale personale! (vezi Disclaimer). Site-ul se poate folosi şi fără susţinerea testului, iar chestionarul poate fi completat fără să îţi faci cont pe platformă."
+  },
+  {
+    "question": "Am completat chestionarul şi mi-am aflat stilul de învăţare. Acum ce pot să fac? ",
+    "response": "Acum poţi să foloseşti resursele oferite de platforma Edu Plus pentru a învăţa mai eficient decât ai făcut-o vreodată până acum. Daca întâlneşti probleme pe parcurs te rog semnalează-le la adresa de e-mail: support@eduplus.net"
+  },
+  {
+    "question": "Cum pot afla mai multe despre stilul meu de învăţare? ",
+    "response": "După completarea chestionarului vei găsi o descriere succintă a stilului tău de învăţare, împreună cu câteva recomandări pentru a învăţa mai eficient. Dacă vrei să afli toate detaliile despre caracteristicile stilului tău, cu punctele tale forte şi ce trebuie să eviţi pentru a adapta informaţiile din jur la nevoile tale, acceseaza pagina Stiluri de învăţare."
+  } 
 ]

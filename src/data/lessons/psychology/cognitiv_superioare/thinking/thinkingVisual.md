@@ -2,7 +2,7 @@
 
 _**Gandirea**_ poate fi deifinita ca fiind procesul psihic cognitiv superior care constă în manipularea imaginilor mentale (cuvinte, sunete, imaigni, actiuni) ale informaţiilor
 Folosim gandirea pentru a categoriza, a rezolva probleme si pentru a lua decizii.
-## **Categorisirea**
+## **Categorizarea**
 Inseamna încadrarea conceptelor în clase și categorii. Informatiile pot fi incadrate in concepte, concepte ce pot fi incadrate in clase si categorii.
 _**Conceptele**_ sunt condensări informaționale, generalizări despre obiecte, ființe, fenomene, situații care au caracteristici comune. Acestea pot fi empirice, adica neesențiale, concrete, specifice copiilor, subiective, neriguroase, se schimbă în timp, sunt exprimate în limbaj uzual, sau stiintifice, adica riguroase, impun o anumită ordine, abstracte, generale, nu pot fi contrazise sau schimbate în timp, folosesc limbaj specializat.
 

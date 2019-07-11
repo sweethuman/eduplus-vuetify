@@ -1,3 +1,12 @@
-- Bareme + variante de bac
-
-Acest site, fiind in stare Alpha, nu contine continut aditional (in unele cazuri nu contine nici macar continut normal :D).
+-	Bareme + variante de bac:
+    * [2013](/downloads/sub_bar/2013.rar)
+    * [2014](/downloads/sub_bar/2014.rar)
+    * [2015](/downloads/sub_bar/2015.rar)
+    * [2016](/downloads/sub_bar/2016.rar)
+    * [2017](/downloads/sub_bar/2017.rar)
+    * [2018](/downloads/sub_bar/2018.rar)
+    * [2019](/downloads/sub_bar/2019.rar)
+-   [Programa de bacalaureat](/downloads/BacPsiho.pdf)
+-	[Stilurile de învăţare](/downloads/Stiluri.docx)
+-	Ricki Linksman – [cărţi](https://www.goodreads.com/author/show/362814.Ricki_Linksman)
+-	Ricki Linksman – [interviu](http://voyagechicago.com/interview/meet-ricki-linksman-national-reading-diagnostics-institute-keys-learning-western-suburbs-napervillelisle-area/)

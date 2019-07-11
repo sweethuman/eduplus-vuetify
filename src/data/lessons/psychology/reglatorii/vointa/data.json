@@ -1,0 +1,25 @@
+{
+    "name": "Vointa",
+    "description": "O scurta lectie despre depasirea obstacolelor si atingerea scopurilor",
+    "test-id": "testVointa",
+    "styles": [
+      {
+        "type": "visual",
+        "source": "vointaVisual.md"
+      },
+      {
+        "type": "puzzle",
+        "source": "vointaPuzzle.md"
+      },
+      {
+        "type": "audio",
+        "youtube-id": "",
+        "source": "vointaVisual.md"
+      },
+      {
+        "type": "tactile",
+        "youtube-id": "",
+        "source": "vointaVisual.md"
+      }
+    ]
+  }

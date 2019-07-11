@@ -1,0 +1,25 @@
+{
+  "name": "Gandirea",
+  "description": "O scurta lectie despre cum rezolvam probleme si luam decizii",
+  "test-id": "testGandire",
+  "styles": [
+    {
+      "type": "visual",
+      "source": "thinkingVisual.md"
+    },
+    {
+      "type": "puzzle",
+      "source": "thinkingPuzzle.md"
+    },
+    {
+      "type": "audio",
+      "youtube-id": "",
+      "source": "thinkingShort.md"
+    },
+    {
+      "type": "tactile",
+      "youtube-id": "",
+      "source": "thinkingShort.md"
+    }
+  ]
+}

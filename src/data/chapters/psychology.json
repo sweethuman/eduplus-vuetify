@@ -1,8 +1,20 @@
 [
   {
-    "id": "procese",
-    "title": "Procese Psihice",
+    "id": "cognitiv_superioare",
+    "title": "Procese Psihice Cognitiv Superioare",
+    "test-id": "exampleTest",
+    "order": 1
+  },
+  {
+    "id": "cognitiv_senzoriale",
+    "title": "Procese Psihice Cognitiv Senzoriale",
     "test-id": "exampleTest",
     "order": 0
+  },
+  {
+    "id": "reglatorii",
+    "title": "Procese Psihice Reglatorii",
+    "test-id": "exampleTest",
+    "order": 2
   }
 ]
