@@ -46,14 +46,14 @@ export default {
     },
     disableSubjectText: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     textSingleSubject() {
-      return this.disableSubjectText ? "Ai obtinut " : "In total ai "
-    }
-  }
+      return this.disableSubjectText ? "Ai obtinut " : "In total ai ";
+    },
+  },
 };
 </script>
 

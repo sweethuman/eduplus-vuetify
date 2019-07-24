@@ -14,10 +14,12 @@
             </v-card-title>
             <v-card-text>
               <h5 class="headline">
-                Aceasta este o platformă deschisă care te ajută să înveţi la disciplinele care contează pentru tine, în modul în care ai tu nevoie. 
+                Aceasta este o platformă deschisă care te ajută să înveţi la disciplinele care contează pentru tine, în
+                modul în care ai tu nevoie.
               </h5>
               <h5 class="headline">
-                Pentru a începe, completează chestionarul de identificare a stilului de învăţare sau caută lecţia care îţi trebuie printre cele pe care ţi le oferim ca resurse. 
+                Pentru a începe, completează chestionarul de identificare a stilului de învăţare sau caută lecţia care
+                îţi trebuie printre cele pe care ţi le oferim ca resurse.
               </h5>
               <h5 class="headline">
                 Ai multe opţiuni de discipline, toate din planul de bacalaureat:
@@ -45,7 +47,9 @@
             </v-card-title>
             <v-card-text>
               <h5 class="headline">
-                 Alexiu, Alina; Badea, Mariana; Iordache, Nicoleta; Milici, Talida; Ştefănescu, Carmen. Teste-grilă pentru pregătirea examenului de bacalaureat. Logică, argumentare şi comunicare. Psihologie. Sociologie. (2017) 
+                Alexiu, Alina; Badea, Mariana; Iordache, Nicoleta; Milici, Talida; Ştefănescu, Carmen. Teste-grilă
+                pentru pregătirea examenului de bacalaureat. Logică, argumentare şi comunicare. Psihologie. Sociologie.
+                (2017)
               </h5>
               <h5 class="headline">
                 Ioaneş, Diana. Psihologie. Teste grilă. (2018). Ed. Universitară, Bucureşti
@@ -57,7 +61,8 @@
                 Neculau, Adrian (coord). (2008). Manual de psihologie. Editura Polirom, Iaşi
               </h5>
               <h5 class="headline">
-                Zlate, Mielu; Creţu, Tinca; Mitrofan, Nicolae; Aniţei, Mihai. (2008). Manual de psihologie. Editura Aramis, Bucureşti
+                Zlate, Mielu; Creţu, Tinca; Mitrofan, Nicolae; Aniţei, Mihai. (2008). Manual de psihologie. Editura
+                Aramis, Bucureşti
               </h5>
               <h5 class="headline">
                 Baddeley, A. (1998). Memoria umană. Editura Teora, Bucureşti
@@ -80,6 +85,6 @@ export default {
       snackbar: false,
       pageTitle: "Despre",
     };
-  }
-}
+  },
+};
 </script>
