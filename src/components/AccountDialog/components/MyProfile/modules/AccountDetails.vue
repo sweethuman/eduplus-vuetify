@@ -277,7 +277,7 @@ export default {
       );
     },
     closePassForm() {
-      this.clearObjFields(this.passwordForm);
+      this.clearObjStringFields(this.passwordForm);
       this.$v.passwordForm.$reset();
     },
     async savePassForm() {
@@ -292,7 +292,7 @@ export default {
           newPassword: this.passwordForm.newPassword,
         });
         this.displaySuccess("Password successfully changed");
-        this.clearObjFields(this.passwordForm);
+        this.clearObjStringFields(this.passwordForm);
         this.$v.passwordForm.$reset();
       } catch (e) {
         this.displayError(e.message);

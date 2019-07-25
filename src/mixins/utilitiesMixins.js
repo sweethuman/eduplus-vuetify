@@ -24,7 +24,7 @@ export const isDarkThemeOn = {
 
 export const utilityMethodsMixin = {
   methods: {
-    clearObjFields(object) {
+    clearObjStringFields(object) {
       this._.forEach(object, (value, key) => {
         object[key] = "";
       });

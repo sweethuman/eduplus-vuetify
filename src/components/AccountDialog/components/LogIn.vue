@@ -264,7 +264,7 @@ export default {
           password: this.loginForm.loginPassword,
         });
         this.hideError();
-        this.clearObjFields(this.loginForm);
+        this.clearObjStringFields(this.loginForm);
         this.$emit("close-dialog");
         this.$v.loginForm.$reset();
       } catch (e) {
@@ -290,7 +290,7 @@ export default {
           password: this.registerForm.registerPassword,
         });
         this.hideError();
-        this.clearObjFields(this.registerForm);
+        this.clearObjStringFields(this.registerForm);
         this.$emit("close-dialog");
         this.$v.registerForm.$reset();
       } catch (e) {
