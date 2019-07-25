@@ -11,6 +11,7 @@ import store from "./store";
 import "./plugins";
 import VueWait from "vue-wait";
 import titleMixin from "./mixins/titleMixin";
+import "./firebase";
 
 Vue.config.productionTip = false;
 Vue.mixin(titleMixin);
