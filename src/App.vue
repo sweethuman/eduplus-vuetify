@@ -18,14 +18,6 @@
             <v-list-tile-title>Discipline</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile ripple @click="snackbar = true">
-          <v-list-tile-action>
-            <v-icon>mdi-trophy-variant-outline</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Ultimele Lectii</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
         <v-list-tile to="/about" ripple>
           <v-list-tile-action>
             <v-icon>{{ iconPath("/about", "mdi-information") }}</v-icon>
@@ -63,10 +55,6 @@
         <v-btn flat to="/disciplines">
           <v-icon left>{{ iconPath("/disciplines", "mdi-book") }}</v-icon>
           Discipline
-        </v-btn>
-        <v-btn flat @click="snackbar = true">
-          <v-icon left>mdi-trophy-variant-outline</v-icon>
-          Ultimele Lectii
         </v-btn>
         <v-btn to="/about" flat>
           <v-icon left>{{ iconPath("/about", "mdi-information") }}</v-icon>
