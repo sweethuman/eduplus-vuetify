@@ -125,24 +125,12 @@
 </template>
 
 <script>
-import { required, minLength, email, alphaNum, helpers, sameAs } from "vuelidate/lib/validators";
+import { required, minLength, email, alphaNum, sameAs } from "vuelidate/lib/validators";
 import { genericErrorMethodsMixin } from "../../../../../mixins/genericErrorMethodsMixin";
 import { utilityMethodsMixin } from "../../../../../mixins/utilitiesMixins";
 import { formUtilitiesMixin } from "../../../../../mixins/formUtilitiesMixin";
 import EditButtons from "../../../../core/EditButtons";
 import { mapState } from "vuex";
-
-function otherUsernameNotExist(value) {
-  return this.$store.state.userManagement.currentUser.username === value
-    ? true
-    : !helpers.req(value) || !this.$store.getters["userDatabase/checkIfUsernameExists"](value);
-}
-
-function otherEmailNotExist(value) {
-  return this.$store.state.userManagement.currentUser.email === value
-    ? true
-    : !helpers.req(value) || !this.$store.getters["userDatabase/checkIfEmailExists"](value);
-}
 
 export default {
   name: "AccountDetails",
@@ -160,8 +148,8 @@ export default {
     accountInfo: {
       name: { required },
       forename: { required },
-      username: { required, minLength: minLength(5), alphaNum, usernameNotExist: otherUsernameNotExist },
-      email: { required, email, emailNotExist: otherEmailNotExist },
+      username: { required, minLength: minLength(5), alphaNum },
+      email: { required, email },
     },
     passwordForm: {
       oldPassword: { required },
@@ -195,7 +183,7 @@ export default {
     accountUsernameErrors() {
       const errors = [];
       !this.$v.accountInfo.username.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
-      !this.$v.accountInfo.username.usernameNotExist && errors.push("Username deja prezent");
+      // !this.$v.accountInfo.username.usernameNotExist && errors.push("Username deja prezent");
       if (!this.$v.accountInfo.username.$dirty) return errors;
       !this.$v.accountInfo.username.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
       !this.$v.accountInfo.username.required && errors.push("Numele contului este necesar");
@@ -203,7 +191,7 @@ export default {
     },
     accountEmailErrors() {
       const errors = [];
-      !this.$v.accountInfo.email.emailNotExist && errors.push("Email deja prezent");
+      // !this.$v.accountInfo.email.emailNotExist && errors.push("Email deja prezent");
       if (!this.$v.accountInfo.email.$dirty) return errors;
       !this.$v.accountInfo.email.email && errors.push("Trebuie sa fie un Email Valid");
       !this.$v.accountInfo.email.required && errors.push("Emailul este necesar");
