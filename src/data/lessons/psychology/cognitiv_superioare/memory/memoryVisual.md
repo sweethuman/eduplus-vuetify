@@ -1,4 +1,6 @@
-# Definiţie{.titlu}
+# **Memoria** {.text-xs-center}
+
+## Definiţie{.titlu}
 
 ## Memoria este:{.emph}
 
