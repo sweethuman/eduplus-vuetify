@@ -285,10 +285,6 @@ export default {
           email: this.registerForm.registerEmail,
           password: this.registerForm.registerPassword,
         });
-        await this.$store.dispatch("userManagement/logIn", {
-          loginId: this.registerForm.registerUsername,
-          password: this.registerForm.registerPassword,
-        });
         this.hideError();
         this.clearObjStringFields(this.registerForm);
         this.$emit("close-dialog");

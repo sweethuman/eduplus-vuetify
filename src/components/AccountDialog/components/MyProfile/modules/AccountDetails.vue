@@ -242,13 +242,7 @@ export default {
         this.displayError("Sunt greseli in Datele noi ale Contului");
         return;
       }
-      await this.$store.dispatch("userManagement/updateCurrentUser", {
-        id: this.$store.state.userManagement.currentUser.id,
-        name: this.accountInfo.name,
-        forename: this.accountInfo.forename,
-        username: this.accountInfo.username,
-        email: this.accountInfo.email,
-      });
+      await this.$store.dispatch("userManagement/updateCurrentUser", this.accountInfo);
       this.loadAccountData();
     },
     displayError(message) {

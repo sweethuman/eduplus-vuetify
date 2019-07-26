@@ -2,7 +2,7 @@
   <v-dialog
     key="AccountDialog"
     v-model="dialog"
-    :max-width="$store.state.userManagement.loggedIn ? '70%' : '500'"
+    :max-width="$store.getters['userManagement/loggedIn'] ? '70%' : '500'"
     :fullscreen="!this.$vuetify.breakpoint.mdAndUp"
     :transition="this.$vuetify.breakpoint.mdAndUp ? 'dialog-transition' : 'dialog-bottom-transition'"
     lazy
@@ -41,10 +41,10 @@ export default {
   },
   computed: {
     activeComponent() {
-      return this.$store.state.userManagement.loggedIn ? "MyProfile" : "LogIn";
+      return this.$store.getters["userManagement/loggedIn"] ? "MyProfile" : "LogIn";
     },
     activeButton() {
-      return this.$store.state.userManagement.loggedIn ? "MyProfileButton" : "LoginButton";
+      return this.$store.getters["userManagement/loggedIn"] ? "MyProfileButton" : "LoginButton";
     },
   },
 };
