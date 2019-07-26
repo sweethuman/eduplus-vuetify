@@ -5,7 +5,7 @@
       <v-toolbar-title>Profilul Meu</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn icon color="error" @click="$store.commit('userManagement/resetState')">
+        <v-btn icon color="error" @click="logout">
           <v-icon>mdi-logout-variant</v-icon>
         </v-btn>
         <v-btn icon @click="$emit('close-dialog')"><v-icon>mdi-content-save</v-icon></v-btn>
@@ -57,6 +57,11 @@ export default {
   computed: {
     hrBorderTopWidth() {
       return this.$vuetify.breakpoint.mdAndDown ? "3px" : "0";
+    },
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch("userManagement/logOut");
     },
   },
 };

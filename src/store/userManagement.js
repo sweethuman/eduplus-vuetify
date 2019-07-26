@@ -1,48 +1,35 @@
+import { auth, firestore } from "../firebase";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import { firestoreAction } from "vuexfire";
+
 export default {
   namespaced: true,
   state: {
-    loggedIn: false,
-    currentUser: {
-      id: 0,
-      username: null,
-      name: null,
-      email: null,
-      learningStyle: null,
-    },
+    currentUser: null,
   },
-  mutations: {
-    setNewUser(state, payload) {
-      state.loggedIn = true;
-      state.currentUser.id = payload.id;
-      state.currentUser.username = payload.username;
-      state.currentUser.name = payload.name;
-      state.currentUser.forename = payload.forename;
-      state.currentUser.email = payload.email;
-      state.currentUser.learningStyle = payload.learningStyle;
-    },
-    updateLearningStyle(state, learningStyle) {
-      state.currentUser.learningStyle = learningStyle;
-    },
-    resetState(state) {
-      state.loggedIn = false;
-      state.currentUser = {
-        id: 0,
-        username: null,
-        name: null,
-        forename: null,
-        email: null,
-        learningStyle: null,
-      };
+  getters: {
+    loggedIn: state => {
+      return state.currentUser != null;
     },
   },
   actions: {
-    logIn({ commit, rootGetters }, payload) {
-      let result = rootGetters["userDatabase/getUserByUsernameOrEmail"](payload.loginId);
-      if (result == null) throw new Error("Username gresit");
-      if (result.password !== payload.password) throw new Error("Parola Gresita");
-      commit("setNewUser", result);
+    async logIn({ dispatch }, payload) {
+      try {
+        await auth.signInWithEmailAndPassword(payload.loginId, payload.password);
+        await dispatch("bindCurrentUser");
+      } catch (error) {
+        throw new Error(error.message);
+      }
     },
-    register({ commit, rootGetters }, payload) {
+    logOut: firestoreAction(async function({ unbindFirestoreRef }) {
+      await auth.signOut();
+      return unbindFirestoreRef("currentUser");
+    }),
+    bindCurrentUser: firestoreAction(function({ bindFirestoreRef }) {
+      return bindFirestoreRef("currentUser", firestore.collection("users").doc(auth.currentUser.uid));
+    }),
+    async register({ dispatch }, payload) {
       if (
         payload == null ||
         payload.username == null ||
@@ -52,41 +39,47 @@ export default {
         payload.password == null
       )
         throw new Error("Unul sau Mai multe campuri sunt goale");
-      if (rootGetters["userDatabase/checkIfEmailExists"](payload.email)) throw new Error("Email exista deja");
-      if (rootGetters["userDatabase/checkIfUsernameExists"](payload.username)) throw new Error("Username exista deja");
-      commit(
-        "userDatabase/addUser",
-        {
-          username: payload.username,
-          name: payload.name,
-          forename: payload.forename,
-          email: payload.email,
-          password: payload.password,
-        },
-        { root: true }
-      );
-    },
-    updateCurrentUser({ state, commit }, payload) {
-      const userToUpdate = {};
-      userToUpdate.id = state.currentUser.id;
-      userToUpdate.username = payload.username != null ? payload.username : state.currentUser.username;
-      userToUpdate.name = payload.name != null ? payload.name : state.currentUser.name;
-      userToUpdate.forename = payload.forename != null ? payload.forename : state.currentUser.forename;
-      userToUpdate.email = payload.email != null ? payload.email : state.currentUser.email;
-      commit("setNewUser", userToUpdate);
-      commit("userDatabase/updateUser", userToUpdate, { root: true });
-    },
-    updateCurrentPassword({ state, commit, rootGetters }, payload) {
-      let user = rootGetters["userDatabase/getUserById"](state.currentUser.id);
-      if (user == null) throw new Error("USER DOES NOT EXIST! CRITICAL ERROR!");
-      if (user.password !== payload.oldPassword) throw new Error("Old Password is Wrong!");
-      commit("userDatabase/updateUser", { id: state.currentUser.id, password: payload.newPassword }, { root: true });
-    },
-    updateLearningStyle({ state, commit }, learningStyle) {
-      commit("updateLearningStyle", learningStyle);
-      if (state.loggedIn) {
-        commit("userDatabase/updateUser", { id: state.currentUser.id, learningStyle: learningStyle }, { root: true });
+      try {
+        let userCredential = await auth.createUserWithEmailAndPassword(payload.email, payload.password);
+        await firestore
+          .collection("users")
+          .doc(userCredential.user.uid)
+          .set({
+            forename: payload.forename,
+            name: payload.name,
+            username: payload.username,
+            email: payload.email,
+          });
+        await userCredential.user.updateProfile({ displayName: payload.name + " " + payload.forename });
+        await dispatch("bindCurrentUser");
+      } catch (error) {
+        throw new Error(error.message);
       }
     },
+    updateCurrentUser: firestoreAction(async function(context, payload) {
+      await firestore
+        .collection("users")
+        .doc(auth.currentUser.uid)
+        .update(payload);
+    }),
+    async updateCurrentPassword({ state }, payload) {
+      let credential = firebase.auth.EmailAuthProvider.credential(state.currentUser.email, payload.oldPassword);
+      //TODO handle errors as they come as error codes not error messages and the method error handling this method might not be able to show the appropriate message
+      // currently it shows any error as a network error
+      await auth.currentUser.reauthenticateWithCredential(credential);
+      //TODO same here as above
+      await auth.currentUser.updatePassword(payload.newPassword);
+    },
+    updateLearningStyle: firestoreAction(async function(context, learningStyle) {
+      if (auth.currentUser) {
+        await firestore
+          .collection("users")
+          .doc(auth.currentUser.uid)
+          .update({ learningStyle: learningStyle });
+      } else {
+        this.$log.warn("User not logged in");
+        //TODO add a way to temporarily store the learning style even if the user is not logged in
+      }
+    }),
   },
 };

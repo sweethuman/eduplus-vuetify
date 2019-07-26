@@ -26,7 +26,7 @@
                 v-model="loginForm.loginId"
                 prepend-icon="mdi-account"
                 name="loginId"
-                label="Username sau Email"
+                label="Email"
                 type="text"
                 color="orange"
                 :error-messages="loginIdErrors"
@@ -148,32 +148,24 @@
 </template>
 
 <script>
-import { required, minLength, email, alphaNum, sameAs, or, and, helpers } from "vuelidate/lib/validators";
+import { required, minLength, email, alphaNum, sameAs } from "vuelidate/lib/validators";
 import { formUtilitiesMixin } from "../../../mixins/formUtilitiesMixin";
 import { utilityMethodsMixin } from "../../../mixins/utilitiesMixins";
 import { genericErrorMethodsMixin } from "../../../mixins/genericErrorMethodsMixin";
-
-function usernameNotExist(value) {
-  return !helpers.req(value) || !this.$store.getters["userDatabase/checkIfUsernameExists"](value);
-}
-
-function emailNotExist(value) {
-  return !helpers.req(value) || !this.$store.getters["userDatabase/checkIfEmailExists"](value);
-}
 
 export default {
   name: "LogIn",
   mixins: [formUtilitiesMixin, genericErrorMethodsMixin, utilityMethodsMixin],
   validations: {
     loginForm: {
-      loginId: { required, emailOrUsername: or(email, and(minLength(5), alphaNum)) },
+      loginId: { required, email },
       loginPassword: { required, minLength: minLength(8) },
     },
     registerForm: {
-      registerUsername: { required, minLength: minLength(5), alphaNum, usernameNotExist },
+      registerUsername: { required, minLength: minLength(5), alphaNum },
       registerName: { required },
       registerForename: { required },
-      registerEmail: { required, email, emailNotExist },
+      registerEmail: { required, email },
       registerPassword: { required, minLength: minLength(8) },
       registerPasswordRepeat: { required, sameAsRegisterPassword: sameAs("registerPassword") },
     },
@@ -204,8 +196,8 @@ export default {
     loginIdErrors() {
       const errors = [];
       if (!this.$v.loginForm.loginId.$dirty) return errors;
-      !this.$v.loginForm.loginId.required && errors.push("Username sau Email este necesar");
-      !this.$v.loginForm.loginId.emailOrUsername && errors.push("Username sau Email invalid");
+      !this.$v.loginForm.loginId.required && errors.push("Email este necesar");
+      !this.$v.loginForm.loginId.email && errors.push("Email invalid");
       return errors;
     },
     loginPasswordErrors() {
@@ -218,7 +210,7 @@ export default {
     registerUsernameErrors() {
       const errors = [];
       !this.$v.registerForm.registerUsername.alphaNum && errors.push("Trebuie sa fie doar cifre si/sau numere");
-      !this.$v.registerForm.registerUsername.usernameNotExist && errors.push("Username deja prezent");
+      //here comes a check for already present username when this is implemented
       if (!this.$v.registerForm.registerUsername.$dirty) return errors;
       !this.$v.registerForm.registerUsername.minLength && errors.push("Trebuie sa aiba minim 5 caractere");
       !this.$v.registerForm.registerUsername.required && errors.push("Numele contului este necesar");
@@ -226,7 +218,7 @@ export default {
     },
     registerEmailErrors() {
       const errors = [];
-      !this.$v.registerForm.registerEmail.emailNotExist && errors.push("Email deja prezent");
+      // here comes a check for an already existing email in the database(i think you can get this from auth component)
       if (!this.$v.registerForm.registerEmail.$dirty) return errors;
       !this.$v.registerForm.registerEmail.email && errors.push("Trebuie sa fie un Email Valid");
       !this.$v.registerForm.registerEmail.required && errors.push("Emailul este necesar");
@@ -264,7 +256,7 @@ export default {
           password: this.loginForm.loginPassword,
         });
         this.hideError();
-        this.clearObjFields(this.loginForm);
+        this.clearObjStringFields(this.loginForm);
         this.$emit("close-dialog");
         this.$v.loginForm.$reset();
       } catch (e) {
@@ -285,12 +277,8 @@ export default {
           email: this.registerForm.registerEmail,
           password: this.registerForm.registerPassword,
         });
-        await this.$store.dispatch("userManagement/logIn", {
-          loginId: this.registerForm.registerUsername,
-          password: this.registerForm.registerPassword,
-        });
         this.hideError();
-        this.clearObjFields(this.registerForm);
+        this.clearObjStringFields(this.registerForm);
         this.$emit("close-dialog");
         this.$v.registerForm.$reset();
       } catch (e) {

@@ -2,7 +2,7 @@
   <v-dialog
     key="AccountDialog"
     v-model="dialog"
-    :max-width="$store.state.userManagement.loggedIn ? '70%' : '500'"
+    :max-width="$store.getters['userManagement/loggedIn'] ? '70%' : '500'"
     :fullscreen="!this.$vuetify.breakpoint.mdAndUp"
     :transition="this.$vuetify.breakpoint.mdAndUp ? 'dialog-transition' : 'dialog-bottom-transition'"
     lazy
@@ -18,6 +18,8 @@
 <script>
 import LoginButton from "./components/buttons/LoginButton";
 import MyProfileButton from "./components/buttons/MyProfileButton";
+import { auth } from "../../firebase";
+
 export default {
   name: "AccountDialog",
   components: {
@@ -41,11 +43,22 @@ export default {
   },
   computed: {
     activeComponent() {
-      return this.$store.state.userManagement.loggedIn ? "MyProfile" : "LogIn";
+      return this.$store.getters["userManagement/loggedIn"] ? "MyProfile" : "LogIn";
     },
     activeButton() {
-      return this.$store.state.userManagement.loggedIn ? "MyProfileButton" : "LoginButton";
+      return this.$store.getters["userManagement/loggedIn"] ? "MyProfileButton" : "LoginButton";
     },
+  },
+  async created() {
+    let that = this;
+    let unsubscribe = auth.onAuthStateChanged(async function(user) {
+      if (user) {
+        that.$log.debug("logging in already logged in user");
+        await that.$store.dispatch("userManagement/bindCurrentUser");
+      }
+      unsubscribe();
+      that.$log.debug("unsubscribed from onAuthStateChanged in AccountDialog");
+    });
   },
 };
 </script>

@@ -3,6 +3,7 @@
     <v-layout align-center fill-height justify-center>
       <v-flex grow>
         <v-alert
+          v-if="$store.getters['userManagement/loggedIn']"
           :value="$store.state.userManagement.currentUser.learningStyle == null"
           type="warning"
           class="mt-0 large-child-icon"
@@ -103,7 +104,8 @@ export default {
         chapterId +
         "/" +
         lessonId +
-        (this.$store.state.userManagement.currentUser.learningStyle != null
+        (this.$store.getters["userManagement/loggedIn"] &&
+        this.$store.state.userManagement.currentUser.learningStyle != null
           ? "?style=" + this.$store.state.userManagement.currentUser.learningStyle
           : "")
       );
