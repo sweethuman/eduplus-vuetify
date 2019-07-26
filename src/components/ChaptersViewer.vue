@@ -80,7 +80,7 @@
 import romanize from "romanize";
 import GoToExamButton from "./core/GoToExamButton";
 export default {
-  name: "DisciplineViewer",
+  name: "ChaptersViewer",
   components: { GoToExamButton },
   props: {
     data: {
