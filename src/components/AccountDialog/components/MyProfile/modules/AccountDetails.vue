@@ -130,6 +130,8 @@ import { genericErrorMethodsMixin } from "../../../../../mixins/genericErrorMeth
 import { utilityMethodsMixin } from "../../../../../mixins/utilitiesMixins";
 import { formUtilitiesMixin } from "../../../../../mixins/formUtilitiesMixin";
 import EditButtons from "../../../../core/EditButtons";
+import { mapState } from "vuex";
+
 function otherUsernameNotExist(value) {
   return this.$store.state.userManagement.currentUser.username === value
     ? true
@@ -222,9 +224,15 @@ export default {
         errors.push("Trebuie sa fie identica cu parola noua");
       return errors;
     },
+    ...mapState("userManagement", ["currentUser"]),
   },
-  created() {
-    this.loadAccountData();
+  watch: {
+    currentUser: {
+      immediate: true,
+      handler() {
+        this.loadAccountData();
+      },
+    },
   },
   methods: {
     loadAccountData() {
@@ -243,7 +251,6 @@ export default {
         return;
       }
       await this.$store.dispatch("userManagement/updateCurrentUser", this.accountInfo);
-      this.loadAccountData();
     },
     displayError(message) {
       this.alert.message = message;
