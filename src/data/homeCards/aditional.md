@@ -1,3 +1,12 @@
-- Bareme + variante de bac
-
-Acest site, fiind in stare Alpha, nu contine continut aditional (in unele cazuri nu contine nici macar continut normal :D).
+-	Bareme + variante de bac:
+    * [2013](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2013.rar?alt=media&token=4a061c3e-bf47-4667-a4ae-6d10fd6aae44)
+    * [2014](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2014.rar?alt=media&token=1ccd2f24-5a62-49d3-9739-0e7b64365025)
+    * [2015](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2015.rar?alt=media&token=694d24d1-c2ea-43e8-948c-3df6d15ceee0)
+    * [2016](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2016.rar?alt=media&token=7d9ba549-b3bc-4293-821d-c34a7d0d442c)
+    * [2017](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2017.rar?alt=media&token=5de7e2d4-66fc-4b29-869f-93cc20bf9cf2)
+    * [2018](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2018.rar?alt=media&token=68334750-8b80-4abf-8913-143a2fa16d71)
+    * [2019](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2F2019.rar?alt=media&token=1f514a3f-9467-4243-b166-a18fc2acf0fa)
+-   [Programa de bacalaureat](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2FBacPsiho.pdf?alt=media&token=8f3022d7-c3b9-42a3-8b18-3a44eee95751)
+-	[Stilurile de învăţare](https://firebasestorage.googleapis.com/v0/b/eduplus-d675a.appspot.com/o/public_downloads%2FStiluri.docx?alt=media&token=28b74ee3-e55c-4f5e-ae47-e746b269e11d)
+-	Ricki Linksman – [cărţi](https://www.goodreads.com/author/show/362814.Ricki_Linksman)
+-	Ricki Linksman – [interviu](http://voyagechicago.com/interview/meet-ricki-linksman-national-reading-diagnostics-institute-keys-learning-western-suburbs-napervillelisle-area/)
