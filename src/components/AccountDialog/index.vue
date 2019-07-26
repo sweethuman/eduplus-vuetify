@@ -18,6 +18,8 @@
 <script>
 import LoginButton from "./components/buttons/LoginButton";
 import MyProfileButton from "./components/buttons/MyProfileButton";
+import { auth } from "../../firebase";
+
 export default {
   name: "AccountDialog",
   components: {
@@ -46,6 +48,17 @@ export default {
     activeButton() {
       return this.$store.getters["userManagement/loggedIn"] ? "MyProfileButton" : "LoginButton";
     },
+  },
+  async created() {
+    let that = this;
+    let unsubscribe = auth.onAuthStateChanged(async function(user) {
+      if (user) {
+        that.$log.debug("logging in already logged in user");
+        await that.$store.dispatch("userManagement/bindCurrentUser");
+      }
+      unsubscribe();
+      that.$log.debug("unsubscribed from onAuthStateChanged in AccountDialog");
+    });
   },
 };
 </script>
