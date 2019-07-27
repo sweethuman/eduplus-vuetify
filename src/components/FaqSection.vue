@@ -46,12 +46,16 @@
 </template>
 
 <script>
+import { firestore } from "../firebase";
+
 export default {
   name: "FaqSection",
   data() {
     return {
       slide: 0,
-      items: [],
+      faq: {
+        items: [],
+      },
     };
   },
   computed: {
@@ -59,20 +63,16 @@ export default {
       let i = 0;
       let itemPerRow = this.$vuetify.breakpoint.mdAndUp ? 3 : 1;
       let arrayOfSlides = [];
-      while (i < this.items.length) {
+      while (i < this.faq.items.length) {
         let a = [];
-        for (let j = 0; j < itemPerRow && i + j < this.items.length; j++) {
-          a.push(this.items[i + j]);
+        for (let j = 0; j < itemPerRow && i + j < this.faq.items.length; j++) {
+          a.push(this.faq.items[i + j]);
         }
         arrayOfSlides.push(a);
         i += itemPerRow;
       }
       return arrayOfSlides;
     },
-  },
-  async created() {
-    let jsonFaq = await import("../data/faq");
-    this.items = jsonFaq.default;
   },
   methods: {
     prev() {
@@ -85,6 +85,9 @@ export default {
       let itemLength = 12 / numberOfItems;
       return ["md" + itemLength];
     },
+  },
+  firestore: {
+    faq: firestore.collection("public_data").doc("faq"),
   },
 };
 </script>
