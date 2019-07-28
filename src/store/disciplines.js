@@ -1,5 +1,8 @@
 import _ from "lodash";
 import reflectPromise from "../jsUtilities/promiseReflect";
+import { firestore } from "../firebase";
+import { firestoreAction } from "vuexfire";
+
 export default {
   namespaced: true,
   state: {
@@ -51,10 +54,9 @@ export default {
     },
   },
   actions: {
-    async loadDisciplines({ commit }) {
-      let disciplines = await import("../data/disciplines");
-      commit("setDisciplines", disciplines.default);
-    },
+    loadDisciplines: firestoreAction(function({ bindFirestoreRef }) {
+      return bindFirestoreRef("disciplines", firestore.collection("disciplines"));
+    }),
     async getDisciplineChapters({ commit }, discipline) {
       let chapters = await import(`../data/chapters/${discipline}.json`);
       let sendPayload = {};

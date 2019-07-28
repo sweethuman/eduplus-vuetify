@@ -39,7 +39,7 @@ export default {
     },
     generateLink(index) {
       let that = this.$store.state.disciplines.disciplines[index];
-      return "/chapters/" + that.name;
+      return "/chapters/" + that.id;
     },
   },
 };
