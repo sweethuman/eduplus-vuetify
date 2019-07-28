@@ -74,6 +74,9 @@ export default {
       return arrayOfSlides;
     },
   },
+  firestore: {
+    faq: firestore.collection("public_data").doc("faq"),
+  },
   methods: {
     prev() {
       this.slide = this.slide - 1 < 0 ? this.structuredItems.length - 1 : this.slide - 1;
@@ -85,9 +88,6 @@ export default {
       let itemLength = 12 / numberOfItems;
       return ["md" + itemLength];
     },
-  },
-  firestore: {
-    faq: firestore.collection("public_data").doc("faq"),
   },
 };
 </script>
