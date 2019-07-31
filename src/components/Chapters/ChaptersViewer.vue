@@ -47,13 +47,13 @@
                     <v-icon color="primary">$vuetify.icons.expand</v-icon>
                   </template>
                   <template #header>
-                    <div>{{ romanization(i + 1) }}.{{ j + 1 }}. {{ lesson.name }}</div>
+                    <div>{{ romanization(i + 1) }}.{{ j + 1 }}. {{ lesson.title }}</div>
                   </template>
                   <v-card>
                     <v-card-text>
                       {{ lesson.description }}
                     </v-card-text>
-                    <v-card-actions v-if="lesson.styles != null && lesson.styles.length !== 0">
+                    <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn
                         dark
@@ -78,7 +78,7 @@
 
 <script>
 import romanize from "romanize";
-import GoToExamButton from "./core/GoToExamButton";
+import GoToExamButton from "../core/GoToExamButton";
 export default {
   name: "ChaptersViewer",
   components: { GoToExamButton },
