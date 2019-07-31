@@ -109,6 +109,7 @@ import lessonStyles from "../enums/lessonStyles";
 import ReferencesItem from "../components/core/ReferencesItem";
 import GoToExamButton from "../components/core/GoToExamButton";
 import RenderAdvancedMarkdown from "../components/RenderAdvancedMarkdown";
+import { firestore } from "../firebase";
 
 export default {
   name: "Lesson",
@@ -149,38 +150,45 @@ export default {
     async loadLesson(routeObject) {
       this.$wait.start("loading lesson");
       try {
-        let jsonDataFile = await import(
-          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${routeObject.params.lesson}/data.json`
-        );
-        this.lessonTitle = jsonDataFile.name;
-        if (jsonDataFile.styles == null || jsonDataFile.styles.length === 0) {
-          this.markdown = "LECTIA NU PREZINTA CONTINUT{.display-3 .error}";
-          return;
-        }
-        let lessonObject = this._.find(jsonDataFile.styles, {
-          //NOTE defaults to visual because ALL LESSONS SHOULD HAS VISUAL STYLE
-          type: routeObject.query.style != null ? routeObject.query.style : lessonStyles.styles.VISUAL,
+        let discipline = routeObject.params.discipline;
+        let chapter = routeObject.params.chapter;
+        let lesson = routeObject.params.lesson;
+        await this.$store.dispatch("disciplines/loadLessons", {
+          discipline: discipline,
+          chapter: chapter,
         });
-        if (lessonObject == null) {
+        let lessonIndex = this._.findIndex(
+          this.$store.state.disciplines.lessons[discipline][chapter],
+          x => x.id === lesson
+        );
+        if (lessonIndex === -1) {
+          throw Error("Lectia Nu Exista");
+        }
+        let lessonObject = this.$store.state.disciplines.lessons[discipline][chapter][lessonIndex];
+        this.lessonTitle = lessonObject.title;
+        //Queries for the desired style, and if it doesn't exist, it will return false which the router will the redirect to the default link and then load the default style
+        let styleObject = await firestore
+          .collection(`/disciplines/${discipline}/chapters/${chapter}/lessons/${lesson}/styles`)
+          .doc(routeObject.query.style != null ? routeObject.query.style : lessonStyles.styles.VISUAL)
+          .get();
+        console.log(styleObject);
+        if (!styleObject.exists) {
           return false;
         }
-
+        let styleData = styleObject.data();
         //Load Additional Lesson Data
-        if (lessonObject.type === lessonStyles.styles.AUDIO || lessonObject.type === lessonStyles.styles.TACTILE)
-          this.lessonData.youtubeId = lessonObject["youtube-id"];
+        if (styleObject.id === lessonStyles.styles.AUDIO || styleObject.id === lessonStyles.styles.TACTILE)
+          this.lessonData.youtubeId = styleData["youtube-id"];
         else this.lessonData.youtubeId = null;
-        if (jsonDataFile["test-id"] != null) this.lessonData.testId = jsonDataFile["test-id"];
+        if (styleData["test-id"] != null) this.lessonData.testId = styleData["test-id"];
         else this.lessonData.testId = null;
-
-        let markdownFile = await import(
-          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${routeObject.params.lesson}/${lessonObject.source}`
-        );
         //NOTE used to be console log here
-        this.markdown = (await this.axios.get(markdownFile.default)).data;
+        this.markdown = styleData.source;
       } catch (e) {
         //NOTE used to be console log here
         //NOTE check between import error and actual error
         this.markdown = "LECTIA NU A FOST GASITA{.display-3 .error}";
+        this.$log.error(e);
       } finally {
         this.$wait.end("loading lesson");
       }
