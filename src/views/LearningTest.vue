@@ -157,10 +157,10 @@ export default {
           val = i;
         }
       }
-      if (val === 0) return lessonStyles.VISUAL;
-      if (val === 1) return lessonStyles.AUDIO;
-      if (val === 2) return lessonStyles.TACTILE;
-      if (val === 3) return lessonStyles.PUZZLE;
+      if (val === 0) return lessonStyles.styles.VISUAL;
+      if (val === 1) return lessonStyles.styles.AUDIO;
+      if (val === 2) return lessonStyles.styles.TACTILE;
+      if (val === 3) return lessonStyles.styles.PUZZLE;
     },
     async loadNextPage() {
       await this.$vuetify.goTo(0, { duration: 1000 });

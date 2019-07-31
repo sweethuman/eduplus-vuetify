@@ -105,7 +105,6 @@
 </template>
 
 <script>
-import markdownIt from "../jsUtilities/markdownIt";
 import lessonStyles from "../enums/lessonStyles";
 import ReferencesItem from "../components/core/ReferencesItem";
 import GoToExamButton from "../components/core/GoToExamButton";
@@ -136,13 +135,13 @@ export default {
   },
   async beforeRouteUpdate(to, from, next) {
     if ((await this.loadLesson(to)) === false) {
-      this.$showError("Acel stil nu exista momentan");
+      this.$showError(`Stilul ${lessonStyles.styleToText[to.query.style]} nu exista momentan`);
       next(false);
     } else next();
   },
   async created() {
     if ((await this.loadLesson(this.$route)) === false) {
-      this.$showError("Acel stil nu exista momentan");
+      this.$showError(`Stilul ${lessonStyles.styleToText[this.$route.query.style]} nu exista momentan`);
       this.$router.replace(this.$route.path);
     }
   },
@@ -151,9 +150,7 @@ export default {
       this.$wait.start("loading lesson");
       try {
         let jsonDataFile = await import(
-          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
-            routeObject.params.lesson
-          }/data.json`
+          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${routeObject.params.lesson}/data.json`
         );
         this.lessonTitle = jsonDataFile.name;
         if (jsonDataFile.styles == null || jsonDataFile.styles.length === 0) {
@@ -162,23 +159,21 @@ export default {
         }
         let lessonObject = this._.find(jsonDataFile.styles, {
           //NOTE defaults to visual because ALL LESSONS SHOULD HAS VISUAL STYLE
-          type: routeObject.query.style != null ? routeObject.query.style : lessonStyles.VISUAL,
+          type: routeObject.query.style != null ? routeObject.query.style : lessonStyles.styles.VISUAL,
         });
         if (lessonObject == null) {
           return false;
         }
 
         //Load Additional Lesson Data
-        if (lessonObject.type === lessonStyles.AUDIO || lessonObject.type === lessonStyles.TACTILE)
+        if (lessonObject.type === lessonStyles.styles.AUDIO || lessonObject.type === lessonStyles.styles.TACTILE)
           this.lessonData.youtubeId = lessonObject["youtube-id"];
         else this.lessonData.youtubeId = null;
         if (jsonDataFile["test-id"] != null) this.lessonData.testId = jsonDataFile["test-id"];
         else this.lessonData.testId = null;
 
         let markdownFile = await import(
-          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${
-            routeObject.params.lesson
-          }/${lessonObject.source}`
+          `../data/lessons/${routeObject.params.discipline}/${routeObject.params.chapter}/${routeObject.params.lesson}/${lessonObject.source}`
         );
         //NOTE used to be console log here
         this.markdown = (await this.axios.get(markdownFile.default)).data;
