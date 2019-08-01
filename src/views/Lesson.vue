@@ -72,9 +72,20 @@ export default {
   name: "Lesson",
   components: {
     //Webpack Dynamic Imports, this means they are only loaded only when they are used, saving on LoadTime and bandwidth
-    //TODO Add Loading Handlers like here: https://vuejs.org/v2/guide/components-dynamic-async.html#Handling-Loading-State
-    LessonViewer: () => import(/* webpackChunkName: "lessonViewer" */ "../components/Lesson/LessonViewer"),
-    ItemNotFound: () => import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
+    LessonViewer: () => ({
+      component: import(/* webpackChunkName: "lessonViewer" */ "../components/Lesson/LessonViewer"),
+      // A component to use while the async component is loading
+      loading: LessonSkeletonLoader,
+      // A component to use if the load fails
+      error: ErrorComponent,
+    }),
+    ItemNotFound: () => ({
+      component: import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
+      // A component to use while the async component is loading
+      loading: LessonSkeletonLoader,
+      // A component to use if the load fails
+      error: ErrorComponent,
+    }),
     LessonSkeletonLoader,
     ErrorComponent,
   },
