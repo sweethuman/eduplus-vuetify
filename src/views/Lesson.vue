@@ -10,7 +10,7 @@
       <v-btn
         fab
         dark
-        small
+        :small="!$vuetify.breakpoint.lgAndUp"
         color="green"
         :to="this.$route.path + '?style=visual'"
         active-class="v-btn--active lighten-2"
@@ -23,7 +23,7 @@
       <v-btn
         fab
         dark
-        small
+        :small="!$vuetify.breakpoint.lgAndUp"
         color="indigo"
         :to="this.$route.path + '?style=audio'"
         active-class="v-btn--active lighten-2"
@@ -35,7 +35,7 @@
       <v-btn
         fab
         dark
-        small
+        :small="!$vuetify.breakpoint.lgAndUp"
         color="red"
         :to="this.$route.path + '?style=tactile'"
         active-class="v-btn--active lighten-2"
@@ -47,7 +47,7 @@
       <v-btn
         fab
         dark
-        small
+        :small="!$vuetify.breakpoint.lgAndUp"
         color="purple"
         :to="this.$route.path + '?style=puzzle'"
         active-class="v-btn--active lighten-2"
