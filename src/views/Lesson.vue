@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fill-height>
     <v-speed-dial v-model="fab" fixed bottom right>
       <template #activator>
         <v-btn v-model="fab" class="soundcloud-gradient" dark fab :large="$vuetify.breakpoint.lgAndUp">
@@ -57,7 +57,9 @@
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
     </v-speed-dial>
-    <component :is="activeComponent" v-bind="activeComponentProps"></component>
+    <v-fade-transition mode="out-in">
+      <component :is="activeComponent" v-bind="activeComponentProps"></component>
+    </v-fade-transition>
   </v-container>
 </template>
 
