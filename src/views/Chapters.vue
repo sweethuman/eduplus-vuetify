@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height>
-    <component :is="activeComponent" v-bind="componentProps"></component>
+    <component :is="activeComponent" v-bind="activeComponentProps"></component>
   </v-container>
 </template>
 
@@ -9,6 +9,7 @@ import ChaptersSkeletonLoader from "../components/Chapters/ChaptersSkeletonLoade
 export default {
   name: "Chapters",
   components: {
+    //Webpack Dynamic Imports, this means they are only loaded only when they are used, saving on LoadTime and bandwidth
     ChaptersViewer: () => import(/* webpackChunkName: "chaptersViewer" */ "../components/Chapters/ChaptersViewer"),
     ItemNotFound: () => import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
     ChaptersSkeletonLoader,
@@ -31,8 +32,9 @@ export default {
     } catch (e) {
       this.$log.warn(e);
       //TODO add console logging or high order function here, it happens when the current discipline is not found, it isn't critical
+    } finally {
+      this.$wait.end("loading chapters");
     }
-    this.$wait.end("loading chapters");
     next();
   },
   computed: {
@@ -51,16 +53,9 @@ export default {
       if (this.$wait.waiting("loading chapters")) return "ChaptersSkeletonLoader";
       if (this.isReadyToLoadChapters) return "ChaptersViewer";
       return "ItemNotFound";
-      /*FIXME
-        ItemNotFound is returned when the lesson is not found in the lesson structure, this works,
-        because items are loaded first, but it should also be shown if setting the lesson structure fails,
-        idk if you should really do this, because lesson is still not loaded if throw error,
-        but there might be a case where it is in the structure but no chapters are present, or whateve,
-        delete this if you're not sure anymore
-       */
     },
     //Dynamically loads props for the selected component
-    componentProps() {
+    activeComponentProps() {
       //SkeletonLoader doesn't need any props
       if (this.$wait.waiting("loading chapters")) return {};
       //Returns Props for Chapter Viewer
