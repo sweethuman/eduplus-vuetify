@@ -33,7 +33,7 @@ export default {
   props: {
     text: {
       type: String,
-      required: true,
+      default: "Elemntul care trebuia sa apara a esuat. off :(",
     },
   },
   computed: {
