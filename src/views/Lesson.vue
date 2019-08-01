@@ -57,94 +57,127 @@
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
     </v-speed-dial>
-    <v-expand-transition>
-      <v-layout v-if="lessonData.youtubeId != null" align-center justify-center class="mb-3">
-        <v-flex md10 lg8>
-          <v-card class="pa-2">
-            <div class="youtube-container">
-              <div class="youtube-content">
-                <youtube
-                  :video-id="lessonData.youtubeId"
-                  :player-vars="playerVars"
-                  style="margin-bottom: -6px; width: 100%;height: 100%"
-                ></youtube>
-              </div>
-            </div>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-expand-transition>
-    <v-layout align-center justify-center>
-      <v-flex md10 lg8>
-        <v-card>
-          <v-card-text class="lesson-content">
-            <render-advanced-markdown :markdown="markdown"></render-advanced-markdown>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <v-divider class="my-5"></v-divider>
-    <v-layout align-center justify-center>
-      <v-flex md10 lg8>
-        <v-card class="pl-3">
-          <v-card-title primary-title class="display-3 font-italic font-weight-bold pb-0">
-            Referinte Lectie
-          </v-card-title>
-          <v-card-title class="pt-0 title">
-            Contine Teste, Materiale Sursa sau alte Materiale Utile ce au legatura cu lectia
-          </v-card-title>
-          <v-card-text class="pt-0">
-            <references-item v-if="lessonData.testId" icon="mdi-format-list-checks" title="Teste">
-              <go-to-exam-button :test-id="lessonData.testId" text="Primul Test"></go-to-exam-button>
-            </references-item>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+    <component :is="activeComponent" v-bind="activeComponentProps"></component>
   </v-container>
 </template>
 
 <script>
 import lessonStyles from "../enums/lessonStyles";
-import ReferencesItem from "../components/core/ReferencesItem";
-import GoToExamButton from "../components/core/GoToExamButton";
-import RenderAdvancedMarkdown from "../components/RenderAdvancedMarkdown";
 import { firestore } from "../firebase";
+import LessonSkeletonLoader from "../components/Lesson/LessonSkeletonLoader";
+import LessonLoadState from "../enums/LessonLoadState";
+import ErrorComponent from "../components/ErrorComponent";
 
 export default {
   name: "Lesson",
-  components: { ReferencesItem, GoToExamButton, RenderAdvancedMarkdown },
+  components: {
+    //Webpack Dynamic Imports, this means they are only loaded only when they are used, saving on LoadTime and bandwidth
+    //TODO Add Loading Handlers like here: https://vuejs.org/v2/guide/components-dynamic-async.html#Handling-Loading-State
+    LessonViewer: () => import(/* webpackChunkName: "lessonViewer" */ "../components/Lesson/LessonViewer"),
+    ItemNotFound: () => import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
+    LessonSkeletonLoader,
+    ErrorComponent,
+  },
   data() {
     return {
-      markdown: "",
       fab: false,
-      playerVars: {
-        origin: window.location.origin,
-      },
-
       lessonData: {
         youtubeId: null,
         testId: null,
+        markdown: "",
       },
       lessonTitle: "",
+      loadState: null,
     };
   },
   computed: {
     pageTitle() {
       return this.lessonTitle;
     },
+    activeComponent() {
+      if (this.$wait.waiting("loading lesson")) return "LessonSkeletonLoader";
+      if (this.loadState === LessonLoadState.NotExist || this.loadState === LessonLoadState.MissingContent)
+        return "ItemNotFound";
+      if (this.loadState === LessonLoadState.Loaded) return "LessonViewer";
+      return "ErrorComponent";
+    },
+    activeComponentProps() {
+      if (this.$wait.waiting("loading lesson")) return {};
+      if (this.loadState === LessonLoadState.NotExist) return { text: this.$route.params.lesson + " Nu Exista!" };
+      if (this.loadState === LessonLoadState.MissingContent)
+        return { text: this.lessonTitle + " Nu Prezinta Continut!" };
+      if (this.loadState === LessonLoadState.Loaded) return this.lessonData;
+      return { text: "Exista O Eroare Neasteptata" };
+    },
   },
+  /*We Have Three Rejected States
+  - Lesson Doesn't Exist
+  - Style Doesn't Exist ->  When Style is Specified
+  - Content is Missing -> When Style is Not Specified meaning DEFAULT URL, as a rule every lesson has to have at least VISUAL style
+   */
+  //Add a Loader here to Stop Loading Changes
   async beforeRouteUpdate(to, from, next) {
-    if ((await this.loadLesson(to)) === false) {
-      this.$showError(`Stilul ${lessonStyles.styleToText[to.query.style]} nu exista momentan`);
-      next(false);
-    } else next();
+    this.$wait.start("processing route");
+    let LoadState = await this.loadLesson(to);
+
+    //Before Loading I should show Loading Animation and then do the LoadState and other components
+    switch (LoadState) {
+      case LessonLoadState.NotExist:
+        this.loadState = LoadState;
+        this.$log.debug("Proceeding to: ", to.fullPath);
+        next();
+        break;
+      case LessonLoadState.MissingStyle:
+        if (to.query.style == null) {
+          this.loadState = LessonLoadState.MissingContent;
+          next();
+        } else if (to.path === from.path) {
+          this.$showError(`Stilul ${lessonStyles.styleToText[to.query.style]} nu exista momentan`);
+          this.$log.debug("Canceled going to: ", to.fullPath);
+          next(false);
+        } else {
+          this.$showError(`Stilul ${lessonStyles.styleToText[to.query.style]} nu exista momentan`);
+          this.$log.debug("Going to the default of the path: ", to.fullPath);
+          next(to.path);
+        }
+        break;
+      case LessonLoadState.Loaded:
+        this.loadState = LessonLoadState.Loaded;
+        this.$log.debug("Proceeding to: ", to.fullPath);
+        next();
+        break;
+      default:
+        this.$log.warning("Unhandled State");
+        this.loadState = null;
+        next();
+    }
+    this.$wait.end("processing route");
   },
   async created() {
-    if ((await this.loadLesson(this.$route)) === false) {
-      this.$showError(`Stilul ${lessonStyles.styleToText[this.$route.query.style]} nu exista momentan`);
-      this.$router.replace(this.$route.path);
+    this.$wait.start("processing route");
+    let LoadState = await this.loadLesson(this.$route);
+
+    switch (LoadState) {
+      case LessonLoadState.NotExist:
+        this.loadState = LoadState;
+        break;
+      case LessonLoadState.MissingStyle:
+        if (this.$route.query.style == null) {
+          this.loadState = LessonLoadState.MissingContent;
+        } else {
+          this.$showError(`Stilul ${lessonStyles.styleToText[this.$route.query.style]} nu exista momentan`);
+          this.$log.debug("Going to the default of the path: ", this.$route.fullPath);
+          this.$router.replace(this.$route.path);
+        }
+        break;
+      case LessonLoadState.Loaded:
+        this.loadState = LessonLoadState.Loaded;
+        break;
+      default:
+        this.$log.warning("Unhandled State");
+        this.loadState = null;
     }
+    this.$wait.end("processing route");
   },
   methods: {
     async loadLesson(routeObject) {
@@ -162,176 +195,35 @@ export default {
           x => x.id === lesson
         );
         if (lessonIndex === -1) {
-          throw Error("Lectia Nu Exista");
+          return LessonLoadState.NotExist;
         }
         let lessonObject = this.$store.state.disciplines.lessons[discipline][chapter][lessonIndex];
         this.lessonTitle = lessonObject.title;
-        //Queries for the desired style, and if it doesn't exist, it will return false which the router will the redirect to the default link and then load the default style
+        //Queries for the desired style, and if it doesn't exist, it will return MissingStyle which the router will then redirect to the default link and then load the default style
         let styleObject = await firestore
           .collection(`/disciplines/${discipline}/chapters/${chapter}/lessons/${lesson}/styles`)
           .doc(routeObject.query.style != null ? routeObject.query.style : lessonStyles.styles.VISUAL)
           .get();
-        console.log(styleObject);
         if (!styleObject.exists) {
-          return false;
+          return LessonLoadState.MissingStyle;
         }
         let styleData = styleObject.data();
         //Load Additional Lesson Data
         if (styleObject.id === lessonStyles.styles.AUDIO || styleObject.id === lessonStyles.styles.TACTILE)
           this.lessonData.youtubeId = styleData["youtube-id"];
         else this.lessonData.youtubeId = null;
-        if (styleData["test-id"] != null) this.lessonData.testId = styleData["test-id"];
+        if (lessonObject["test-id"] != null) this.lessonData.testId = lessonObject["test-id"];
         else this.lessonData.testId = null;
         //NOTE used to be console log here
-        this.markdown = styleData.source;
+        this.lessonData.markdown = styleData.source;
       } catch (e) {
-        //NOTE used to be console log here
-        //NOTE check between import error and actual error
-        this.markdown = "LECTIA NU A FOST GASITA{.display-3 .error}";
         this.$log.error(e);
+        return null;
       } finally {
         this.$wait.end("loading lesson");
       }
+      return LessonLoadState.Loaded;
     },
   },
 };
 </script>
-
-<style lang="scss">
-.lesson-content {
-  margin: 0 auto;
-  line-height: 1;
-  padding: 30px;
-  font-size: 18px;
-  p {
-    line-height: 150%;
-    max-width: 960px;
-    font-weight: 400;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: 400;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    margin-bottom: 25px;
-    padding: 0;
-  }
-
-  h1 {
-    font-size: 300%;
-    padding: 0;
-    font-variant: small-caps;
-  }
-
-  h2 {
-    font-size: 150%;
-  }
-
-  h3 {
-    font-size: 120%;
-  }
-  h4 {
-    font-size: 100%;
-    font-variant: small-caps;
-  }
-  h5 {
-    font-size: 80%;
-    font-weight: 100;
-  }
-
-  h6 {
-    font-size: 80%;
-    font-weight: 100;
-    color: red;
-    font-variant: small-caps;
-  }
-  ul,
-  ol {
-    padding: 0;
-    margin: 0 0 0 50px;
-  }
-  ul {
-    list-style-type: square;
-  }
-
-  li {
-    line-height: 150%;
-  }
-  li ul,
-  li ul {
-    margin-left: 24px;
-  }
-
-  li > p {
-    margin-bottom: 0;
-  }
-
-  pre {
-    padding: 0 24px;
-    white-space: pre-wrap;
-  }
-  code {
-    font-family: Consolas, Monaco, Andale Mono, monospace;
-    line-height: 1.5;
-    font-size: 13px;
-  }
-  aside {
-    display: block;
-    float: right;
-    width: 390px;
-  }
-  blockquote {
-    border-left: 0.5em solid #eee;
-    padding: 0 1em;
-    margin-left: 0;
-    max-width: 476px;
-    cite {
-      line-height: 20px;
-      color: #bfbfbf;
-    }
-    cite:before {
-      content: "\2014 \00A0";
-    }
-    p {
-      max-width: 460px;
-    }
-  }
-  hr {
-    text-align: left;
-    margin: 0 auto 0 0;
-  }
-
-  .titlu {
-    color: lightcoral;
-  }
-  .emph {
-    text-decoration: underline;
-    color: red;
-  }
-}
-</style>
-
-<style scoped>
-.youtube-container {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-}
-
-.youtube-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-</style>
