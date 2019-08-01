@@ -1,4 +1,0 @@
-Platforma Edu Plus ajută elevii să înveţe la materiile pentru examenul de bacalaureat într-un mod unic: toate lecţiile sunt adaptate nevoilor personale ale utilizatorului, care sunt determinate cu ajutorul chestionarului de identificare a stilului de învăţare.
-După completarea chestionarului şi aflarea rezultatului, elevul poate selecta diverse lecţii din disciplinele de bacalaureat, pentru a studia în baza rezultatului determinat de  chestionarul.
-Conform teoriei lui Ricki Linksman exista patru stiluri de învăţare, deci patru posibilităţi pe care noi le propunem elevilor pentru învăţare: Stilul Vizual, Stilul Auditiv, Stilul Tactil si Stilul Kinestezic. Fiecare stil este caracterizat de anumite elemente ce îl avantajează, precum şi de elemente ce împiedică sau încetineşte învăţarea optimă.
-Platforma Edu Plus conţine material adaptat, care să avantajeze fiecare stil de învăţare.
