@@ -95,14 +95,14 @@ export default {
       return this.lessonTitle;
     },
     activeComponent() {
-      if (this.$wait.waiting("loading lesson")) return "LessonSkeletonLoader";
+      if (this.$wait.waiting(["loading lesson", "processing route"])) return "LessonSkeletonLoader";
       if (this.loadState === LessonLoadState.NotExist || this.loadState === LessonLoadState.MissingContent)
         return "ItemNotFound";
       if (this.loadState === LessonLoadState.Loaded) return "LessonViewer";
       return "ErrorComponent";
     },
     activeComponentProps() {
-      if (this.$wait.waiting("loading lesson")) return {};
+      if (this.$wait.waiting(["loading lesson", "processing route"])) return {};
       if (this.loadState === LessonLoadState.NotExist) return { text: this.$route.params.lesson + " Nu Exista!" };
       if (this.loadState === LessonLoadState.MissingContent)
         return { text: this.lessonTitle + " Nu Prezinta Continut!" };
