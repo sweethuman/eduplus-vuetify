@@ -5,7 +5,7 @@
         <v-container grid-list-lg fluid class="pa-0">
           <v-layout wrap>
             <v-flex v-for="i in $store.state.disciplines.disciplines.length" :key="i" xs12 sm6 md6>
-              <content-card :round="true" :content="generateConent(i - 1)" :to="generateLink(i - 1)"></content-card>
+              <content-card :round="true" :content="generateContent(i - 1)" :to="generateLink(i - 1)"></content-card>
             </v-flex>
           </v-layout>
         </v-container>
@@ -33,13 +33,13 @@ export default {
     this.$wait.end("loading disciplines");
   },
   methods: {
-    generateConent(index) {
+    generateContent(index) {
       let that = this.$store.state.disciplines.disciplines[index];
       return new CardContent(that.title, that.description, that.image + "&w=1000", that.image + "&w=200&q=80");
     },
     generateLink(index) {
       let that = this.$store.state.disciplines.disciplines[index];
-      return "/chapters/" + that.name;
+      return "/chapters/" + that.id;
     },
   },
 };
