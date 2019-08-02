@@ -38,9 +38,6 @@
             </template>
             <!--            TODO alignment of item needs to be improved-->
             <v-card>
-              <v-card-title v-if="data[i]['test-id']" primary-title class="align-self-center ml-4">
-                <go-to-exam-button :test-id="data[i]['test-id']" text="Examen Capitol"></go-to-exam-button>
-              </v-card-title>
               <v-expansion-panel popout>
                 <v-expansion-panel-content v-for="(lesson, j) in chapter.lessons" :key="j" ripple lazy>
                   <template #actions>
@@ -68,6 +65,9 @@
                   </v-card>
                 </v-expansion-panel-content>
               </v-expansion-panel>
+              <v-card-title v-if="data[i]['test-id']" primary-title class="align-self-center ml-4">
+                <go-to-exam-button :test-id="data[i]['test-id']" text="Examen Capitol"></go-to-exam-button>
+              </v-card-title>
             </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
