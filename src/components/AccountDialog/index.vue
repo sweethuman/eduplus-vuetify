@@ -15,26 +15,35 @@
     <component :is="activeComponent" @close-dialog="dialog = false" />
   </v-dialog>
 </template>
+
 <script>
 import LoginButton from "./components/buttons/LoginButton";
 import MyProfileButton from "./components/buttons/MyProfileButton";
+import ErrorComponent from "../ErrorComponent";
+import AccountSkeletonFormLoader from "./components/AccountSkeletonFormLoader";
 import { auth } from "../../firebase";
 
 export default {
   name: "AccountDialog",
   components: {
-    LogIn: () =>
-      import(
-        /* webpackChunkName: 'login' */
-        "./components/LogIn"
-      ),
-    MyProfile: () =>
-      import(
-        /* webpackChunkName: 'myProfile' */
-        "./components/MyProfile"
-      ),
+    LogIn: () => ({
+      component: import(/* webpackChunkName: 'login' */ "./components/LogIn"),
+      // A component to use while the async component is loading
+      loading: AccountSkeletonFormLoader,
+      // A component to use if the load fails
+      error: ErrorComponent,
+    }),
+    MyProfile: () => ({
+      component: import(/* webpackChunkName: 'myProfile' */ "./components/MyProfile"),
+      // A component to use while the async component is loading
+      loading: AccountSkeletonFormLoader,
+      // A component to use if the load fails
+      error: ErrorComponent,
+    }),
     LoginButton,
     MyProfileButton,
+    ErrorComponent,
+    AccountSkeletonFormLoader,
   },
   data() {
     return {
