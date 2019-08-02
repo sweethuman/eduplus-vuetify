@@ -2,27 +2,34 @@
   <v-layout align-center justify-center>
     <v-flex shrink>
       <v-btn
-        large
+        :large="$vuetify.breakpoint.mdAndUp"
         round
         :class="previousButtonClass"
         :dark="!previousDisabled"
         :to="previousButtonLink"
         :disabled="previousDisabled"
       >
-        <v-icon left>mdi-chevron-left</v-icon>
-        Inapoi
+        <v-icon :left="!$vuetify.breakpoint.xsOnly">mdi-chevron-left</v-icon>
+        {{ returnEmptyStringOnlyOnXS("Inapoi") }}
       </v-btn>
     </v-flex>
     <v-flex shrink>
-      <v-btn large round color="#ff4e50" dark :to="allButtonLink">
-        <v-icon left>mdi-format-list-checkbox</v-icon>
-        Toate
+      <v-btn :large="$vuetify.breakpoint.mdAndUp" round color="#ff4e50" dark :to="allButtonLink">
+        <v-icon :left="!$vuetify.breakpoint.xsOnly">mdi-format-list-checkbox</v-icon>
+        {{ returnEmptyStringOnlyOnXS("Toate") }}
       </v-btn>
     </v-flex>
     <v-flex shrink>
-      <v-btn large round :class="nextButtonClass" :dark="!nextDisabled" :to="nextButtonLink" :disabled="nextDisabled">
-        Inainte
-        <v-icon right>mdi-chevron-right</v-icon>
+      <v-btn
+        :large="$vuetify.breakpoint.mdAndUp"
+        round
+        :class="nextButtonClass"
+        :dark="!nextDisabled"
+        :to="nextButtonLink"
+        :disabled="nextDisabled"
+      >
+        {{ returnEmptyStringOnlyOnXS("Inainte") }}
+        <v-icon :right="!$vuetify.breakpoint.xsOnly">mdi-chevron-right</v-icon>
       </v-btn>
     </v-flex>
   </v-layout>
@@ -88,6 +95,14 @@ export default {
         "orange-gradient-reversed": !this.nextDisabled,
         "disabled-button": this.nextDisabled,
       };
+    },
+  },
+  methods: {
+    returnEmptyStringOnlyOnXS(text) {
+      if (this.$vuetify.breakpoint.xsOnly) {
+        return "";
+      }
+      return text;
     },
   },
 };
