@@ -6,13 +6,27 @@
 
 <script>
 import ChaptersSkeletonLoader from "../components/Chapters/ChaptersSkeletonLoader";
+import ErrorComponent from "../components/ErrorComponent";
 export default {
   name: "Chapters",
   components: {
     //Webpack Dynamic Imports, this means they are only loaded only when they are used, saving on LoadTime and bandwidth
-    ChaptersViewer: () => import(/* webpackChunkName: "chaptersViewer" */ "../components/Chapters/ChaptersViewer"),
-    ItemNotFound: () => import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
+    ChaptersViewer: () => ({
+      component: import(/* webpackChunkName: "chaptersViewer" */ "../components/Chapters/ChaptersViewer"),
+      // A component to use while the async component is loading
+      loading: ChaptersSkeletonLoader,
+      // A component to use if the load fails
+      error: ErrorComponent,
+    }),
+    ItemNotFound: () => ({
+      component: import(/* webpackChunkName: "itemNotFound" */ "../components/ItemNotFound"),
+      // A component to use while the async component is loading
+      loading: ChaptersSkeletonLoader,
+      // A component to use if the load fails
+      error: ErrorComponent,
+    }),
     ChaptersSkeletonLoader,
+    ErrorComponent,
   },
   //needed to react to route change, to reload data on route change
   async beforeRouteUpdate(to, from, next) {
