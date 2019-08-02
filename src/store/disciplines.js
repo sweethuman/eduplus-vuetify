@@ -37,6 +37,12 @@ export default {
         ],
       },
     },
+    currentLessonIndex: 0,
+  },
+  mutations: {
+    changeCurrentLessonIndex(state, newIndex) {
+      state.currentLessonIndex = newIndex;
+    },
   },
   getters: {
     isReadyToLoadChapters: state => disciplineName => {

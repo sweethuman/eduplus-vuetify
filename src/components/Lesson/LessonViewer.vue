@@ -1,5 +1,6 @@
 <template>
   <v-layout column>
+    <navigation-buttons class="mb-3"></navigation-buttons>
     <v-expand-transition>
       <v-layout v-if="youtubeId != null" align-center justify-center class="mb-3">
         <v-flex md10 lg8>
@@ -28,7 +29,9 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-divider class="my-5"></v-divider>
+    <v-divider class="mt-5 mb-3"></v-divider>
+    <navigation-buttons></navigation-buttons>
+    <v-divider class="mb-5 mt-3"></v-divider>
     <v-layout align-center justify-center>
       <v-flex md10 lg8>
         <v-card class="pl-3">
@@ -53,12 +56,14 @@
 import RenderAdvancedMarkdown from "../RenderAdvancedMarkdown";
 import ReferencesItem from "../core/ReferencesItem";
 import GoToExamButton from "../core/GoToExamButton";
+import NavigationButtons from "./NavigationButtons";
 export default {
   name: "LessonViewer",
   components: {
     RenderAdvancedMarkdown,
     ReferencesItem,
     GoToExamButton,
+    NavigationButtons,
   },
   props: {
     markdown: {

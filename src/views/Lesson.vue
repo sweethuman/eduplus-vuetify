@@ -210,6 +210,7 @@ export default {
         if (lessonIndex === -1) {
           return LessonLoadState.NotExist;
         }
+        this.$store.commit("disciplines/changeCurrentLessonIndex", lessonIndex);
         let lessonObject = this.$store.state.disciplines.lessons[discipline][chapter][lessonIndex];
         this.lessonTitle = lessonObject.title;
         //Queries for the desired style, and if it doesn't exist, it will return MissingStyle which the router will then redirect to the default link and then load the default style
