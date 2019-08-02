@@ -125,10 +125,8 @@ export default {
       pageTitle: "Home",
     };
   },
-  firestore: {
-    homeCards: firestore.collection("public_data").doc("homeCards"),
-  },
-  mounted() {
+  async mounted() {
+    await this.$bind("homeCards", firestore.collection("public_data").doc("homeCards"));
     this.findIndex();
   },
   methods: {
@@ -139,6 +137,7 @@ export default {
       this.timeout = setTimeout(this.findIndex, 40);
     },
     findIndex() {
+      console.log(this.$refs.cards);
       let element = this.$refs.cards.findIndex(card => {
         return card.$el.offsetTop - this.$vuetify.clientHeight / 4 >= this.currentOffset;
       });
