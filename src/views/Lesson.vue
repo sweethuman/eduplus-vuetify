@@ -57,11 +57,12 @@
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
     </v-speed-dial>
-    <edit-lesson-button v-if="showEditButtons" class="mx-3"></edit-lesson-button>
-    <v-fade-transition mode="out-in">
-      <component :is="activeComponent" v-bind="activeComponentProps"></component>
-    </v-fade-transition>
-    <edit-lesson-button v-if="showEditButtons" class="mx-3"></edit-lesson-button>
+    <v-layout column>
+      <v-fade-transition mode="out-in">
+        <component :is="activeComponent" v-bind="activeComponentProps"></component>
+      </v-fade-transition>
+      <edit-lesson-button v-if="showEditButtons" class="mx-3"></edit-lesson-button>
+    </v-layout>
   </v-container>
 </template>
 
