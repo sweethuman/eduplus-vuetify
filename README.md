@@ -4,7 +4,7 @@
 - platformă educaţională de învăţare personalizată a disciplinelor de bacalaureat
 - se deosebeste de alte platforme prin unicitatea în prezentarea lecţiilor: fiecare lecţie este adaptată la stilul de învăţare al elevului
 
-## Utilizare	
+## Utilizare
 - Selectezi disciplina la care vrei sa te pregatesti
 - Parcurgi chestionarul pentru identificarea stilului de invatare
 - Revii la pagina disciplinei si alegi lectia pe car vrei sa o parcurgi
@@ -15,7 +15,7 @@
 - Buton de schimbat pe fond luminos sau intunecat (dark theme toggle)
 - Continut aditional
 - Sectiune de Bibliografie
-		 
+
 ## Descriere tehnica
 Eduplus este o aplicatie web facuta in Vue.js.
 Aceasta aplicatie genereaza fiecare pagina dinamic, insemnand ca fiecare pagina a aplicatiei este formata de componenta principala (App.vue) care se foloseste de o componenta router (router.js) pentru a genera ce vede utilizatorul, facand adaugarea si extinderea proiectului foarte usoara.
@@ -28,6 +28,7 @@ Folosim Webpack pentru a „comprima” codul si Babel pentru „transpiling”.
 Folosim Material design Icons pentru simbolurile prezente in aplicatie.
 
 ## Componente
+firestore_rules.txt - contine Firestore Security Rules (regulile de securitate de la firestore) care sunt active in momentul actual pe Firestore(baza de date)
 App.vue - Componenta principala a aplicatiei web, aceasta incapsuleaza paginile si restul logicii acestora in timpul rularii aplicatiei
 firebase.js - Componenta ce integreaza Firebase in aplicatie
 main.js - script principal al codului, primul element rulat de aplicatie

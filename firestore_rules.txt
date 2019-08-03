@@ -1,0 +1,97 @@
+		rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+  	function isUserSignedIn() {
+    	return request.auth != null;
+    }
+
+
+    match /public_data/{document=**} {
+      allow read;
+      allow write: if false;
+    }
+    match /users/{userID} {
+    	function professorIsNotSet() {
+      	return !("professor" in request.resource.data) || request.resource.data.professor == resource.data.professor;
+      }
+    	function isLearningStyleValid() {
+      	return !("learningStyle" in request.resource.data) || request.resource.data.learningStyle in [null, "visual", "audio", "puzzle", "tactile"];
+      }
+      function userIsOwnerOfDocument() {
+      	return request.resource.id == request.auth.uid;
+      }
+      function areFieldsStrings() {
+      	return request.resource.data.email is string &&
+        request.resource.data.forename is string &&
+        request.resource.data.name is string &&
+        request.resource.data.username is string;
+      }
+      function specialFieldsNotChanged() {
+      	return request.resource.data.email == resource.data.email &&
+        request.auth.token.email == request.resource.data.email;
+      }
+      function isUserProfessor() {
+      	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.professor == true;
+      }
+
+    	allow read;
+      allow create: if isLearningStyleValid() &&
+      								 professorIsNotSet()&&
+      								 userIsOwnerOfDocument() &&
+                       areFieldsStrings() &&
+                       request.auth.token.email == request.resource.data.email;
+    	allow update: if isLearningStyleValid() &&
+      								 professorIsNotSet()&&
+      								 userIsOwnerOfDocument() &&
+                       areFieldsStrings() &&
+                       specialFieldsNotChanged();
+      allow delete: if false;
+    }
+    match /exams/{restOfPath=**} {
+    	allow read;
+      allow write: if false;
+    }
+    match /disciplines/{disciplineID} {
+      match /chapters/{chapterID} {
+      	match /lessons/{lessonID} {
+        	match /styles/{styleID} {
+          	function areRequiredFieldsSet() {
+            	return request.resource.data.source is string &&
+              			 (!("youtube-id" in request.resource.data) || request.resource.data["youtube-id"] is string || request.resource.data["youtube-id"] == null);
+            }
+
+          	allow read;
+            allow create, update: if isUserProfessor() &&
+            												 areRequiredFieldsSet();
+            allow delete: if isUserProfessor();
+          }
+
+          function areRequiredFieldsSet() {
+          	return request.resource.data.description is string &&
+            			 request.resource.data.order is number &&
+                   request.resource.data.title is string &&
+                   (!("test-id" in request.resource.data) || request.resource.data["test-id"] is string)
+          }
+
+        	allow read;
+          allow create: if isUserProfessor() &&
+          								 areRequiredFieldsSet();
+          allow update: if isUserProfessor() &&
+          								 areRequiredFieldsSet() &&
+                           request.resource.data.order == resource.data.order;
+          allow delete: if isUserProfessor();
+          function isUserProfessor() {
+      			return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.professor == true;
+      		}
+        }
+
+      	allow read;
+        allow write: if false;
+      }
+
+      allow read;
+      allow write: if false;
+    }
+  }
+}
