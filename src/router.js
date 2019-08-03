@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from "./store";
 
 Vue.use(Router);
 
@@ -51,6 +52,12 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "lesson" */ "./views/Lesson"),
     },
     {
+      path: "/lessonEdit/:discipline/:chapter/:lesson",
+      name: "LessonEdit",
+      component: () => import(/* webpackChunkName: "lesson" */ "./views/LessonEdit"),
+      meta: { onlyProfessor: true },
+    },
+    {
       path: "**",
       name: "404",
       component: () => import(/* webpackChunkName: "notfound" */ "./views/404Page.vue"),
@@ -63,6 +70,22 @@ const router = new Router({
       return { x: 0, y: 0 };
     }
   },
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.onlyProfessor)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!store.getters["userManagement/loggedIn"] || !store.state.userManagement.currentUser.professor === true) {
+      next({
+        path: "/",
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // make sure to always call next()!
+  }
 });
 
 router.beforeResolve((to, from, next) => {
