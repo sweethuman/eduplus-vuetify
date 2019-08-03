@@ -17,7 +17,6 @@
 - Sectiune de Bibliografie
 
 ## Descriere tehnica
-Eduplus este o aplicatie web facuta in Vue.js.
 Aceasta aplicatie genereaza fiecare pagina dinamic, insemnand ca fiecare pagina a aplicatiei este formata de componenta principala (App.vue) care se foloseste de o componenta router (router.js) pentru a genera ce vede utilizatorul, facand adaugarea si extinderea proiectului foarte usoara.
 Respecta protocoalele pwa (cu ajutorul unui plugin), facand astfel posibila descarcarea aplicatiei web si folosirea acesteia ca pe orice alta aplicatie.
 Are un design adaptabil rezolutiilor diverse ale dispozitivelor ce vor utiliza aplicatia. (Cu alte cuvinte, prezinta un Responsive Desgin)
@@ -26,6 +25,30 @@ Generarea textelor este facuta cu ajutorul unei versiuni de Markdown imbunatatit
 Back End-ul aplicatiei este reprezentat de serviciile FireBase. (Pentru integrare in aplicatie folosim firebase web sdk).
 Folosim Webpack pentru a „comprima” codul si Babel pentru „transpiling”.
 Folosim Material design Icons pentru simbolurile prezente in aplicatie.
+
+Pentru Front-End am folosit:
+
+- Vue.js
+- Axios
+- Webpack
+- Markdown-it - cu pluginuri pentru rendering de markdown in cod HTML
+- Babel
+- MDI - pentru iconitele inspirate de Material Design
+
+Plugin-uri de Vue.js:
+
+- VueWait - pentru un wait system si loading states, pentru a monitoriza ce se incarca si a da drumul la animatii
+- VueYoutube - pentru a incarca mai usor videoclipuri de youtube in pagina
+- Vuex - pentru state management
+- Vuetify - pentru Interfata
+- Vue Router - preinclus cu Vue.js pentru routing la diferite pagini
+- VRuntimeTemplate - pentru randarea si incarcarea dinamica a unei pagini
+- VueJs Logger - pentru logging mai usor
+- VueLodash - access usor si global la lodash in Vue
+- VueAxios
+- Vuefire, Vuexfire - pentru comunicarea usoara si actualizarea datelor din Cloud Firestore
+
+Pentru backend folosim Firebase, din care folosim modulul de autentificare si Cloud Firestore.
 
 ## Componente
 firestore_rules.txt - contine Firestore Security Rules (regulile de securitate de la firestore) care sunt active in momentul actual pe Firestore(baza de date)
