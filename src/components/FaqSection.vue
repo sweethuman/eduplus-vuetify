@@ -8,16 +8,16 @@
     <v-flex xs12 lg8>
       <v-window v-model="slide" class="elevation-0 my-5" dark>
         <v-window-item v-for="(itemGroup, i) in structuredItems" :key="i">
-          <v-layout align-center justify-space-between fill-height>
+          <v-layout justify-space-between fill-height>
             <v-flex
               v-for="(faqItem, j) in itemGroup"
               :key="'' + i + j"
               xs12
               v-bind="cardSizeOnMedium(itemGroup.length)"
             >
-              <v-card class="mx-1" min-height="200px" hover>
-                <v-layout fill-height column>
-                  <v-flex grow>
+              <v-card class="mx-1" min-height="200px" height="100%" hover>
+                <v-layout justify-center fill-height column>
+                  <v-flex shrink>
                     <v-card-title primary-title>
                       <h3 class="headline mb-0">
                         {{ faqItem.question }}
@@ -46,12 +46,16 @@
 </template>
 
 <script>
+import { firestore } from "../firebase";
+
 export default {
   name: "FaqSection",
   data() {
     return {
       slide: 0,
-      items: [],
+      faq: {
+        items: [],
+      },
     };
   },
   computed: {
@@ -59,10 +63,10 @@ export default {
       let i = 0;
       let itemPerRow = this.$vuetify.breakpoint.mdAndUp ? 3 : 1;
       let arrayOfSlides = [];
-      while (i < this.items.length) {
+      while (i < this.faq.items.length) {
         let a = [];
-        for (let j = 0; j < itemPerRow && i + j < this.items.length; j++) {
-          a.push(this.items[i + j]);
+        for (let j = 0; j < itemPerRow && i + j < this.faq.items.length; j++) {
+          a.push(this.faq.items[i + j]);
         }
         arrayOfSlides.push(a);
         i += itemPerRow;
@@ -70,9 +74,8 @@ export default {
       return arrayOfSlides;
     },
   },
-  async created() {
-    let jsonFaq = await import("../data/faq");
-    this.items = jsonFaq.default;
+  firestore: {
+    faq: firestore.collection("public_data").doc("faq"),
   },
   methods: {
     prev() {

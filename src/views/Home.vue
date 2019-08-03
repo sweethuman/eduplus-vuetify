@@ -12,7 +12,7 @@
           <div class="py-1">Cuprins</div>
         </template>
         <v-list style="padding: 0; overflow: hidden">
-          <template v-for="(item, i) in items">
+          <template v-for="(item, i) in homeCards.items">
             <v-list-tile
               :key="item.title"
               v-scroll="onScroll"
@@ -36,7 +36,7 @@
                 <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-divider v-if="i !== items.length" :key="i"></v-divider>
+            <v-divider v-if="i !== homeCards.items.length" :key="i"></v-divider>
           </template>
           <v-list-tile ripple @click="expansionPanel = null">
             <v-list-tile-action>
@@ -54,7 +54,7 @@
         <v-card class="d-inline-block elevation-12" style="position: -webkit-sticky; position: sticky; top: 70px;">
           <v-navigation-drawer floating permanent stateless value="true">
             <v-list style="padding: 0">
-              <template v-for="(item, i) in items">
+              <template v-for="(item, i) in homeCards.items">
                 <v-list-tile
                   :key="item.title"
                   v-scroll="onScroll"
@@ -78,7 +78,7 @@
                     <v-list-tile-title>{{ item.title }}</v-list-tile-title>
                   </v-list-tile-content>
                 </v-list-tile>
-                <v-divider v-if="i !== items.length - 1" :key="i"></v-divider>
+                <v-divider v-if="i !== homeCards.items.length - 1" :key="i"></v-divider>
               </template>
             </v-list>
           </v-navigation-drawer>
@@ -86,14 +86,18 @@
       </v-flex>
       <v-flex xs12 md6>
         <v-card
-          v-for="(item, i) in items"
+          v-for="(item, i) in homeCards.items"
           :id="item.title.toLowerCase().replace(/\s/g, '')"
           :key="i"
           ref="cards"
           class="mb-4"
         >
           <v-card-title class="headline">{{ item.title }}</v-card-title>
-          <v-card-text v-if="item.content" class="text-xs-justify" v-html="markation(item.content)"></v-card-text>
+          <v-card-text
+            v-if="item.source"
+            class="text-xs-justify subheading"
+            v-html="markation(item.source)"
+          ></v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -102,14 +106,17 @@
 
 <script>
 import FaqSection from "../components/FaqSection";
-import homeCards from "../data/homeCards/data";
 import markdownIt from "../jsUtilities/markdownIt";
+import { firestore } from "../firebase";
+
 export default {
   name: "Home",
   components: { FaqSection },
   data() {
     return {
-      items: [],
+      homeCards: {
+        items: [],
+      },
       right: null,
       activeElement: 0,
       currentOffset: 0,
@@ -118,27 +125,9 @@ export default {
       pageTitle: "Home",
     };
   },
-  mounted() {
+  async mounted() {
+    await this.$bind("homeCards", firestore.collection("public_data").doc("homeCards"));
     this.findIndex();
-  },
-  async created() {
-    this.$wait.start("loading home");
-    let that = this;
-    this.items = homeCards;
-    let markdownImportPromises = [];
-    this._.forEach(homeCards, function(card) {
-      markdownImportPromises.push(import(`../data/homeCards/${card.source}`));
-    });
-    let markdownImports = await Promise.all(markdownImportPromises);
-    let markdownLoadPromises = [];
-    this._.forEach(markdownImports, function(markdown) {
-      markdownLoadPromises.push(that.axios.get(markdown.default));
-    });
-    let markdownLoads = await Promise.all(markdownLoadPromises);
-    this._.forEach(markdownLoads, function(loaded, i) {
-      that.$set(that.items[i], "content", loaded.data);
-    });
-    this.$wait.end("loading home");
   },
   methods: {
     onScroll() {
@@ -148,6 +137,7 @@ export default {
       this.timeout = setTimeout(this.findIndex, 40);
     },
     findIndex() {
+      console.log(this.$refs.cards);
       let element = this.$refs.cards.findIndex(card => {
         return card.$el.offsetTop - this.$vuetify.clientHeight / 4 >= this.currentOffset;
       });

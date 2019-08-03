@@ -4,4 +4,10 @@ const styles = {
   TACTILE: "tactile",
   PUZZLE: "puzzle",
 };
-export default Object.freeze(styles);
+const styleToText = {
+  visual: "Vizual",
+  audio: "Auditiv",
+  tactile: "Tactil",
+  puzzle: "Kinestezic",
+};
+export default Object.freeze({ styles: styles, styleToText: styleToText });

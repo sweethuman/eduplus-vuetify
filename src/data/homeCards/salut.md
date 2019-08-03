@@ -1,1 +1,0 @@
-Bine ai venit la Edu Plus, platforma menita sa ajute elevii sa se descurce la examenul de bacalaureat intr-un mod unic. Ca sa inepeti, dati click pe sectiunea [Discipline](#/disciplines). {.title}
