@@ -57,9 +57,11 @@
         <v-icon>mdi-puzzle</v-icon>
       </v-btn>
     </v-speed-dial>
+    <edit-lesson-button v-if="showEditButtons" class="mx-3"></edit-lesson-button>
     <v-fade-transition mode="out-in">
       <component :is="activeComponent" v-bind="activeComponentProps"></component>
     </v-fade-transition>
+    <edit-lesson-button v-if="showEditButtons" class="mx-3"></edit-lesson-button>
   </v-container>
 </template>
 
@@ -69,10 +71,12 @@ import { firestore } from "../firebase";
 import LessonSkeletonLoader from "../components/Lesson/LessonSkeletonLoader";
 import LessonLoadState from "../enums/LessonLoadState";
 import ErrorComponent from "../components/ErrorComponent";
+import EditLessonButton from "../components/Lesson/EditLessonButton";
 
 export default {
   name: "Lesson",
   components: {
+    EditLessonButton,
     //Webpack Dynamic Imports, this means they are only loaded only when they are used, saving on LoadTime and bandwidth
     LessonViewer: () => ({
       component: import(/* webpackChunkName: "lessonViewer" */ "../components/Lesson/LessonViewer"),
@@ -121,6 +125,9 @@ export default {
         return { text: this.lessonTitle + " Nu Prezinta Continut!" };
       if (this.loadState === LessonLoadState.Loaded) return this.lessonData;
       return { text: "Exista O Eroare Neasteptata" };
+    },
+    showEditButtons() {
+      return this.loadState === LessonLoadState.MissingContent;
     },
   },
   /*We Have Three Rejected States
