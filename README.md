@@ -1,3 +1,6 @@
+[![time tracker](https://wakatime.com/badge/bitbucket/sweethuman/eduplus-vuetify.svg)](https://wakatime.com/badge/bitbucket/sweethuman/eduplus-vuetify)
+
+
 # Documentatie
 
 ## EDU Plus
