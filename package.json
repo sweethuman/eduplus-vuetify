@@ -12,7 +12,7 @@
     "axios": "^0.18.0",
     "firebase": "^6.2.4",
     "knuth-shuffle-seeded": "^1.0.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "markdown-it": "^8.4.2",
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-attrs": "^2.3.4",
